@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, SparklesIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { LogoIcon } from "@/logo";
+import { LogoIcon } from "@/components/logo";
 
 export function HeroSection() {
   const [email, setEmail] = useState("");
@@ -25,8 +25,8 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-[#1DB954]/10 via-[#1ED760]/5 to-transparent blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 h-[400px] w-[500px] rounded-full bg-linear-to-t from-[#1DB954]/8 to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-[#1DB954]/10 via-[#1DB954]/5 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 h-[400px] w-[500px] rounded-full bg-linear-to-t from-blue-500/8 to-transparent blur-3xl" />
       </div>
 
       {/* Vertical border lines */}
@@ -93,7 +93,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           The Future of{" "}
-          <span className="bg-linear-to-r from-[#1DB954] via-[#1ED760] to-[#1DB954] bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-[#1DB954] via-[#1DB954] to-[#1DB954] bg-clip-text text-transparent">
             Travel Operations
           </span>
         </motion.h1>
@@ -138,8 +138,8 @@ export function HeroSection() {
               <Button
                 className={cn(
                   "rounded-xl px-6 py-3 font-medium",
-                  "bg-linear-to-r from-[#1DB954] to-[#1ED760] text-white",
-                  "hover:from-[#1ED760] hover:to-[#1DB954]",
+                  "bg-[#1DB954] text-white",
+                  "hover:bg-[#1ed760]",
                   "shadow-lg shadow-[#1DB954]/25 transition-all duration-200",
                   "hover:shadow-[#1DB954]/40 hover:scale-[1.02]",
                   "active:scale-[0.98]"
