@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRightIcon, SparklesIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { LogoIcon } from "@/components/logo";
+import { LogoIcon } from "@/logo";
 
 export function HeroSection() {
   const [email, setEmail] = useState("");
@@ -25,8 +25,8 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-indigo-500/10 via-purple-500/5 to-transparent blur-3xl" />
-        <div className="absolute bottom-0 left-1/4 h-[400px] w-[500px] rounded-full bg-linear-to-t from-blue-500/8 to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-[#1DB954]/10 via-[#1ED760]/5 to-transparent blur-3xl" />
+        <div className="absolute bottom-0 left-1/4 h-[400px] w-[500px] rounded-full bg-linear-to-t from-[#1DB954]/8 to-transparent blur-3xl" />
       </div>
 
       {/* Vertical border lines */}
@@ -74,10 +74,10 @@ export function HeroSection() {
           <span
             className={cn(
               "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-white/70 backdrop-blur-sm",
-              "shadow-[0_0_15px_rgba(99,102,241,0.1)]"
+              "shadow-[0_0_15px_rgba(29,185,84,0.1)]"
             )}
           >
-            <SparklesIcon className="size-3 text-indigo-400" />
+            <SparklesIcon className="size-3 text-[#1DB954]" />
             Coming Soon — Travel Operations, Reimagined
           </span>
         </motion.div>
@@ -93,7 +93,7 @@ export function HeroSection() {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           The Future of{" "}
-          <span className="bg-linear-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+          <span className="bg-linear-to-r from-[#1DB954] via-[#1ED760] to-[#1DB954] bg-clip-text text-transparent">
             Travel Operations
           </span>
         </motion.h1>
@@ -125,7 +125,7 @@ export function HeroSection() {
                 className={cn(
                   "flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30",
                   "outline-none ring-1 ring-transparent transition-all duration-200",
-                  "focus:border-indigo-500/50 focus:ring-indigo-500/30 focus:bg-white/[0.07]",
+                  "focus:border-[#1DB954]/50 focus:ring-[#1DB954]/30 focus:bg-white/[0.07]",
                   "backdrop-blur-sm"
                 )}
                 id="waitlist-email"
@@ -138,10 +138,10 @@ export function HeroSection() {
               <Button
                 className={cn(
                   "rounded-xl px-6 py-3 font-medium",
-                  "bg-linear-to-r from-indigo-600 to-purple-600 text-white",
-                  "hover:from-indigo-500 hover:to-purple-500",
-                  "shadow-lg shadow-indigo-500/25 transition-all duration-200",
-                  "hover:shadow-indigo-500/40 hover:scale-[1.02]",
+                  "bg-linear-to-r from-[#1DB954] to-[#1ED760] text-white",
+                  "hover:from-[#1ED760] hover:to-[#1DB954]",
+                  "shadow-lg shadow-[#1DB954]/25 transition-all duration-200",
+                  "hover:shadow-[#1DB954]/40 hover:scale-[1.02]",
                   "active:scale-[0.98]"
                 )}
                 size="lg"
