@@ -34,17 +34,24 @@ export function HeroSection() {
           .insert([{ email, created_at: new Date().toISOString() }]);
 
         if (supabaseError) {
+          console.error("Supabase error:", supabaseError);
           if (supabaseError.code === "23505") {
             setError("You're already on the list! 🎉");
             setTimeout(() => setSubmitted(true), 1500);
+          } else if (supabaseError.code === "42501") {
+            // RLS policy violation
+            setError("Permission denied. Check Supabase RLS policies.");
+          } else if (supabaseError.message?.includes("relation") && supabaseError.message?.includes("does not exist")) {
+            setError("Table not found. Create a 'waitlist' table in Supabase.");
           } else {
-            setError("Something went wrong. Please try again.");
+            setError(`Error: ${supabaseError.message || "Something went wrong. Please try again."}`);
           }
           return;
         }
       }
       setSubmitted(true);
-    } catch {
+    } catch (err) {
+      console.error("Network error:", err);
       setError("Network error. Please try again.");
     } finally {
       setLoading(false);
