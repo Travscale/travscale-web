@@ -2,44 +2,89 @@
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ArrowRightIcon, SparklesIcon } from "lucide-react";
-import { motion } from "motion/react";
-import { useState } from "react";
-import { LogoIcon } from "@/components/logo";
+import {
+  ArrowRightIcon,
+  SparklesIcon,
+  CheckCircle2Icon,
+  LoaderCircleIcon,
+} from "lucide-react";
+import { motion, useInView } from "motion/react";
+import { useState, useRef } from "react";
+import { supabase } from "@/lib/supabase";
 
 export function HeroSection() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setLoading(true);
+    setError("");
+
+    try {
+      if (supabase) {
+        const { error: supabaseError } = await supabase
+          .from("waitlist")
+          .insert([{ email, created_at: new Date().toISOString() }]);
+
+        if (supabaseError) {
+          if (supabaseError.code === "23505") {
+            setError("You're already on the list! 🎉");
+            setTimeout(() => setSubmitted(true), 1500);
+          } else {
+            setError("Something went wrong. Please try again.");
+          }
+          return;
+        }
+      }
       setSubmitted(true);
+    } catch {
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <section className="relative mx-auto w-full max-w-5xl overflow-hidden">
-      {/* Ambient background glow */}
+    <section ref={ref} className="relative mx-auto w-full max-w-6xl overflow-hidden">
+      {/* Ambient background glow - enhanced */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute left-1/2 top-0 h-[600px] w-[800px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-[#1DB954]/10 via-[#1DB954]/5 to-transparent blur-3xl" />
+        <div className="absolute left-1/2 top-0 h-[700px] w-[900px] -translate-x-1/2 -translate-y-1/4 rounded-full bg-linear-to-b from-[#1DB954]/12 via-[#1DB954]/6 to-transparent blur-3xl" />
         <div className="absolute bottom-0 left-1/4 h-[400px] w-[500px] rounded-full bg-linear-to-t from-blue-500/8 to-transparent blur-3xl" />
+        <div className="absolute right-1/4 top-1/3 h-[300px] w-[400px] rounded-full bg-linear-to-l from-emerald-500/5 to-transparent blur-3xl" />
       </div>
+
+      {/* Animated grid background */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 -z-10 opacity-[0.03]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
 
       {/* Vertical border lines */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-5xl lg:block"
+        className="absolute inset-0 mx-auto hidden min-h-screen w-full max-w-6xl lg:block"
       >
         <div className="mask-y-from-80% mask-y-to-100% absolute inset-y-0 left-0 z-10 h-full w-px bg-foreground/15" />
         <div className="mask-y-from-80% mask-y-to-100% absolute inset-y-0 right-0 z-10 h-full w-px bg-foreground/15" />
       </div>
 
       {/* Main content */}
-      <div className="relative flex flex-col items-center justify-center gap-6 px-4 pt-24 pb-20 md:pt-32 md:pb-28">
+      <div className="relative flex flex-col items-center justify-center gap-6 px-4 pt-28 pb-24 md:pt-36 md:pb-32">
         {/* Inner faded border lines */}
         <div
           aria-hidden="true"
@@ -53,7 +98,7 @@ export function HeroSection() {
 
         {/* Logo */}
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="mb-2"
           initial={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.5, delay: 0.1 }}
@@ -67,14 +112,15 @@ export function HeroSection() {
 
         {/* Badge */}
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           initial={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
           <span
             className={cn(
               "inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-1.5 text-xs text-white/70 backdrop-blur-sm",
-              "shadow-[0_0_15px_rgba(29,185,84,0.1)]"
+              "shadow-[0_0_20px_rgba(29,185,84,0.15)]",
+              "animate-pulse-subtle"
             )}
           >
             <SparklesIcon className="size-3 text-[#1DB954]" />
@@ -82,36 +128,47 @@ export function HeroSection() {
           </span>
         </motion.div>
 
-        {/* Headline */}
+        {/* Headline - Improved with multi-line and gradient */}
         <motion.h1
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           className={cn(
-            "text-balance text-center text-4xl font-bold tracking-tight text-white md:text-5xl lg:text-6xl",
-            "leading-[1.1]"
+            "text-balance text-center text-4xl font-bold tracking-tight text-white md:text-6xl lg:text-7xl",
+            "leading-[1.08]"
           )}
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.3 }}
         >
-          The Future of{" "}
-          <span className="bg-linear-to-r from-[#1DB954] via-[#1DB954] to-[#1DB954] bg-clip-text text-transparent">
-            Travel Operations
+          Scale Your Travel
+          <br />
+          <span className="relative inline-block">
+            <span className="bg-linear-to-r from-[#1DB954] via-emerald-400 to-[#1DB954] bg-clip-text text-transparent">
+              Operations
+            </span>
+            {/* Underline decoration */}
+            <motion.div
+              animate={isInView ? { scaleX: 1 } : {}}
+              className="absolute -bottom-1 left-0 h-[3px] w-full origin-left rounded-full bg-linear-to-r from-[#1DB954]/60 via-emerald-400/60 to-transparent md:-bottom-2"
+              initial={{ scaleX: 0 }}
+              transition={{ duration: 0.8, delay: 0.9, ease: "easeOut" }}
+            />
           </span>
         </motion.h1>
 
-        {/* Subtitle */}
+        {/* Subtitle - enhanced */}
         <motion.p
-          animate={{ opacity: 1, y: 0 }}
-          className="mx-auto max-w-lg text-center text-base leading-relaxed text-white/60 md:text-lg"
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          className="mx-auto max-w-xl text-center text-base leading-relaxed text-white/55 md:text-lg"
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          One platform to manage bookings, itineraries, invoicing, and
-          passenger data — built for modern travel agencies ready to scale.
+          The all-in-one platform for managing bookings, itineraries, invoicing,
+          and passenger data — built for travel agencies ready to{" "}
+          <span className="text-white/80 font-medium">scale effortlessly</span>.
         </motion.p>
 
-        {/* Waitlist Form */}
+        {/* Waitlist Form - enhanced with Supabase */}
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="mt-4 w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
           transition={{ duration: 0.6, delay: 0.5 }}
@@ -121,20 +178,27 @@ export function HeroSection() {
               className="flex flex-col gap-3 sm:flex-row"
               onSubmit={handleSubmit}
             >
-              <input
-                className={cn(
-                  "flex-1 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30",
-                  "outline-none ring-1 ring-transparent transition-all duration-200",
-                  "focus:border-[#1DB954]/50 focus:ring-[#1DB954]/30 focus:bg-white/[0.07]",
-                  "backdrop-blur-sm"
-                )}
-                id="waitlist-email"
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-                required
-                type="email"
-                value={email}
-              />
+              <div className="relative flex-1">
+                <input
+                  className={cn(
+                    "w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder-white/30",
+                    "outline-none ring-1 ring-transparent transition-all duration-200",
+                    "focus:border-[#1DB954]/50 focus:ring-[#1DB954]/30 focus:bg-white/[0.07]",
+                    "backdrop-blur-sm",
+                    error && !submitted && "border-red-500/50 ring-red-500/20"
+                  )}
+                  disabled={loading}
+                  id="waitlist-email"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    setError("");
+                  }}
+                  placeholder="Enter your email"
+                  required
+                  type="email"
+                  value={email}
+                />
+              </div>
               <Button
                 className={cn(
                   "rounded-xl px-6 py-3 font-medium",
@@ -142,60 +206,110 @@ export function HeroSection() {
                   "hover:bg-[#1ed760]",
                   "shadow-lg shadow-[#1DB954]/25 transition-all duration-200",
                   "hover:shadow-[#1DB954]/40 hover:scale-[1.02]",
-                  "active:scale-[0.98]"
+                  "active:scale-[0.98]",
+                  "disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
                 )}
+                disabled={loading}
                 size="lg"
                 type="submit"
               >
-                Join Waitlist
-                <ArrowRightIcon className="ml-1 size-4" />
+                {loading ? (
+                  <>
+                    <LoaderCircleIcon className="mr-1 size-4 animate-spin" />
+                    Joining...
+                  </>
+                ) : (
+                  <>
+                    Join Waitlist
+                    <ArrowRightIcon className="ml-1 size-4" />
+                  </>
+                )}
               </Button>
             </form>
           ) : (
             <motion.div
               animate={{ opacity: 1, scale: 1 }}
-              className="flex flex-col items-center gap-2 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-6 py-5 text-center backdrop-blur-sm"
+              className="flex flex-col items-center gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/10 px-6 py-6 text-center backdrop-blur-sm"
               initial={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.4 }}
             >
-              <div className="text-2xl">🎉</div>
-              <p className="font-medium text-emerald-400">
-                You&apos;re on the list!
-              </p>
+              <div className="flex items-center gap-2">
+                <CheckCircle2Icon className="size-5 text-emerald-400" />
+                <p className="font-semibold text-emerald-400">
+                  You&apos;re on the list!
+                </p>
+              </div>
               <p className="text-sm text-white/50">
-                We&apos;ll reach out when your spot is ready.
+                We&apos;ll reach out when your spot is ready. Stay tuned! 🚀
               </p>
             </motion.div>
           )}
+
+          {/* Error message */}
+          {error && !submitted && (
+            <motion.p
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-2 text-center text-xs text-red-400/80"
+              initial={{ opacity: 0, y: -5 }}
+            >
+              {error}
+            </motion.p>
+          )}
         </motion.div>
 
-        {/* Social proof */}
-        <motion.p
-          animate={{ opacity: 1 }}
-          className="mt-2 text-center text-xs text-white/30"
+        {/* Social proof - enhanced */}
+        <motion.div
+          animate={isInView ? { opacity: 1 } : {}}
+          className="mt-3 flex flex-col items-center gap-3"
           initial={{ opacity: 0 }}
           transition={{ duration: 0.6, delay: 0.7 }}
         >
-          Join 200+ travel agencies already on the waitlist
-        </motion.p>
+          <div className="flex items-center gap-2">
+            {/* Stacked avatars */}
+            <div className="flex -space-x-2">
+              {[
+                "bg-gradient-to-br from-blue-400 to-blue-600",
+                "bg-gradient-to-br from-purple-400 to-purple-600",
+                "bg-gradient-to-br from-emerald-400 to-emerald-600",
+                "bg-gradient-to-br from-orange-400 to-orange-600",
+              ].map((gradient, i) => (
+                <div
+                  className={cn(
+                    "size-6 rounded-full border-2 border-[#050505]",
+                    gradient
+                  )}
+                  key={i}
+                />
+              ))}
+            </div>
+            <p className="text-xs text-white/40">
+              Join <span className="text-white/60 font-medium">200+</span> travel agencies already on the waitlist
+            </p>
+          </div>
+        </motion.div>
 
-        {/* Feature pills */}
+        {/* Feature pills - enhanced */}
         <motion.div
-          animate={{ opacity: 1, y: 0 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
           className="mt-6 flex flex-wrap items-center justify-center gap-2"
           initial={{ opacity: 0, y: 10 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
-          {["Smart Bookings", "Auto Invoicing", "Itinerary Builder", "Passenger CRM", "Real-time Analytics"].map(
-            (feature) => (
-              <span
-                className="rounded-full border border-white/5 bg-white/3 px-3 py-1 text-xs text-white/40 transition-colors hover:bg-white/6 hover:text-white/60"
-                key={feature}
-              >
-                {feature}
-              </span>
-            )
-          )}
+          {[
+            { label: "Smart Bookings", icon: "📋" },
+            { label: "Auto Invoicing", icon: "💰" },
+            { label: "Itinerary Builder", icon: "🗺️" },
+            { label: "Passenger CRM", icon: "👥" },
+            { label: "Real-time Analytics", icon: "📊" },
+          ].map((feature) => (
+            <span
+              className="flex items-center gap-1.5 rounded-full border border-white/5 bg-white/[0.03] px-3.5 py-1.5 text-xs text-white/45 transition-all duration-300 hover:bg-white/[0.06] hover:text-white/65 hover:border-white/10"
+              key={feature.label}
+            >
+              <span className="text-[10px]">{feature.icon}</span>
+              {feature.label}
+            </span>
+          ))}
         </motion.div>
 
         {/* Bottom decorative grid dots */}

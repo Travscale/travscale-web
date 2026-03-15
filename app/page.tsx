@@ -4,6 +4,7 @@ import { useState, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import DynamicText from "@/components/kokonutui/dynamic-text";
 import { HeroSection } from "@/components/hero";
+import { ChecklistSection } from "@/components/checklist";
 
 export default function Home() {
   const [showWaitlist, setShowWaitlist] = useState(false);
@@ -33,6 +34,27 @@ export default function Home() {
             transition={{ duration: 0.7, ease: "easeOut" }}
           >
             <HeroSection />
+
+            {/* Divider */}
+            <div className="mx-auto max-w-6xl px-4">
+              <div className="h-px bg-linear-to-r from-transparent via-white/10 to-transparent" />
+            </div>
+
+            <ChecklistSection />
+
+            {/* Footer */}
+            <footer className="border-t border-white/6 py-8">
+              <div className="mx-auto max-w-6xl px-4 flex flex-col items-center gap-3">
+                <img
+                  alt="Travscale"
+                  className="h-5 opacity-50 invert"
+                  src="/logo-w-name.svg"
+                />
+                <p className="text-xs text-white/25">
+                  © {new Date().getFullYear()} Travscale. All rights reserved.
+                </p>
+              </div>
+            </footer>
           </motion.div>
         )}
       </AnimatePresence>
