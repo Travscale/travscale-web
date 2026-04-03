@@ -1,0 +1,94 @@
+import { Quote } from "lucide-react";
+
+const testimonials = [
+  {
+    quote:
+      "Travscale eliminated the email mess. We went from 200+ daily WhatsApp messages to a single dashboard. Our team productivity doubled in the first month.",
+    name: "Rajesh Mehta",
+    role: "Director, Wanderlust Travels",
+    location: "Mumbai",
+  },
+  {
+    quote:
+      "The GDS integration with BYOK was a game-changer. We kept our Amadeus credentials and got a modern interface on top. No vendor lock-in, no compromises.",
+    name: "Sarah Chen",
+    role: "Operations Head, Pacific Routes",
+    location: "Singapore",
+  },
+  {
+    quote:
+      "Visa tracking alone saved us 15 hours a week. No more spreadsheets, no more missed deadlines. Our clients noticed the difference immediately.",
+    name: "Ahmad Al-Rashid",
+    role: "CEO, Desert Rose Tourism",
+    location: "Dubai",
+  },
+];
+
+export default function Testimonials() {
+  return (
+    <section
+      className="py-24 md:py-32"
+      data-testid="testimonials-section"
+      id="testimonials"
+      style={{ backgroundColor: "#FDFDFC" }}
+    >
+      <div className="max-w-7xl mx-auto px-6 md:px-12">
+        <div className="mb-16 max-w-2xl">
+          <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
+            Testimonials
+          </span>
+          <h2
+            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight"
+            data-testid="testimonials-heading"
+            style={{ fontFamily: "var(--font-outfit)" }}
+          >
+            Trusted by agencies{" "}
+            <span className="text-[#003399]">worldwide</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {testimonials.map((t, i) => (
+            <article
+              className={`p-8 md:p-10 flex flex-col justify-between min-h-70 ${
+                i === 0
+                  ? "bg-black text-white md:col-span-1 shadow-2xl shadow-black/20"
+                  : "bg-white border border-black/10 shadow-lg shadow-black/4 hover:-translate-y-1 transition-transform duration-300"
+              }`}
+              data-testid={`testimonial-card-${i}`}
+              key={t.name}
+            >
+              <div>
+                <div className="mb-6">
+                  <Quote
+                    className={`w-8 h-8 ${i === 0 ? "text-[#003399]" : "text-black/10"}`}
+                  />
+                </div>
+
+                <p
+                  className={`text-base leading-relaxed flex-1 mb-8 ${i === 0 ? "text-white/80" : "text-black/70"}`}
+                >
+                  &ldquo;{t.quote}&rdquo;
+                </p>
+              </div>
+
+              <div className="pt-6 border-t border-black/10">
+                <div
+                  className={`text-sm font-semibold ${i === 0 ? "text-white" : "text-black"}`}
+                  style={{ fontFamily: "var(--font-outfit)" }}
+                >
+                  {t.name}
+                </div>
+                <div
+                  className={`text-xs mt-1 ${i === 0 ? "text-white/50" : "text-black/50"}`}
+                >
+                  {t.role} · {t.location}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

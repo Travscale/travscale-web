@@ -1,0 +1,144 @@
+import Image from "next/image";
+import { ArrowRight } from "lucide-react";
+
+const LOGO_WORDMARK =
+  "https://customer-assets.emergentagent.com/job_ff523236-7639-4c36-96ff-1cf74a0e278a/artifacts/624d08ht_logo-w-name.svg";
+
+const footerLinks = {
+  Product: [
+    { label: "Features", href: "#features" },
+    { label: "Pricing", href: "#pricing" },
+    { label: "GDS Integration", href: "#features" },
+    { label: "Changelog", href: "#" },
+  ],
+  Company: [
+    { label: "About", href: "#" },
+    { label: "Careers", href: "#" },
+    { label: "Blog", href: "#" },
+    { label: "Contact", href: "#" },
+  ],
+  Resources: [
+    { label: "Documentation", href: "#" },
+    { label: "Help Center", href: "#" },
+    { label: "API Reference", href: "#" },
+    { label: "Status", href: "#" },
+  ],
+  Legal: [
+    { label: "Privacy Policy", href: "#" },
+    { label: "Terms of Service", href: "#" },
+    { label: "Cookie Policy", href: "#" },
+  ],
+};
+
+type FooterProps = {
+  onDemoClick: () => void;
+};
+
+export default function Footer({ onDemoClick }: FooterProps) {
+  const handleClick = (href: string) => {
+    if (href.startsWith("#") && href.length > 1) {
+      const el = document.querySelector(href);
+      if (el) el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  return (
+    <footer className="bg-black text-white" data-testid="footer-section">
+      <div className="border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+            <div>
+              <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-white/30 block mb-4">
+                Ready to scale?
+              </span>
+              <h2
+                className="text-3xl md:text-5xl tracking-tight font-medium leading-tight"
+                style={{ fontFamily: "var(--font-outfit)" }}
+              >
+                Let&apos;s transform your
+                <br />
+                travel operations.
+              </h2>
+            </div>
+            <button
+              className="bg-white text-black px-10 py-4 text-sm font-medium hover:bg-[#003399] hover:text-white transition-colors flex items-center gap-2 shrink-0"
+              data-testid="footer-cta-btn"
+              onClick={onDemoClick}
+              type="button"
+            >
+              Book a Demo
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
+        <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
+          <div className="col-span-2 md:col-span-1">
+            <Image
+              alt="Travscale"
+              className="h-6 w-auto mb-4 invert"
+              height={24}
+              src={LOGO_WORDMARK}
+              width={130}
+            />
+            <p className="text-sm text-white/40 leading-relaxed">
+              The professional ERP for modern travel agencies.
+            </p>
+          </div>
+
+          {Object.entries(footerLinks).map(([category, links]) => (
+            <div key={category}>
+              <h4 className="text-xs uppercase tracking-[0.15em] font-bold text-white/30 mb-5">
+                {category}
+              </h4>
+              <ul className="space-y-3">
+                {links.map((link) => (
+                  <li key={link.label}>
+                    <button
+                      className="text-sm text-white/60 hover:text-white transition-colors"
+                      data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                      onClick={() => handleClick(link.href)}
+                      type="button"
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-white/10">
+        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-xs text-white/30">
+            © {new Date().getFullYear()} Travscale. All rights reserved.
+          </p>
+          <div className="flex items-center gap-6">
+            <a
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              href="#"
+            >
+              Twitter
+            </a>
+            <a
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              href="#"
+            >
+              LinkedIn
+            </a>
+            <a
+              className="text-xs text-white/30 hover:text-white/60 transition-colors"
+              href="#"
+            >
+              Instagram
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
