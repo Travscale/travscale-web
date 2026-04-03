@@ -36,22 +36,22 @@ export default function Faq() {
 
   return (
     <section
-      className="py-24 md:py-32 border-t border-black/5"
+      className="py-20 sm:py-24 md:py-28 border-t border-black/5"
       data-testid="faq-section"
       id="faq"
     >
-      <div className="max-w-5xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-12 md:mb-14">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="text-center mb-10 sm:mb-12 md:mb-14">
           <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
             FAQ
           </span>
           <h2
-            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Answers for teams switching from manual operations
           </h2>
-          <p className="text-base text-black/60 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-[15px] sm:text-base text-black/60 leading-relaxed max-w-2xl mx-auto">
             Everything you need to validate fit, rollout speed, and operational
             control before booking a demo.
           </p>
@@ -70,7 +70,7 @@ export default function Faq() {
                   <button
                     aria-controls={`faq-panel-${index}`}
                     aria-expanded={isOpen}
-                    className="w-full px-5 md:px-6 py-4 md:py-5 text-left flex items-center justify-between gap-4 hover:bg-black/[0.02] transition-colors"
+                    className="w-full px-5 md:px-6 py-4 md:py-5 text-left flex items-center justify-between gap-4 hover:bg-black/2 transition-colors"
                     id={`faq-trigger-${index}`}
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
                     type="button"

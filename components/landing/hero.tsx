@@ -11,7 +11,7 @@ type HeroProps = {
 export default function Hero({ onDemoClick }: HeroProps) {
   return (
     <section
-      className="relative pt-28 md:pt-36 pb-20 md:pb-28 overflow-hidden"
+      className="relative pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-28 overflow-hidden"
       data-testid="hero-section"
       style={{ backgroundColor: "#FDFDFC" }}
     >
@@ -24,10 +24,10 @@ export default function Hero({ onDemoClick }: HeroProps) {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-black/10 mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-black/10 mb-6 sm:mb-8 bg-white/70 backdrop-blur-sm">
               <span className="w-1.5 h-1.5 rounded-full bg-[#003399]" />
               <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/50">
                 Travel ERP Platform
@@ -35,7 +35,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
             </div>
 
             <h1
-              className="text-4xl sm:text-5xl lg:text-[3.5rem] tracking-tight font-medium leading-[1.08] mb-6"
+              className="text-[2rem] sm:text-5xl lg:text-[3.5rem] tracking-tight font-medium leading-[1.08] mb-5 sm:mb-6"
               data-testid="hero-tagline"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
@@ -44,7 +44,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
             </h1>
 
             <p
-              className="text-base md:text-lg text-black/60 leading-relaxed mb-10 max-w-md"
+              className="text-[15px] sm:text-base md:text-lg text-black/60 leading-relaxed mb-8 sm:mb-10 max-w-md"
               data-testid="hero-subtext"
             >
               Replace the WhatsApp and email chaos with a single, powerful
@@ -52,9 +52,9 @@ export default function Hero({ onDemoClick }: HeroProps) {
               suppliers, GDS, all in one place.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
               <button
-                className="group bg-black text-white px-8 py-4 font-medium hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 text-sm shadow-lg shadow-black/10"
+                className="group bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 font-semibold hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 text-sm shadow-lg shadow-black/10 rounded-xl"
                 data-testid="hero-demo-btn"
                 onClick={onDemoClick}
                 type="button"
@@ -63,7 +63,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <a
-                className="border border-black/20 text-black px-8 py-4 font-medium hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-sm"
+                className="border border-black/20 text-black px-6 sm:px-8 py-3.5 sm:py-4 font-semibold hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-sm rounded-xl"
                 data-testid="hero-trial-btn"
                 href="https://agent.travscale.com"
                 rel="noopener noreferrer"
@@ -74,7 +74,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
               </a>
             </div>
 
-            <div className="flex items-center gap-8 mt-12 pt-8 border-t border-black/10">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-9 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10">
               {[
                 { value: "500+", label: "Travel Agents" },
                 { value: "18K+", label: "Bookings/mo" },
@@ -82,16 +82,42 @@ export default function Hero({ onDemoClick }: HeroProps) {
               ].map((stat) => (
                 <div className="group" key={stat.label}>
                   <div
-                    className="text-2xl md:text-3xl font-semibold tracking-tight transition-colors group-hover:text-[#003399]"
+                    className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight transition-colors group-hover:text-[#003399]"
                     style={{ fontFamily: "var(--font-outfit)" }}
                   >
                     {stat.value}
                   </div>
-                  <div className="text-xs text-black/50 mt-1 uppercase tracking-wider font-medium">
+                  <div className="text-[10px] sm:text-xs text-black/50 mt-1 uppercase tracking-wider font-medium">
                     {stat.label}
                   </div>
                 </div>
               ))}
+            </div>
+
+            <div className="relative mt-9 sm:mt-10 lg:hidden">
+              <div className="relative overflow-hidden shadow-xl shadow-black/10 ring-1 ring-black/8 rounded-2xl">
+                <Image
+                  alt="Travel professionals collaborating"
+                  className="w-full h-56 sm:h-72 object-cover"
+                  height={640}
+                  priority
+                  src={HERO_IMAGE}
+                  width={960}
+                />
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#003399]" />
+              </div>
+
+              <div className="absolute -bottom-4 left-3 right-3 rounded-xl bg-white border border-black/10 px-3 py-2.5 shadow-md flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-black/45 font-semibold">
+                    Platform Status
+                  </p>
+                  <p className="text-sm font-medium text-black/80">
+                    All systems operational
+                  </p>
+                </div>
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+              </div>
             </div>
           </div>
 

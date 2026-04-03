@@ -49,31 +49,31 @@ const features = [
 export default function Features() {
   return (
     <section
-      className="py-24 md:py-32"
+      className="py-20 sm:py-24 md:py-28"
       data-testid="features-section"
       id="features"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="mb-16 max-w-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="mb-10 sm:mb-14 md:mb-16 max-w-2xl">
           <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
             Features
           </span>
           <h2
-            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Built for daily travel operations, not just dashboards
           </h2>
-          <p className="text-base text-black/60 leading-relaxed">
+          <p className="text-[15px] sm:text-base text-black/60 leading-relaxed">
             Every workflow in Travscale is designed to replace inbox chaos with
             clear processes your whole agency can trust.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
           {features.map((feature) => (
             <article
-              className="ts-surface-card bg-white border border-black/10 p-7 hover:border-[#003399]/30"
+              className="ts-surface-card bg-white border border-black/10 p-5 sm:p-6 md:p-7 hover:border-[#003399]/30"
               key={feature.title}
             >
               <div className="w-10 h-10 bg-[#F5F5F0] flex items-center justify-center mb-5">

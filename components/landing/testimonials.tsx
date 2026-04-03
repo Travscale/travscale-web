@@ -27,18 +27,18 @@ const testimonials = [
 export default function Testimonials() {
   return (
     <section
-      className="py-24 md:py-32"
+      className="py-20 sm:py-24 md:py-28"
       data-testid="testimonials-section"
       id="testimonials"
       style={{ backgroundColor: "#FDFDFC" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="mb-16 max-w-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="mb-10 sm:mb-14 md:mb-16 max-w-2xl">
           <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
             Testimonials
           </span>
           <h2
-            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight"
             data-testid="testimonials-heading"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
@@ -47,13 +47,13 @@ export default function Testimonials() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="ts-scroll-strip flex lg:grid lg:grid-cols-3 gap-4 sm:gap-5 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0 snap-x snap-mandatory lg:snap-none">
           {testimonials.map((t, i) => (
             <article
-              className={`p-8 md:p-10 flex flex-col justify-between min-h-70 ${
+              className={`min-w-[86%] sm:min-w-[68%] lg:min-w-0 snap-start p-6 sm:p-8 md:p-9 flex flex-col justify-between min-h-70 ${
                 i === 0
                   ? "bg-black text-white md:col-span-1 shadow-2xl shadow-black/20"
-                  : "bg-white border border-black/10 shadow-lg shadow-black/4 hover:-translate-y-1 transition-transform duration-300"
+                  : "bg-white border border-black/10 shadow-lg shadow-black/4 lg:hover:-translate-y-1 transition-transform duration-300"
               }`}
               data-testid={`testimonial-card-${i}`}
               key={t.name}

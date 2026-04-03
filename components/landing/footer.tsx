@@ -45,14 +45,14 @@ export default function Footer({ onDemoClick }: FooterProps) {
   return (
     <footer className="bg-black text-white" data-testid="footer-section">
       <div className="border-b border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-20 md:py-28">
-          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-16 md:py-24">
+          <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 sm:gap-8">
             <div>
               <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-white/30 block mb-4">
                 Ready to scale?
               </span>
               <h2
-                className="text-3xl md:text-5xl tracking-tight font-medium leading-tight"
+                className="text-[1.9rem] sm:text-4xl md:text-5xl tracking-tight font-medium leading-tight"
                 style={{ fontFamily: "var(--font-outfit)" }}
               >
                 Let&apos;s transform your
@@ -61,7 +61,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
               </h2>
             </div>
             <button
-              className="bg-white text-black px-10 py-4 text-sm font-medium hover:bg-[#003399] hover:text-white transition-colors flex items-center gap-2 shrink-0"
+              className="bg-white text-black px-8 sm:px-10 py-3.5 sm:py-4 text-sm font-semibold hover:bg-[#003399] hover:text-white transition-colors flex items-center justify-center gap-2 shrink-0 rounded-xl w-full md:w-auto"
               data-testid="footer-cta-btn"
               onClick={onDemoClick}
               type="button"
@@ -73,9 +73,9 @@ export default function Footer({ onDemoClick }: FooterProps) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-16">
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-10">
-          <div className="col-span-2 md:col-span-1">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-12 sm:py-14 md:py-16">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 sm:gap-9 md:gap-10">
+          <div className="sm:col-span-2 md:col-span-1">
             <Image
               alt="Travscale"
               className="h-6 w-auto mb-4 invert"
@@ -97,7 +97,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
                 {links.map((link) => (
                   <li key={link.label}>
                     <button
-                      className="text-sm text-white/60 hover:text-white transition-colors"
+                      className="text-sm text-white/60 hover:text-white transition-colors py-0.5"
                       data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
                       onClick={() => handleClick(link.href)}
                       type="button"
@@ -113,7 +113,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="max-w-7xl mx-auto px-6 md:px-12 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-5 sm:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30">
             © {new Date().getFullYear()} Travscale. All rights reserved.
           </p>

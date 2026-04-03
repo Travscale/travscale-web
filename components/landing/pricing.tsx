@@ -102,29 +102,29 @@ export default function Pricing({ onDemoClick }: PricingProps) {
 
   return (
     <section
-      className="py-24 md:py-32"
+      className="py-20 sm:py-24 md:py-28"
       data-testid="pricing-section"
       id="pricing"
       style={{ backgroundColor: "#F5F5F0" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="text-center mb-16 max-w-2xl mx-auto">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto">
           <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
             Pricing
           </span>
           <h2
-            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             data-testid="pricing-heading"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Simple pricing, <span className="text-[#003399]">no surprises</span>
           </h2>
-          <p className="text-base text-black/60 leading-relaxed">
+          <p className="text-[15px] sm:text-base text-black/60 leading-relaxed">
             Choose the plan that fits your agency. All prices are in INR and
             optimized for Indian travel teams.
           </p>
 
-          <div className="mt-8 inline-flex items-center rounded-full border border-black/10 bg-white p-1.5">
+          <div className="mt-7 w-full sm:w-auto sm:inline-flex items-center rounded-2xl sm:rounded-full border border-black/10 bg-white p-1.5 grid grid-cols-2">
             <button
               className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
                 billingCycle === "monthly"
@@ -154,10 +154,10 @@ export default function Pricing({ onDemoClick }: PricingProps) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="ts-scroll-strip flex md:grid md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 overflow-x-auto md:overflow-visible pb-2 md:pb-0 snap-x snap-mandatory md:snap-none">
           {plans.map((plan) => (
             <div
-              className={`relative flex flex-col p-8 md:p-10 transition-transform duration-300 hover:-translate-y-1 ${
+              className={`relative min-w-[86%] sm:min-w-[64%] md:min-w-0 snap-start flex flex-col p-6 sm:p-7 md:p-9 transition-transform duration-300 md:hover:-translate-y-1 ${
                 plan.highlight
                   ? "bg-black text-white shadow-2xl shadow-black/20"
                   : "bg-white border border-black/10 shadow-lg shadow-black/4"
@@ -166,16 +166,16 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               key={plan.name}
             >
               {plan.badge && (
-                <div className="absolute -top-3 left-8">
+                <div className="absolute -top-3 left-6 sm:left-7 md:left-8">
                   <span className="bg-[#003399] text-white text-[10px] uppercase tracking-[0.15em] font-bold px-4 py-1.5">
                     {plan.badge}
                   </span>
                 </div>
               )}
 
-              <div className="mb-8">
+              <div className="mb-7 sm:mb-8">
                 <h3
-                  className={`text-lg font-medium mb-2 ${plan.highlight ? "text-white" : "text-black"}`}
+                  className={`text-xl font-medium mb-2 ${plan.highlight ? "text-white" : "text-black"}`}
                   style={{ fontFamily: "var(--font-outfit)" }}
                 >
                   {plan.name}
@@ -187,7 +187,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                 </p>
                 <div className="flex items-baseline gap-1">
                   <span
-                    className={`text-4xl font-semibold tracking-tight ${plan.highlight ? "text-white" : "text-black"}`}
+                    className={`text-3xl sm:text-4xl font-semibold tracking-tight ${plan.highlight ? "text-white" : "text-black"}`}
                     style={{ fontFamily: "var(--font-outfit)" }}
                   >
                     {plan.price
@@ -225,7 +225,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               </ul>
 
               <button
-                className={`w-full py-4 text-sm font-medium flex items-center justify-center gap-2 transition-colors ${
+                className={`w-full py-3.5 sm:py-4 text-sm font-semibold flex items-center justify-center gap-2 transition-colors rounded-xl ${
                   plan.highlight
                     ? "bg-white text-black hover:bg-white/90"
                     : "bg-black text-white hover:bg-[#003399]"

@@ -31,7 +31,7 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section
-      className="py-24 md:py-32 relative overflow-hidden"
+      className="py-20 sm:py-24 md:py-28 relative overflow-hidden"
       data-testid="how-it-works-section"
       id="how-it-works"
     >
@@ -45,34 +45,34 @@ export default function HowItWorks() {
         />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 relative">
-        <div className="mb-20 max-w-2xl">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative">
+        <div className="mb-10 sm:mb-14 md:mb-16 max-w-2xl">
           <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
             How It Works
           </span>
           <h2
-            className="text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             data-testid="how-it-works-heading"
             style={{ fontFamily: "var(--font-outfit)" }}
           >
             Up and running in{" "}
             <span className="text-[#003399]">three steps</span>
           </h2>
-          <p className="text-base text-black/60 leading-relaxed">
+          <p className="text-[15px] sm:text-base text-black/60 leading-relaxed">
             No complex onboarding. No lengthy implementation cycles. Get your
             agency on Travscale and see results from day one.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 md:gap-6">
           {steps.map((step, i) => (
             <div
-              className="relative group"
+              className="relative group bg-white border border-black/10 p-5 sm:p-6"
               data-testid={`step-${step.num}`}
               key={step.num}
             >
-              {i < steps.length - 1 && (
-                <div className="hidden md:block absolute top-7 left-[calc(50%+40px)] -right-10 h-px bg-black/10" />
+              {i < steps.length - 1 && i % 3 !== 2 && (
+                <div className="hidden xl:block absolute top-7 left-[calc(50%+40px)] -right-6 h-px bg-black/10" />
               )}
 
               <div className="flex items-center gap-4 mb-6">

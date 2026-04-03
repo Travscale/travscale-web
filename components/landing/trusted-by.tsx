@@ -21,15 +21,15 @@ const stats = [
 export default function TrustedBy() {
   return (
     <section
-      className="py-16 border-t border-b border-black/5"
+      className="py-12 sm:py-14 md:py-16 border-t border-b border-black/5"
       data-testid="trusted-by-section"
       style={{ backgroundColor: "#F5F5F0" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 md:gap-6 mb-10 sm:mb-12 md:mb-14">
           {stats.map((stat) => (
             <div
-              className="flex items-center gap-4"
+              className="flex items-center gap-3 sm:gap-4 bg-white border border-black/10 p-3 sm:p-3.5"
               data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
               key={stat.label}
             >
@@ -43,7 +43,7 @@ export default function TrustedBy() {
                 >
                   {stat.value}
                 </div>
-                <div className="text-xs text-black/40 uppercase tracking-wider">
+                <div className="text-[10px] sm:text-xs text-black/40 uppercase tracking-wider">
                   {stat.label}
                 </div>
               </div>
@@ -55,10 +55,10 @@ export default function TrustedBy() {
           <span className="uppercase text-[10px] tracking-[0.2em] font-bold text-black/30 block mb-6">
             Trusted by leading travel agencies
           </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 md:gap-x-10 gap-y-3 sm:gap-y-4">
             {logos.map((name) => (
               <span
-                className="text-sm font-semibold text-black/20 tracking-wider uppercase"
+                className="text-xs sm:text-sm font-semibold text-black/20 tracking-wider uppercase"
                 key={name}
                 style={{ fontFamily: "var(--font-outfit)" }}
               >

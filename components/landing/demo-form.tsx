@@ -101,7 +101,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
   return (
     <div
       aria-modal="true"
-      className="fixed inset-0 z-100 flex items-center justify-center p-4"
+      className="fixed inset-0 z-100 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto"
       data-testid="demo-modal-overlay"
       onClick={onClose}
       role="dialog"
@@ -109,12 +109,12 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div
-        className="relative bg-white w-full max-w-lg p-8 md:p-10 shadow-2xl ring-1 ring-black/5"
+        className="relative bg-white w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 shadow-2xl ring-1 ring-black/5 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl sm:rounded-none"
         data-testid="demo-modal"
         onClick={(e) => e.stopPropagation()}
       >
         <button
-          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center text-black/40 hover:text-black transition-colors"
+          className="sticky top-0 ml-auto w-8 h-8 flex items-center justify-center text-black/40 hover:text-black transition-colors bg-white/90"
           data-testid="demo-modal-close"
           onClick={onClose}
           type="button"
@@ -123,7 +123,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
         </button>
 
         {success ? (
-          <div className="text-center py-8">
+          <div className="text-center py-6 sm:py-8">
             <div className="w-14 h-14 bg-black flex items-center justify-center mx-auto mb-6">
               <Check className="w-7 h-7 text-white" />
             </div>
@@ -148,7 +148,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
           </div>
         ) : (
           <>
-            <div className="mb-8">
+            <div className="mb-6 sm:mb-8">
               <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-3">
                 Book a Demo
               </span>
@@ -164,7 +164,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
               </p>
             </div>
 
-            <form className="space-y-4" onSubmit={handleSubmit}>
+            <form className="space-y-3.5 sm:space-y-4" onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <label className="block">
                   <span className="text-xs uppercase tracking-[0.12em] text-black/55 font-semibold mb-2 block">
@@ -255,7 +255,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
               )}
 
               <button
-                className="w-full bg-black text-white py-4 text-sm font-medium hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
+                className="w-full bg-black text-white py-3.5 sm:py-4 text-sm font-semibold hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 rounded-xl"
                 data-testid="demo-submit-btn"
                 disabled={loading}
                 type="submit"

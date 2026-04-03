@@ -27,6 +27,17 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
+    const previous = document.body.style.overflow;
+    if (mobileOpen) {
+      document.body.style.overflow = "hidden";
+    }
+
+    return () => {
+      document.body.style.overflow = previous;
+    };
+  }, [mobileOpen]);
+
+  useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
 
@@ -82,12 +93,12 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
       }`}
       data-testid="main-navigation"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="flex items-center justify-between h-16 md:h-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
+        <div className="flex items-center justify-between h-15 sm:h-16 lg:h-20">
           <Link className="shrink-0" data-testid="nav-logo" href="/">
             <Image
               alt="Travscale"
-              className="h-7 md:h-8 w-auto"
+              className="h-6 sm:h-7 lg:h-8 w-auto"
               height={36}
               priority
               src={LOGO_URL}
@@ -95,7 +106,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             />
           </Link>
 
-          <div className="hidden md:flex items-center gap-7">
+          <div className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <button
                 className={`text-sm font-medium transition-colors flex items-center gap-2 ${
@@ -120,7 +131,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <a
               className="text-sm font-medium text-black/70 hover:text-black transition-colors"
               data-testid="nav-login-btn"
@@ -142,7 +153,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           </div>
 
           <button
-            className="md:hidden p-2"
+            className="lg:hidden p-2.5 rounded-full border border-black/10 bg-white/85 backdrop-blur"
             data-testid="mobile-menu-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
@@ -157,46 +168,72 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
       </div>
 
       {mobileOpen && (
-        <div
-          className="md:hidden bg-white border-t border-black/5 px-6 py-6"
-          data-testid="mobile-menu"
-        >
-          <div className="flex flex-col gap-4">
-            {navLinks.map((link) => (
+        <>
+          <div
+            className="fixed inset-0 top-15 sm:top-16 bg-black/35 backdrop-blur-[1px] lg:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+          <div
+            className="lg:hidden fixed left-0 right-0 top-15 sm:top-16 z-60 bg-[#FCFCFA] border-y border-black/10"
+            data-testid="mobile-menu"
+          >
+            <div className="px-4 sm:px-6 py-4">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-3">
+                Navigate
+              </p>
+
+              <div className="grid grid-cols-2 gap-2.5">
+                {navLinks.map((link) => {
+                  const active = activeSection === link.href;
+
+                  return (
+                    <button
+                      className={`text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border ${
+                        active
+                          ? "bg-black text-white border-black"
+                          : "bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
+                      }`}
+                      data-testid={`mobile-nav-${link.label
+                        .toLowerCase()
+                        .replace(/\s+/g, "-")}`}
+                      key={link.href}
+                      onClick={() => handleNavClick(link.href)}
+                      type="button"
+                    >
+                      {link.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 rounded-xl bg-white border border-black/10 p-3.5 flex items-center justify-between gap-3">
+                <a
+                  className="text-sm font-medium text-black/70 hover:text-black transition-colors"
+                  href="https://agent.travscale.com"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  Log in to agent portal
+                </a>
+                <span className="text-[10px] uppercase tracking-[0.14em] text-[#003399] font-bold">
+                  INR Plans
+                </span>
+              </div>
+
               <button
-                className="text-left text-base font-medium text-black/80 hover:text-black py-2"
-                data-testid={`mobile-nav-${link.label
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
+                className="bg-black text-white px-6 py-3.5 text-sm font-semibold w-full mt-4 rounded-xl"
+                data-testid="mobile-demo-btn"
+                onClick={() => {
+                  setMobileOpen(false);
+                  onDemoClick();
+                }}
                 type="button"
               >
-                {link.label}
+                Book a Demo
               </button>
-            ))}
-            <hr className="border-black/10 my-2" />
-            <a
-              className="text-base font-medium text-black/70"
-              href="https://agent.travscale.com"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              Log in
-            </a>
-            <button
-              className="bg-black text-white px-6 py-3 text-sm font-medium w-full mt-2"
-              data-testid="mobile-demo-btn"
-              onClick={() => {
-                setMobileOpen(false);
-                onDemoClick();
-              }}
-              type="button"
-            >
-              Book a Demo
-            </button>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       <div className="absolute left-0 right-0 bottom-0 h-0.5 bg-black/5">

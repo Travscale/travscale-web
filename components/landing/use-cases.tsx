@@ -47,23 +47,23 @@ const useCases = [
 export default function UseCases() {
   return (
     <section
-      className="ts-mesh-soft py-24 md:py-32 bg-[#F7F7F2] border-y border-black/5"
+      className="ts-mesh-soft py-20 sm:py-24 md:py-28 bg-[#F7F7F2] border-y border-black/5"
       data-testid="use-cases-section"
       id="use-cases"
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12">
-        <div className="mb-14 md:mb-16 flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+        <div className="mb-10 sm:mb-14 md:mb-16 flex flex-col gap-4 sm:gap-5 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
               Use Cases
             </span>
             <h2
-              className="text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+              className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
               style={{ fontFamily: "var(--font-outfit)" }}
             >
               Designed for real travel workflows, not generic CRMs
             </h2>
-            <p className="text-base text-black/60 leading-relaxed">
+            <p className="text-[15px] sm:text-base text-black/60 leading-relaxed">
               Pick your operating model and run it on a platform built for
               travel complexity from day one.
             </p>
@@ -77,10 +77,10 @@ export default function UseCases() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
           {useCases.map((item) => (
             <article
-              className="ts-surface-card bg-white border border-black/10 p-7 md:p-8"
+              className="ts-surface-card bg-white border border-black/10 p-5 sm:p-6 md:p-7"
               key={item.title}
             >
               <div className="w-11 h-11 bg-[#EEF2FF] text-[#003399] flex items-center justify-center mb-5 border border-[#003399]/10">
