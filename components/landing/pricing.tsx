@@ -154,10 +154,10 @@ export default function Pricing({ onDemoClick }: PricingProps) {
           </p>
         </div>
 
-        <div className="ts-scroll-strip flex md:grid md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5 overflow-x-auto md:overflow-visible pb-2 md:pb-0 snap-x snap-mandatory md:snap-none">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-5">
           {plans.map((plan) => (
             <div
-              className={`relative min-w-[86%] sm:min-w-[64%] md:min-w-0 snap-start flex flex-col p-6 sm:p-7 md:p-9 transition-transform duration-300 md:hover:-translate-y-1 ${
+              className={`relative flex flex-col p-6 sm:p-7 md:p-9 transition-transform duration-300 md:hover:-translate-y-1 ${
                 plan.highlight
                   ? "bg-black text-white shadow-2xl shadow-black/20"
                   : "bg-white border border-black/10 shadow-lg shadow-black/4"
