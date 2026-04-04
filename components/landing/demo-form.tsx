@@ -284,7 +284,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm" />
           <Drawer.Content
-            className="fixed inset-x-0 bottom-0 z-[101] bg-white rounded-t-3xl border-t border-black/10 max-h-[92dvh]"
+            className="fixed inset-x-0 bottom-0 z-101 bg-white rounded-t-3xl border-t border-black/10 max-h-[92dvh]"
             data-testid="demo-drawer"
           >
             <Drawer.Title className="sr-only">Book a Demo</Drawer.Title>

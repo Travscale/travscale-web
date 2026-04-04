@@ -119,8 +119,8 @@ export function ChecklistSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10"
       >
-        <div className="absolute right-0 top-1/4 h-[500px] w-[400px] rounded-full bg-linear-to-l from-[#1DB954]/5 to-transparent blur-3xl" />
-        <div className="absolute left-0 bottom-1/4 h-[400px] w-[350px] rounded-full bg-linear-to-r from-blue-500/5 to-transparent blur-3xl" />
+        <div className="absolute right-0 top-1/4 h-125 w-100 rounded-full bg-linear-to-l from-[#1DB954]/5 to-transparent blur-3xl" />
+        <div className="absolute left-0 bottom-1/4 h-100 w-87.5 rounded-full bg-linear-to-r from-blue-500/5 to-transparent blur-3xl" />
       </div>
 
       {/* Section header */}

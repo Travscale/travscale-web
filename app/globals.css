@@ -2,24 +2,33 @@
 @import "tw-animate-css";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --card: #ffffff;
-  --card-foreground: #171717;
-  --popover: #ffffff;
-  --popover-foreground: #171717;
-  --primary: oklch(0.488 0.243 264.376);
+  --ts-bg: #fdfdfc;
+  --ts-surface: #ffffff;
+  --ts-text: #0f172a;
+  --ts-muted: #475569;
+  --ts-border: #dce4f0;
+  --ts-primary: #003399;
+  --ts-primary-strong: #02266f;
+  --ts-accent: #0ea5e9;
+
+  --background: var(--ts-bg);
+  --foreground: var(--ts-text);
+  --card: var(--ts-surface);
+  --card-foreground: var(--ts-text);
+  --popover: var(--ts-surface);
+  --popover-foreground: var(--ts-text);
+  --primary: var(--ts-primary);
   --primary-foreground: #ffffff;
-  --secondary: oklch(0.93 0.01 260);
-  --secondary-foreground: #171717;
-  --muted: oklch(0.93 0.01 260);
-  --muted-foreground: oklch(0.55 0.02 260);
-  --accent: oklch(0.93 0.01 260);
-  --accent-foreground: #171717;
-  --destructive: oklch(0.55 0.2 25);
-  --border: oklch(0.88 0.01 260);
-  --input: oklch(0.88 0.01 260);
-  --ring: oklch(0.488 0.243 264.376);
+  --secondary: #e8eef7;
+  --secondary-foreground: var(--ts-text);
+  --muted: #edf2f8;
+  --muted-foreground: var(--ts-muted);
+  --accent: #e0eefb;
+  --accent-foreground: var(--ts-primary-strong);
+  --destructive: #b91c1c;
+  --border: var(--ts-border);
+  --input: var(--ts-border);
+  --ring: var(--ts-primary);
 }
 
 @theme inline {
@@ -46,13 +55,14 @@
 }
 
 body {
-  background: #fdfdfc;
-  color: #111;
+  background: var(--background);
+  color: var(--foreground);
   font-family: var(--font-manrope), sans-serif;
   scroll-behavior: smooth;
   background-image:
-    radial-gradient(circle at 100% 0%, rgba(0, 51, 153, 0.05), transparent 34%),
-    radial-gradient(circle at 0% 62%, rgba(0, 0, 0, 0.045), transparent 32%);
+    radial-gradient(circle at 100% 0%, rgba(0, 51, 153, 0.08), transparent 36%),
+    radial-gradient(circle at 0% 62%, rgba(2, 38, 111, 0.05), transparent 35%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(253, 253, 252, 0.9));
 }
 
 @layer base {
@@ -79,10 +89,19 @@ body {
 }
 
 .ts-gradient-text {
-  background: linear-gradient(120deg, #111 0%, #003399 100%);
+  background: linear-gradient(
+    120deg,
+    var(--ts-text) 0%,
+    var(--ts-primary) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+.ts-shell {
+  background-color: var(--background);
+  color: var(--foreground);
 }
 
 .ts-section {

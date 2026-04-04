@@ -37,7 +37,7 @@ export default function LandingPage() {
   }, []);
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FDFDFC" }}>
+    <div className="min-h-screen ts-shell">
       <Navigation onDemoClick={openDemo} />
 
       <main>

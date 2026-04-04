@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface Greeting {
@@ -96,10 +97,12 @@ const DynamicText = ({ onComplete }: DynamicTextProps) => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            <img
+            <Image
               alt="Travscale"
-              className="h-10 invert md:h-14 lg:h-16"
+              className="h-10 w-auto invert md:h-14 lg:h-16"
+              height={64}
               src="/logo-w-name.svg"
+              width={220}
             />
           </motion.div>
         )}

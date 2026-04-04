@@ -4,17 +4,10 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { navbarPageLinks, sectionLinks } from "@/lib/site-content";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_ff523236-7639-4c36-96ff-1cf74a0e278a/artifacts/624d08ht_logo-w-name.svg";
-
-const navLinks = [
-  { label: "Features", href: "#features" },
-  { label: "Workflow", href: "#how-it-works" },
-  { label: "Use Cases", href: "#use-cases" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "FAQ", href: "#faq" },
-];
 
 type NavigationProps = {
   onDemoClick: () => void;
@@ -23,7 +16,7 @@ type NavigationProps = {
 export default function Navigation({ onDemoClick }: NavigationProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState(navLinks[0].href);
+  const [activeSection, setActiveSection] = useState(sectionLinks[0].href);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -53,7 +46,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   }, []);
 
   useEffect(() => {
-    const sections = navLinks
+    const sections = sectionLinks
       .map((link) => document.querySelector(link.href))
       .filter(Boolean) as Element[];
 
@@ -106,8 +99,8 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             />
           </Link>
 
-          <div className="hidden lg:flex items-center gap-7">
-            {navLinks.map((link) => (
+          <div className="hidden xl:flex items-center gap-6">
+            {sectionLinks.map((link) => (
               <button
                 className={`text-sm font-medium transition-colors flex items-center gap-2 ${
                   activeSection === link.href
@@ -128,6 +121,31 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 />
                 {link.label}
               </button>
+            ))}
+            <span className="h-5 w-px bg-black/10" />
+            {navbarPageLinks.map((link) => (
+              <Link
+                className="text-sm font-medium text-black/70 hover:text-black transition-colors"
+                data-testid={`nav-page-${link.label
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+                href={link.href}
+                key={link.href}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </div>
+
+          <div className="hidden lg:flex xl:hidden items-center gap-4">
+            {navbarPageLinks.map((link) => (
+              <Link
+                className="text-sm font-medium text-black/70 hover:text-black transition-colors"
+                href={link.href}
+                key={link.href}
+              >
+                {link.label}
+              </Link>
             ))}
           </div>
 
@@ -179,11 +197,11 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           >
             <div className="px-4 sm:px-6 py-4">
               <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-3">
-                Navigate
+                Sections
               </p>
 
               <div className="grid grid-cols-2 gap-2.5">
-                {navLinks.map((link) => {
+                {sectionLinks.map((link) => {
                   const active = activeSection === link.href;
 
                   return (
@@ -206,17 +224,34 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 })}
               </div>
 
+              <div className="mt-4 rounded-xl border border-black/10 bg-white p-3.5">
+                <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-2">
+                  Pages
+                </p>
+                <div className="grid grid-cols-3 gap-2">
+                  {navbarPageLinks.map((link) => (
+                    <Link
+                      className="rounded-lg border border-black/10 px-3 py-2 text-xs text-center font-semibold text-black/75 hover:border-[#003399]/30 hover:text-black transition-colors"
+                      href={link.href}
+                      key={link.href}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+
               <div className="mt-4 rounded-xl bg-white border border-black/10 p-3.5 flex items-center justify-between gap-3">
-                <a
+                <Link
                   className="text-sm font-medium text-black/70 hover:text-black transition-colors"
-                  href="https://agent.travscale.com"
-                  rel="noopener noreferrer"
-                  target="_blank"
+                  href="/documentation"
+                  onClick={() => setMobileOpen(false)}
                 >
-                  Log in to agent portal
-                </a>
+                  View documentation
+                </Link>
                 <span className="text-[10px] uppercase tracking-[0.14em] text-[#003399] font-bold">
-                  INR Plans
+                  Dummy Content Pages
                 </span>
               </div>
 

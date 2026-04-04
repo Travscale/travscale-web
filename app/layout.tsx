@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Manrope, Outfit } from "next/font/google";
+import { siteConfig, toAbsoluteUrl } from "@/lib/site-content";
 import "./globals.css";
 
 const manrope = Manrope({
@@ -13,21 +14,75 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Travscale — The Travel Operations Platform",
-  description:
-    "Travscale is the modern operations platform for travel agencies. Streamline bookings, invoices, itineraries, and scale your travel business. Join the waitlist today.",
+  metadataBase: new URL(siteConfig.url),
+  title: {
+    default: `${siteConfig.name} | Travel Operations Platform`,
+    template: `%s | ${siteConfig.name}`,
+  },
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  referrer: "origin-when-cross-origin",
+  creator: siteConfig.name,
+  publisher: siteConfig.legalName,
+  category: "Travel Technology",
+  alternates: {
+    canonical: "/",
+  },
   keywords: [
     "travel agency software",
+    "travel ERP",
     "travel operations platform",
+    "B2B travel automation",
+    "travel booking workflow",
+    "agency operations software",
     "travel management",
     "travscale",
   ],
+  authors: [{ name: "Travscale Team", url: siteConfig.url }],
+  themeColor: siteConfig.themeColor,
+  manifest: "/manifest.webmanifest",
+  icons: {
+    icon: [{ url: "/favicon.ico" }],
+    shortcut: [{ url: "/favicon.ico" }],
+    apple: [{ url: "/favicon.ico" }],
+  },
+  formatDetection: {
+    address: false,
+    email: false,
+    telephone: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
   openGraph: {
-    title: "Travscale — The Travel Operations Platform",
-    description: "Streamline your travel agency operations. Join the waitlist.",
-    url: "https://travscale.com",
-    siteName: "Travscale",
+    title: `${siteConfig.name} | Travel Operations Platform`,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     type: "website",
+    locale: siteConfig.locale,
+    images: [
+      {
+        url: toAbsoluteUrl(siteConfig.ogImage),
+        width: 1200,
+        height: 630,
+        alt: `${siteConfig.name} platform overview`,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: `${siteConfig.name} | Travel Operations Platform`,
+    description: siteConfig.description,
+    images: [toAbsoluteUrl(siteConfig.ogImage)],
   },
 };
 

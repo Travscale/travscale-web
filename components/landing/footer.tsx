@@ -1,34 +1,10 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { footerLinkGroups, isHashLink, siteConfig } from "@/lib/site-content";
 
 const LOGO_WORDMARK =
   "https://customer-assets.emergentagent.com/job_ff523236-7639-4c36-96ff-1cf74a0e278a/artifacts/624d08ht_logo-w-name.svg";
-
-const footerLinks = {
-  Product: [
-    { label: "Features", href: "#features" },
-    { label: "Pricing", href: "#pricing" },
-    { label: "GDS Integration", href: "#features" },
-    { label: "Changelog", href: "#" },
-  ],
-  Company: [
-    { label: "About", href: "#" },
-    { label: "Careers", href: "#" },
-    { label: "Blog", href: "#" },
-    { label: "Contact", href: "#" },
-  ],
-  Resources: [
-    { label: "Documentation", href: "#" },
-    { label: "Help Center", href: "#" },
-    { label: "API Reference", href: "#" },
-    { label: "Status", href: "#" },
-  ],
-  Legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Cookie Policy", href: "#" },
-  ],
-};
 
 type FooterProps = {
   onDemoClick: () => void;
@@ -36,7 +12,7 @@ type FooterProps = {
 
 export default function Footer({ onDemoClick }: FooterProps) {
   const handleClick = (href: string) => {
-    if (href.startsWith("#") && href.length > 1) {
+    if (isHashLink(href) && href.length > 1) {
       const el = document.querySelector(href);
       if (el) el.scrollIntoView({ behavior: "smooth" });
     }
@@ -86,24 +62,37 @@ export default function Footer({ onDemoClick }: FooterProps) {
             <p className="text-sm text-white/40 leading-relaxed">
               The professional ERP for modern travel agencies.
             </p>
+            <p className="text-xs text-white/30 mt-2 leading-relaxed">
+              All linked pages are available with polished placeholder content.
+            </p>
           </div>
 
-          {Object.entries(footerLinks).map(([category, links]) => (
-            <div key={category}>
+          {footerLinkGroups.map((group) => (
+            <div key={group.title}>
               <h4 className="text-xs uppercase tracking-[0.15em] font-bold text-white/30 mb-5">
-                {category}
+                {group.title}
               </h4>
               <ul className="space-y-3">
-                {links.map((link) => (
+                {group.links.map((link) => (
                   <li key={link.label}>
-                    <button
-                      className="text-sm text-white/60 hover:text-white transition-colors py-0.5"
-                      data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
-                      onClick={() => handleClick(link.href)}
-                      type="button"
-                    >
-                      {link.label}
-                    </button>
+                    {isHashLink(link.href) ? (
+                      <button
+                        className="text-sm text-white/60 hover:text-white transition-colors py-0.5"
+                        data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                        onClick={() => handleClick(link.href)}
+                        type="button"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link
+                        className="text-sm text-white/60 hover:text-white transition-colors py-0.5"
+                        data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
+                        href={link.href}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
@@ -115,7 +104,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-5 sm:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30 flex items-center gap-1.5">
-            © {new Date().getFullYear()} Travscale. All rights reserved.
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
             <span className="text-white/20">•</span>
             <a
               className="text-white/35 hover:text-white/55 transition-colors"
@@ -129,19 +118,19 @@ export default function Footer({ onDemoClick }: FooterProps) {
           <div className="flex items-center gap-6">
             <a
               className="text-xs text-white/30 hover:text-white/60 transition-colors"
-              href="#"
+              href={siteConfig.socials.twitter}
             >
               Twitter
             </a>
             <a
               className="text-xs text-white/30 hover:text-white/60 transition-colors"
-              href="#"
+              href={siteConfig.socials.linkedin}
             >
               LinkedIn
             </a>
             <a
               className="text-xs text-white/30 hover:text-white/60 transition-colors"
-              href="#"
+              href={siteConfig.socials.instagram}
             >
               Instagram
             </a>
