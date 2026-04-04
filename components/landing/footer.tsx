@@ -114,8 +114,17 @@ export default function Footer({ onDemoClick }: FooterProps) {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-5 sm:py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/30">
+          <p className="text-xs text-white/30 flex items-center gap-1.5">
             © {new Date().getFullYear()} Travscale. All rights reserved.
+            <span className="text-white/20">•</span>
+            <a
+              className="text-white/35 hover:text-white/55 transition-colors"
+              href="https://abubakarshaikh.dev"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
+              abubakarshaikh.dev
+            </a>
           </p>
           <div className="flex items-center gap-6">
             <a
