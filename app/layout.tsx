@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Outfit } from "next/font/google";
 import { siteConfig, toAbsoluteUrl } from "@/lib/site-content";
 import "./globals.css";
@@ -39,12 +39,11 @@ export const metadata: Metadata = {
     "travscale",
   ],
   authors: [{ name: "Travscale Team", url: siteConfig.url }],
-  themeColor: siteConfig.themeColor,
   manifest: "/manifest.webmanifest",
   icons: {
-    icon: [{ url: "/favicon.ico" }],
-    shortcut: [{ url: "/favicon.ico" }],
-    apple: [{ url: "/favicon.ico" }],
+    icon: [{ url: "/favicon.ico", type: "image/x-icon", sizes: "any" }],
+    shortcut: [{ url: "/favicon.ico", type: "image/x-icon" }],
+    apple: [{ url: "/favicon.ico", type: "image/x-icon" }],
   },
   formatDetection: {
     address: false,
@@ -84,6 +83,10 @@ export const metadata: Metadata = {
     description: siteConfig.description,
     images: [toAbsoluteUrl(siteConfig.ogImage)],
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: siteConfig.themeColor,
 };
 
 export default function RootLayout({
