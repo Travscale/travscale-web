@@ -91,11 +91,11 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           <Link className="shrink-0" data-testid="nav-logo" href="/">
             <Image
               alt="Travscale"
-              className="h-6 sm:h-7 lg:h-8 w-auto"
-              height={36}
+              className="h-5 sm:h-5 lg:h-6 w-auto"
+              height={30}
               priority
               src={LOGO_URL}
-              width={140}
+              width={118}
             />
           </Link>
 

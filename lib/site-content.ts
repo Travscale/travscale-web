@@ -11,7 +11,7 @@ export const siteConfig = {
   socials: {
     twitter: "#",
     linkedin: "#",
-    instagram: "#",
+    instagram: "https://instagram.com/travscale",
   },
 } as const;
 
