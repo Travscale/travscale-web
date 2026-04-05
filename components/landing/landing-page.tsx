@@ -7,7 +7,6 @@ import Features from "@/components/landing/features";
 import Footer from "@/components/landing/footer";
 import Hero from "@/components/landing/hero";
 import HowItWorks from "@/components/landing/how-it-works";
-import Navigation from "@/components/landing/navigation";
 import Pricing from "@/components/landing/pricing";
 import Testimonials from "@/components/landing/testimonials";
 import TrustedBy from "@/components/landing/trusted-by";
@@ -38,8 +37,6 @@ export default function LandingPage() {
 
   return (
     <div className="min-h-screen ts-shell">
-      <Navigation onDemoClick={openDemo} />
-
       <main>
         <Hero onDemoClick={openDemo} />
 

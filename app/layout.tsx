@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Manrope, Outfit } from "next/font/google";
+import Navigation from "@/components/landing/navigation";
 import { siteConfig, toAbsoluteUrl } from "@/lib/site-content";
 import "./globals.css";
 
@@ -97,6 +98,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${manrope.variable} ${outfit.variable} antialiased`}>
+        <Navigation />
         {children}
       </body>
     </html>

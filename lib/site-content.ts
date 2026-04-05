@@ -33,6 +33,7 @@ export const navbarPageLinks: SiteLink[] = [
   { label: "About", href: "/about" },
   { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
+  { label: "Terms", href: "/terms-and-conditions" },
 ];
 
 export const footerLinkGroups: Array<{ title: string; links: SiteLink[] }> = [
@@ -71,7 +72,7 @@ export const footerLinkGroups: Array<{ title: string; links: SiteLink[] }> = [
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "/privacy-policy" },
-      { label: "Terms of Service", href: "/terms-of-service" },
+      { label: "Terms and Conditions", href: "/terms-and-conditions" },
       { label: "Cookie Policy", href: "/cookie-policy" },
       { label: "Security", href: "/security" },
     ],

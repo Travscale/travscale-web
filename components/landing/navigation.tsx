@@ -3,21 +3,37 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { navbarPageLinks, sectionLinks } from "@/lib/site-content";
 
 const LOGO_URL =
   "https://customer-assets.emergentagent.com/job_ff523236-7639-4c36-96ff-1cf74a0e278a/artifacts/624d08ht_logo-w-name.svg";
+const AGENT_APP_URL = "https://agent.travscale.com";
 
 type NavigationProps = {
-  onDemoClick: () => void;
+  onDemoClick?: () => void;
 };
 
+function toHomeSectionHref(href: string): string {
+  if (href.startsWith("#")) {
+    return `/${href}`;
+  }
+
+  return href;
+}
+
 export default function Navigation({ onDemoClick }: NavigationProps) {
+  const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(sectionLinks[0].href);
   const [scrollProgress, setScrollProgress] = useState(0);
+
+  const pageLinks = isHome
+    ? navbarPageLinks
+    : [{ label: "Home", href: "/" }, ...navbarPageLinks];
 
   useEffect(() => {
     const previous = document.body.style.overflow;
@@ -46,9 +62,17 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   }, []);
 
   useEffect(() => {
+    if (!isHome) {
+      return;
+    }
+
     const sections = sectionLinks
       .map((link) => document.querySelector(link.href))
       .filter(Boolean) as Element[];
+
+    if (sections.length === 0) {
+      return;
+    }
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -68,13 +92,29 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
 
     sections.forEach((section) => observer.observe(section));
     return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
+  }, [isHome]);
 
-  const handleNavClick = (href: string) => {
+  const handleHomeSectionClick = (href: string) => {
     setMobileOpen(false);
+
+    if (!isHome) {
+      return;
+    }
+
     setActiveSection(href);
     const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleDemoClick = () => {
+    if (onDemoClick) {
+      onDemoClick();
+      return;
+    }
+
+    window.open(AGENT_APP_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -100,53 +140,84 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           </Link>
 
           <div className="hidden xl:flex items-center gap-6">
-            {sectionLinks.map((link) => (
-              <button
-                className={`text-sm font-medium transition-colors flex items-center gap-2 ${
-                  activeSection === link.href
-                    ? "text-black"
-                    : "text-black/70 hover:text-black"
-                }`}
-                data-testid={`nav-link-${link.label
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                key={link.href}
-                onClick={() => handleNavClick(link.href)}
-                type="button"
-              >
-                <span
-                  className={`h-1.5 w-1.5 rounded-full transition-colors ${
-                    activeSection === link.href ? "bg-[#003399]" : "bg-black/20"
-                  }`}
-                />
-                {link.label}
-              </button>
-            ))}
+            {sectionLinks.map((link) => {
+              const isActive = isHome && activeSection === link.href;
+
+              if (isHome) {
+                return (
+                  <button
+                    className={`text-sm font-medium transition-colors flex items-center gap-2 ${
+                      isActive ? "text-black" : "text-black/70 hover:text-black"
+                    }`}
+                    data-testid={`nav-link-${link.label
+                      .toLowerCase()
+                      .replace(/\s+/g, "-")}`}
+                    key={link.href}
+                    onClick={() => handleHomeSectionClick(link.href)}
+                    type="button"
+                  >
+                    <span
+                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                        isActive ? "bg-[#003399]" : "bg-black/20"
+                      }`}
+                    />
+                    {link.label}
+                  </button>
+                );
+              }
+
+              return (
+                <Link
+                  className="text-sm font-medium transition-colors flex items-center gap-2 text-black/70 hover:text-black"
+                  data-testid={`nav-link-${link.label
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                  href={toHomeSectionHref(link.href)}
+                  key={link.href}
+                  onClick={() => setMobileOpen(false)}
+                >
+                  <span className="h-1.5 w-1.5 rounded-full bg-black/20 transition-colors" />
+                  {link.label}
+                </Link>
+              );
+            })}
             <span className="h-5 w-px bg-black/10" />
-            {navbarPageLinks.map((link) => (
-              <Link
-                className="text-sm font-medium text-black/70 hover:text-black transition-colors"
-                data-testid={`nav-page-${link.label
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                href={link.href}
-                key={link.href}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {pageLinks.map((link) => {
+              const isCurrent = pathname === link.href;
+
+              return (
+                <Link
+                  className={`text-sm font-medium transition-colors ${
+                    isCurrent ? "text-black" : "text-black/70 hover:text-black"
+                  }`}
+                  data-testid={`nav-page-${link.label
+                    .toLowerCase()
+                    .replace(/\s+/g, "-")}`}
+                  href={link.href}
+                  key={link.href}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden lg:flex xl:hidden items-center gap-4">
-            {navbarPageLinks.map((link) => (
-              <Link
-                className="text-sm font-medium text-black/70 hover:text-black transition-colors"
-                href={link.href}
-                key={link.href}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {pageLinks.map((link) => {
+              const isCurrent = pathname === link.href;
+
+              return (
+                <Link
+                  className={`text-sm font-medium transition-colors ${
+                    isCurrent ? "text-black" : "text-black/70 hover:text-black"
+                  }`}
+                  href={link.href}
+                  key={link.href}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </div>
 
           <div className="hidden lg:flex items-center gap-4">
@@ -162,7 +233,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             <button
               className="bg-black text-white px-6 py-2.5 text-sm font-medium hover:bg-[#003399] transition-colors flex items-center gap-2"
               data-testid="nav-demo-btn"
-              onClick={onDemoClick}
+              onClick={handleDemoClick}
               type="button"
             >
               Book a Demo
@@ -197,29 +268,45 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           >
             <div className="px-4 sm:px-6 py-4">
               <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-3">
-                Sections
+                {isHome ? "Sections" : "Explore Home Sections"}
               </p>
 
               <div className="grid grid-cols-2 gap-2.5">
                 {sectionLinks.map((link) => {
-                  const active = activeSection === link.href;
+                  const active = isHome && activeSection === link.href;
+
+                  if (isHome) {
+                    return (
+                      <button
+                        className={`text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border ${
+                          active
+                            ? "bg-black text-white border-black"
+                            : "bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
+                        }`}
+                        data-testid={`mobile-nav-${link.label
+                          .toLowerCase()
+                          .replace(/\s+/g, "-")}`}
+                        key={link.href}
+                        onClick={() => handleHomeSectionClick(link.href)}
+                        type="button"
+                      >
+                        {link.label}
+                      </button>
+                    );
+                  }
 
                   return (
-                    <button
-                      className={`text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border ${
-                        active
-                          ? "bg-black text-white border-black"
-                          : "bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
-                      }`}
+                    <Link
+                      className="text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
                       data-testid={`mobile-nav-${link.label
                         .toLowerCase()
                         .replace(/\s+/g, "-")}`}
+                      href={toHomeSectionHref(link.href)}
                       key={link.href}
-                      onClick={() => handleNavClick(link.href)}
-                      type="button"
+                      onClick={() => setMobileOpen(false)}
                     >
                       {link.label}
-                    </button>
+                    </Link>
                   );
                 })}
               </div>
@@ -228,17 +315,25 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-2">
                   Pages
                 </p>
-                <div className="grid grid-cols-3 gap-2">
-                  {navbarPageLinks.map((link) => (
-                    <Link
-                      className="rounded-lg border border-black/10 px-3 py-2 text-xs text-center font-semibold text-black/75 hover:border-[#003399]/30 hover:text-black transition-colors"
-                      href={link.href}
-                      key={link.href}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
+                <div className="grid grid-cols-2 gap-2">
+                  {pageLinks.map((link) => {
+                    const isCurrent = pathname === link.href;
+
+                    return (
+                      <Link
+                        className={`rounded-lg border px-3 py-2 text-xs text-center font-semibold transition-colors ${
+                          isCurrent
+                            ? "text-black border-black/30 bg-black/5"
+                            : "text-black/75 border-black/10 hover:border-[#003399]/30 hover:text-black"
+                        }`}
+                        href={link.href}
+                        key={link.href}
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        {link.label}
+                      </Link>
+                    );
+                  })}
                 </div>
               </div>
 
@@ -260,7 +355,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 data-testid="mobile-demo-btn"
                 onClick={() => {
                   setMobileOpen(false);
-                  onDemoClick();
+                  handleDemoClick();
                 }}
                 type="button"
               >
