@@ -4,12 +4,16 @@
 :root {
   --ts-bg: #fdfdfc;
   --ts-surface: #ffffff;
+  --ts-surface-muted: #f7f8fb;
   --ts-text: #0f172a;
   --ts-muted: #475569;
   --ts-border: #dce4f0;
   --ts-primary: #003399;
   --ts-primary-strong: #02266f;
   --ts-accent: #0ea5e9;
+  --ts-shadow-soft: 0 16px 36px -26px rgba(15, 23, 42, 0.42);
+  --ts-shadow-strong: 0 28px 64px -38px rgba(2, 18, 52, 0.58);
+  --ts-focus-ring: rgba(0, 51, 153, 0.34);
 
   --background: var(--ts-bg);
   --foreground: var(--ts-text);
@@ -104,6 +108,75 @@ body {
   color: var(--foreground);
 }
 
+:where([class*="rounded-"]):not(.ts-keep-round) {
+  border-radius: 0 !important;
+}
+
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--ts-focus-ring);
+  outline-offset: 2px;
+}
+
+.ts-eyebrow {
+  display: block;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgb(15 23 42 / 40%);
+}
+
+.ts-panel {
+  border: 1px solid rgb(15 23 42 / 10%);
+  background: var(--ts-surface);
+  box-shadow: var(--ts-shadow-soft);
+}
+
+.ts-elevated {
+  border: 1px solid rgb(15 23 42 / 10%);
+  background: var(--ts-surface);
+  box-shadow: var(--ts-shadow-soft);
+}
+
+.ts-btn-primary,
+.ts-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    transform 0.25s ease;
+}
+
+.ts-btn-primary {
+  border: 1px solid #000000;
+  background: #000000;
+  color: #ffffff;
+  box-shadow: var(--ts-shadow-soft);
+}
+
+.ts-btn-primary:hover {
+  border-color: var(--ts-primary);
+  background: var(--ts-primary);
+}
+
+.ts-btn-secondary {
+  border: 1px solid rgb(15 23 42 / 16%);
+  background: var(--ts-surface);
+  color: var(--ts-text);
+}
+
+.ts-btn-secondary:hover {
+  border-color: rgb(0 51 153 / 45%);
+  background: rgb(15 23 42 / 3%);
+  color: #000000;
+}
+
 .ts-section {
   opacity: 0;
   transform: translateY(18px);
@@ -120,6 +193,9 @@ body {
 
 .ts-surface-card {
   position: relative;
+  background: var(--ts-surface);
+  border: 1px solid rgb(15 23 42 / 10%);
+  box-shadow: var(--ts-shadow-soft);
   transition:
     transform 0.3s ease,
     box-shadow 0.3s ease,
@@ -128,7 +204,8 @@ body {
 
 .ts-surface-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 38px -24px rgba(17, 17, 17, 0.45);
+  border-color: rgb(0 51 153 / 30%);
+  box-shadow: var(--ts-shadow-strong);
 }
 
 .ts-scroll-strip {

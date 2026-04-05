@@ -109,9 +109,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
         <div className="text-center mb-10 sm:mb-14 md:mb-16 max-w-2xl mx-auto">
-          <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
-            Pricing
-          </span>
+          <span className="ts-eyebrow mb-4">Pricing</span>
           <h2
             className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             data-testid="pricing-heading"
@@ -124,12 +122,12 @@ export default function Pricing({ onDemoClick }: PricingProps) {
             optimized for Indian travel teams.
           </p>
 
-          <div className="mt-7 w-full sm:w-auto sm:inline-flex items-center rounded-2xl sm:rounded-full border border-black/10 bg-white p-1.5 grid grid-cols-2">
+          <div className="mt-7 w-full sm:w-auto sm:inline-grid items-center ts-panel p-1 grid grid-cols-2">
             <button
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
                 billingCycle === "monthly"
                   ? "bg-black text-white"
-                  : "text-black/65 hover:text-black"
+                  : "text-black/65 hover:text-black hover:bg-black/4"
               }`}
               onClick={() => setBillingCycle("monthly")}
               type="button"
@@ -137,10 +135,10 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               Monthly Billing
             </button>
             <button
-              className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+              className={`px-4 py-2 text-sm font-medium transition-colors ${
                 billingCycle === "yearly"
                   ? "bg-black text-white"
-                  : "text-black/65 hover:text-black"
+                  : "text-black/65 hover:text-black hover:bg-black/4"
               }`}
               onClick={() => setBillingCycle("yearly")}
               type="button"
@@ -159,8 +157,8 @@ export default function Pricing({ onDemoClick }: PricingProps) {
             <div
               className={`relative flex flex-col p-6 sm:p-7 md:p-9 transition-transform duration-300 md:hover:-translate-y-1 ${
                 plan.highlight
-                  ? "bg-black text-white shadow-2xl shadow-black/20"
-                  : "bg-white border border-black/10 shadow-lg shadow-black/4"
+                  ? "bg-black text-white border border-black shadow-(--ts-shadow-strong)"
+                  : "ts-panel"
               }`}
               data-testid={`pricing-card-${plan.name.toLowerCase()}`}
               key={plan.name}
@@ -225,10 +223,10 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               </ul>
 
               <button
-                className={`w-full py-3.5 sm:py-4 text-sm font-semibold flex items-center justify-center gap-2 transition-colors rounded-xl ${
+                className={`w-full py-3.5 sm:py-4 text-sm font-semibold flex items-center justify-center gap-2 transition-colors border ${
                   plan.highlight
-                    ? "bg-white text-black hover:bg-white/90"
-                    : "bg-black text-white hover:bg-[#003399]"
+                    ? "bg-white text-black border-white hover:bg-white/90"
+                    : "bg-black text-white border-black hover:bg-[#003399] hover:border-[#003399]"
                 }`}
                 data-testid={`pricing-cta-${plan.name.toLowerCase()}`}
                 onClick={onDemoClick}

@@ -140,7 +140,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
             hours.
           </p>
           <button
-            className="bg-black text-white px-8 py-3 text-sm font-medium hover:bg-[#003399] transition-colors"
+            className="ts-btn-primary px-8 py-3 text-sm"
             data-testid="demo-modal-done"
             onClick={onClose}
             type="button"
@@ -251,7 +251,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
             )}
 
             <button
-              className="w-full bg-black text-white py-3.5 sm:py-4 text-sm font-semibold hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 disabled:opacity-50 rounded-xl"
+              className="ts-btn-primary w-full py-3.5 sm:py-4 text-sm disabled:opacity-50"
               data-testid="demo-submit-btn"
               disabled={loading}
               type="submit"
@@ -284,11 +284,11 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
         <Drawer.Portal>
           <Drawer.Overlay className="fixed inset-0 z-100 bg-black/60 backdrop-blur-sm" />
           <Drawer.Content
-            className="fixed inset-x-0 bottom-0 z-101 bg-white rounded-t-3xl border-t border-black/10 max-h-[92dvh]"
+            className="fixed inset-x-0 bottom-0 z-101 bg-white border-t border-black/10 max-h-[92dvh]"
             data-testid="demo-drawer"
           >
             <Drawer.Title className="sr-only">Book a Demo</Drawer.Title>
-            <div className="mx-auto mt-2.5 mb-1 h-1.5 w-12 rounded-full bg-black/15" />
+            <div className="mx-auto mt-2.5 mb-1 h-1.5 w-12 bg-black/15" />
             <div className="relative px-5 pb-5 pt-2 overflow-y-auto max-h-[calc(92dvh-20px)]">
               {content}
             </div>
@@ -309,7 +309,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
 
       <div
-        className="relative bg-white w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 shadow-2xl ring-1 ring-black/5 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto rounded-2xl sm:rounded-none"
+        className="relative ts-panel w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto"
         data-testid="demo-modal"
         onClick={(e) => e.stopPropagation()}
       >

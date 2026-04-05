@@ -24,7 +24,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-14 sm:py-16 md:py-24">
           <div className="flex flex-col md:flex-row items-start md:items-end justify-between gap-6 sm:gap-8">
             <div>
-              <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-white/30 block mb-4">
+              <span className="ts-eyebrow text-white/30 mb-4">
                 Ready to scale?
               </span>
               <h2
@@ -37,7 +37,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
               </h2>
             </div>
             <button
-              className="bg-white text-black px-8 sm:px-10 py-3.5 sm:py-4 text-sm font-semibold hover:bg-[#003399] hover:text-white transition-colors flex items-center justify-center gap-2 shrink-0 rounded-xl w-full md:w-auto"
+              className="ts-btn-secondary px-8 sm:px-10 py-3.5 sm:py-4 text-sm hover:bg-[#003399] hover:border-[#003399] hover:text-white shrink-0 w-full md:w-auto"
               data-testid="footer-cta-btn"
               onClick={onDemoClick}
               type="button"

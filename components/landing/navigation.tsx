@@ -157,7 +157,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                     type="button"
                   >
                     <span
-                      className={`h-1.5 w-1.5 rounded-full transition-colors ${
+                      className={`h-1.5 w-1.5 rounded-full ts-keep-round transition-colors ${
                         isActive ? "bg-[#003399]" : "bg-black/20"
                       }`}
                     />
@@ -176,7 +176,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                   key={link.href}
                   onClick={() => setMobileOpen(false)}
                 >
-                  <span className="h-1.5 w-1.5 rounded-full bg-black/20 transition-colors" />
+                  <span className="h-1.5 w-1.5 rounded-full ts-keep-round bg-black/20 transition-colors" />
                   {link.label}
                 </Link>
               );
@@ -231,7 +231,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
               Log in
             </a>
             <button
-              className="bg-black text-white px-6 py-2.5 text-sm font-medium hover:bg-[#003399] transition-colors flex items-center gap-2"
+              className="ts-btn-primary px-6 py-2.5 text-sm"
               data-testid="nav-demo-btn"
               onClick={handleDemoClick}
               type="button"
@@ -242,7 +242,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           </div>
 
           <button
-            className="lg:hidden p-2.5 rounded-full border border-black/10 bg-white/85 backdrop-blur"
+            className="lg:hidden p-2.5 border border-black/10 bg-white/85 backdrop-blur"
             data-testid="mobile-menu-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
@@ -278,7 +278,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                   if (isHome) {
                     return (
                       <button
-                        className={`text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border ${
+                        className={`text-left px-4 py-3.5 text-sm font-semibold transition-colors border ${
                           active
                             ? "bg-black text-white border-black"
                             : "bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
@@ -297,7 +297,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
 
                   return (
                     <Link
-                      className="text-left rounded-xl px-4 py-3.5 text-sm font-semibold transition-colors border bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
+                      className="text-left px-4 py-3.5 text-sm font-semibold transition-colors border bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
                       data-testid={`mobile-nav-${link.label
                         .toLowerCase()
                         .replace(/\s+/g, "-")}`}
@@ -311,7 +311,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 })}
               </div>
 
-              <div className="mt-4 rounded-xl border border-black/10 bg-white p-3.5">
+              <div className="mt-4 ts-panel p-3.5">
                 <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-2">
                   Pages
                 </p>
@@ -321,7 +321,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
 
                     return (
                       <Link
-                        className={`rounded-lg border px-3 py-2 text-xs text-center font-semibold transition-colors ${
+                        className={`border px-3 py-2 text-xs text-center font-semibold transition-colors ${
                           isCurrent
                             ? "text-black border-black/30 bg-black/5"
                             : "text-black/75 border-black/10 hover:border-[#003399]/30 hover:text-black"
@@ -337,7 +337,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                 </div>
               </div>
 
-              <div className="mt-4 rounded-xl bg-white border border-black/10 p-3.5 flex items-center justify-between gap-3">
+              <div className="mt-4 ts-panel p-3.5 flex items-center justify-between gap-3">
                 <Link
                   className="text-sm font-medium text-black/70 hover:text-black transition-colors"
                   href="/documentation"
@@ -351,7 +351,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
               </div>
 
               <button
-                className="bg-black text-white px-6 py-3.5 text-sm font-semibold w-full mt-4 rounded-xl"
+                className="ts-btn-primary px-6 py-3.5 text-sm w-full mt-4"
                 data-testid="mobile-demo-btn"
                 onClick={() => {
                   setMobileOpen(false);

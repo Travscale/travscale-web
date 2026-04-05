@@ -42,9 +42,7 @@ export default function Faq() {
     >
       <div className="max-w-5xl mx-auto px-4 sm:px-6 md:px-12">
         <div className="text-center mb-10 sm:mb-12 md:mb-14">
-          <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
-            FAQ
-          </span>
+          <span className="ts-eyebrow mb-4">FAQ</span>
           <h2
             className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             style={{ fontFamily: "var(--font-outfit)" }}

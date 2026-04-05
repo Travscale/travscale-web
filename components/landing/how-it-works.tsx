@@ -47,9 +47,7 @@ export default function HowItWorks() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 relative">
         <div className="mb-10 sm:mb-14 md:mb-16 max-w-2xl">
-          <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/40 block mb-4">
-            How It Works
-          </span>
+          <span className="ts-eyebrow mb-4">How It Works</span>
           <h2
             className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
             data-testid="how-it-works-heading"

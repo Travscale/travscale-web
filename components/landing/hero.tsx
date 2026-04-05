@@ -28,7 +28,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <div className="max-w-xl">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-black/10 mb-6 sm:mb-8 bg-white/70 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#003399]" />
+              <span className="w-1.5 h-1.5 rounded-full ts-keep-round bg-[#003399]" />
               <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/50">
                 Travel ERP Platform
               </span>
@@ -54,7 +54,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
 
             <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
               <button
-                className="group bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 font-semibold hover:bg-[#003399] transition-colors flex items-center justify-center gap-2 text-sm shadow-lg shadow-black/10 rounded-xl"
+                className="ts-btn-primary group px-6 sm:px-8 py-3.5 sm:py-4 text-sm"
                 data-testid="hero-demo-btn"
                 onClick={onDemoClick}
                 type="button"
@@ -63,7 +63,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <a
-                className="border border-black/20 text-black px-6 sm:px-8 py-3.5 sm:py-4 font-semibold hover:bg-black/5 transition-colors flex items-center justify-center gap-2 text-sm rounded-xl"
+                className="ts-btn-secondary px-6 sm:px-8 py-3.5 sm:py-4 text-sm"
                 data-testid="hero-trial-btn"
                 href="https://agent.travscale.com"
                 rel="noopener noreferrer"
@@ -95,7 +95,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
             </div>
 
             <div className="relative mt-9 sm:mt-10 lg:hidden">
-              <div className="relative overflow-hidden shadow-xl shadow-black/10 ring-1 ring-black/8 rounded-2xl">
+              <div className="relative overflow-hidden ts-elevated">
                 <Image
                   alt="Travel professionals collaborating"
                   className="w-full h-56 sm:h-72 object-cover"
@@ -107,7 +107,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 <div className="absolute inset-x-0 bottom-0 h-1 bg-[#003399]" />
               </div>
 
-              <div className="absolute -bottom-4 left-3 right-3 rounded-xl bg-white border border-black/10 px-3 py-2.5 shadow-md flex items-center justify-between gap-3">
+              <div className="absolute -bottom-4 left-3 right-3 ts-panel px-3 py-2.5 flex items-center justify-between gap-3">
                 <div>
                   <p className="text-[10px] uppercase tracking-[0.14em] text-black/45 font-semibold">
                     Platform Status
@@ -116,14 +116,14 @@ export default function Hero({ onDemoClick }: HeroProps) {
                     All systems operational
                   </p>
                 </div>
-                <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+                <span className="h-2.5 w-2.5 rounded-full ts-keep-round bg-green-500" />
               </div>
             </div>
           </div>
 
           <div className="relative hidden lg:block">
             <div className="relative">
-              <div className="relative overflow-hidden shadow-2xl shadow-black/10 ring-1 ring-black/5">
+              <div className="relative overflow-hidden ts-elevated">
                 <Image
                   alt="Travel professionals collaborating"
                   className="w-full h-120 object-cover"
@@ -135,12 +135,12 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#003399]" />
               </div>
 
-              <div className="absolute -bottom-6 -left-6 bg-white border border-black/10 p-5 shadow-lg max-w-55">
+              <div className="absolute -bottom-6 -left-6 ts-panel p-5 max-w-55">
                 <div className="text-xs uppercase tracking-[0.15em] font-bold text-black/40 mb-2">
                   Platform Status
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-green-500" />
+                  <span className="w-2 h-2 rounded-full ts-keep-round bg-green-500" />
                   <span className="text-sm font-medium">
                     All systems operational
                   </span>

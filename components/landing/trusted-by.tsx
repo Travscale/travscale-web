@@ -52,7 +52,7 @@ export default function TrustedBy() {
         </div>
 
         <div className="text-center">
-          <span className="uppercase text-[10px] tracking-[0.2em] font-bold text-black/30 block mb-6">
+          <span className="ts-eyebrow text-black/30 mb-6">
             Trusted by leading travel agencies
           </span>
           <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 md:gap-x-10 gap-y-3 sm:gap-y-4">
