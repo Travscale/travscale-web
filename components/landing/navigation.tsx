@@ -7,8 +7,7 @@ import { usePathname } from "next/navigation";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { navbarPageLinks } from "@/lib/site-content";
 
-const LOGO_URL =
-  "https://customer-assets.emergentagent.com/job_ff523236-7639-4c36-96ff-1cf74a0e278a/artifacts/624d08ht_logo-w-name.svg";
+const LOGO_URL = "/logo-w-name.svg";
 const AGENT_APP_URL = "https://agent.travscale.com";
 
 type NavigationProps = {
