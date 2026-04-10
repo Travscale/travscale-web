@@ -237,6 +237,61 @@ body {
   opacity: 0.45;
 }
 
+/* ── Testimonials Marquee ── */
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.ts-marquee-row {
+  overflow: hidden;
+  width: 100%;
+  position: relative;
+}
+
+.ts-marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee-scroll var(--marquee-duration, 60s) linear infinite;
+  animation-direction: var(--marquee-direction, normal);
+}
+
+.ts-marquee-row:hover .ts-marquee-track {
+  animation-play-state: paused;
+}
+
+.ts-marquee-fade-left,
+.ts-marquee-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.ts-marquee-fade-left {
+  left: 0;
+  background: linear-gradient(to right, #fdfdfc, transparent);
+}
+
+.ts-marquee-fade-right {
+  right: 0;
+  background: linear-gradient(to left, #fdfdfc, transparent);
+}
+
+@media (min-width: 768px) {
+  .ts-marquee-fade-left,
+  .ts-marquee-fade-right {
+    width: 120px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
@@ -249,5 +304,9 @@ body {
   .ts-section.visible {
     opacity: 1;
     transform: none;
+  }
+
+  .ts-marquee-track {
+    animation: none !important;
   }
 }
