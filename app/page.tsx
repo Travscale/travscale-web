@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import LandingPage from "@/components/landing/landing-page";
+import MarketingHomePage from "@/components/pages/marketing-home-page";
 import { siteConfig, toAbsoluteUrl } from "@/lib/site-content";
 
 export const metadata: Metadata = {
@@ -58,7 +58,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
         type="application/ld+json"
       />
-      <LandingPage />
+      <MarketingHomePage />
     </>
   );
 }
