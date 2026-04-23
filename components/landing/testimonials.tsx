@@ -23,17 +23,17 @@ type Testimonial = (typeof ROW_1)[number];
 
 function TestimonialCard({ t }: { t: Testimonial }) {
   return (
-    <article className={`flex w-[min(88vw,360px)] shrink-0 flex-col p-6 text-left md:w-[400px] md:p-8 ${t.featured ? "bg-white border border-[#181717]/15 shadow-[0_8px_32px_-12px_rgba(24,23,23,0.10)]" : "bg-[#eeebea] border border-[#181717]/[0.07]"}`}>
+    <article className={`flex w-[min(88vw,360px)] shrink-0 flex-col rounded-2xl p-6 text-left md:w-[400px] md:p-8 transition-all duration-300 ${t.featured ? "bg-white border border-[#181717]/12 shadow-[0_4px_24px_-8px_rgba(24,23,23,0.08)]" : "bg-[#eeebea]/60 border border-[#181717]/[0.06]"}`}>
       <div className="mb-5 flex min-h-[28px] items-center">
-        <span className="text-xs font-bold uppercase tracking-[0.18em] text-[#181717]/25">{t.logo}</span>
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-[#181717]/20">{t.logo}</span>
       </div>
       <blockquote className="flex min-h-0 flex-1 flex-col">
-        <p className="relative text-sm leading-relaxed font-medium tracking-tight text-[#181717]/80 md:text-[15px]">&ldquo;{t.quote}&rdquo;</p>
+        <p className="relative text-sm leading-relaxed font-medium tracking-tight text-[#181717]/75 md:text-[15px]">&ldquo;{t.quote}&rdquo;</p>
       </blockquote>
       <div className="mt-auto flex items-center gap-3 pt-6">
-        <img alt={t.name} className="size-11 shrink-0 rounded-xl object-cover p-0.5 ring-1 ring-[#181717]/10 bg-white" height={44} src={t.avatar} width={44} />
+        <img alt={t.name} className="size-10 shrink-0 rounded-full object-cover ring-2 ring-[#181717]/5 ring-offset-2 ring-offset-white" height={40} src={t.avatar} width={40} />
         <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-[#181717]/90">{t.name}</p>
+          <p className="truncate text-sm font-medium text-[#181717]/85">{t.name}</p>
           <p className="truncate text-xs text-[#666666]">{t.role}</p>
         </div>
       </div>
@@ -44,7 +44,7 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 function MarqueeRow({ items, duration, reverse = false }: { items: Testimonial[]; duration: number; reverse?: boolean }) {
   return (
     <div className="ts-marquee-row">
-      <div className="ts-marquee-track" style={{ "--marquee-duration": `${duration}s`, "--marquee-direction": reverse ? "reverse" : "normal" } as React.CSSProperties}>
+      <div className="ts-marquee-track gap-4 sm:gap-5" style={{ "--marquee-duration": `${duration}s`, "--marquee-direction": reverse ? "reverse" : "normal" } as React.CSSProperties}>
         {items.map((t, i) => (<TestimonialCard key={`a-${i}`} t={t} />))}
         {items.map((t, i) => (<TestimonialCard key={`b-${i}`} t={t} />))}
       </div>
@@ -54,17 +54,17 @@ function MarqueeRow({ items, duration, reverse = false }: { items: Testimonial[]
 
 export default function Testimonials() {
   return (
-    <section className="relative w-full py-16 md:py-20" data-testid="testimonials-section" id="testimonials" style={{ backgroundColor: "#f9f7f6" }}>
+    <section className="relative w-full py-20 md:py-28" data-testid="testimonials-section" id="testimonials" style={{ backgroundColor: "#f9f7f6" }}>
       <div className="mx-auto max-w-7xl px-4 md:px-12">
-        <header className="mx-auto mb-10 max-w-2xl text-center md:mb-12">
+        <header className="mx-auto mb-12 max-w-2xl text-center md:mb-16">
           <span className="ts-eyebrow mb-4">Testimonials</span>
-          <h2 className="text-[1.85rem] sm:text-3xl md:text-4xl font-medium leading-tight text-balance" data-testid="testimonials-heading" style={{ letterSpacing: "-1.44px" }}>
+          <h2 className="text-[1.85rem] sm:text-3xl md:text-[2.75rem] font-medium leading-[1.12] text-balance" data-testid="testimonials-heading" style={{ letterSpacing: "-1.44px" }}>
             Trusted by agencies <span className="text-[#d04841]">worldwide</span>
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-pretty text-[#666666] md:text-base">Real feedback from teams that replaced chaos with clarity.</p>
+          <p className="mt-4 text-[15px] leading-relaxed text-pretty text-[#666666] sm:text-base">Real feedback from teams that replaced chaos with clarity.</p>
         </header>
       </div>
-      <div className="relative flex w-full flex-col gap-0 border-t border-[#181717]/[0.07]">
+      <div className="relative flex w-full flex-col gap-4 sm:gap-5">
         <div className="ts-marquee-fade-left" />
         <div className="ts-marquee-fade-right" />
         <MarqueeRow items={ROW_1} duration={70} />

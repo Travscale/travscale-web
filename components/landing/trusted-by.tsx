@@ -1,4 +1,4 @@
-import { Clock, Globe, Headphones, Shield } from "lucide-react";
+"use client";
 
 const logos = [
   "Wanderlust Travels",
@@ -11,57 +11,29 @@ const logos = [
   "Voyager Group",
 ];
 
-const stats = [
-  { icon: Globe, value: "32+", label: "Countries" },
-  { icon: Shield, value: "SOC2", label: "Compliant" },
-  { icon: Clock, value: "<2min", label: "Avg Response" },
-  { icon: Headphones, value: "24/7", label: "Support" },
-];
-
 export default function TrustedBy() {
+  const doubled = [...logos, ...logos];
+
   return (
     <section
-      className="py-12 sm:py-14 md:py-16 border-t border-b border-[#181717]/5"
+      className="py-8 sm:py-10 overflow-hidden"
       data-testid="trusted-by-section"
       style={{ backgroundColor: "#f9f7f6" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 sm:gap-4 md:gap-6 mb-10 sm:mb-12 md:mb-14">
-          {stats.map((stat) => (
-            <div
-              className="flex items-center gap-3 sm:gap-4 bg-white rounded-xl border border-[#181717]/10 p-3 sm:p-3.5"
-              data-testid={`stat-${stat.label.toLowerCase().replace(/\s+/g, "-")}`}
-              key={stat.label}
-            >
-              <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center border border-[#181717]/10">
-                <stat.icon className="w-4 h-4 text-[#d04841]" />
-              </div>
-              <div>
-                <div className="text-xl font-medium tracking-tight">
-                  {stat.value}
-                </div>
-                <div className="text-[10px] sm:text-xs text-[#666666] uppercase tracking-wider">
-                  {stat.label}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
+      <div className="relative">
+        {/* Fade edges */}
+        <div className="absolute left-0 top-0 bottom-0 w-20 sm:w-32 z-10 bg-gradient-to-r from-[#f9f7f6] to-transparent pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-20 sm:w-32 z-10 bg-gradient-to-l from-[#f9f7f6] to-transparent pointer-events-none" />
 
-        <div className="text-center">
-          <span className="ts-eyebrow text-[#181717]/30 mb-6">
-            Trusted by leading travel agencies
-          </span>
-          <div className="flex flex-wrap items-center justify-center gap-x-6 sm:gap-x-8 md:gap-x-10 gap-y-3 sm:gap-y-4">
-            {logos.map((name) => (
-              <span
-                className="text-xs sm:text-sm font-semibold text-[#181717]/20 tracking-wider uppercase"
-                key={name}
-              >
-                {name}
-              </span>
-            ))}
-          </div>
+        <div className="flex animate-logo-scroll">
+          {doubled.map((name, i) => (
+            <span
+              className="shrink-0 px-6 sm:px-10 text-[11px] sm:text-xs font-semibold text-[#181717]/15 tracking-[0.25em] uppercase whitespace-nowrap"
+              key={`${name}-${i}`}
+            >
+              {name}
+            </span>
+          ))}
         </div>
       </div>
     </section>
