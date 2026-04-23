@@ -1,16 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, Outfit } from "next/font/google";
+import { Inter } from "next/font/google";
 import SiteNavigation from "@/components/organisms/navigation/site-navigation";
 import { siteConfig, toAbsoluteUrl } from "@/lib/site-content";
 import "./globals.css";
 
-const manrope = Manrope({
-  variable: "--font-manrope",
-  subsets: ["latin"],
-});
-
-const outfit = Outfit({
-  variable: "--font-outfit",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });
 
@@ -97,7 +92,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${manrope.variable} ${outfit.variable} antialiased`}>
+      <body className={`${inter.variable} antialiased`}>
         <SiteNavigation />
         {children}
       </body>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -18,7 +18,9 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const lastScrollY = useRef(0);
 
   const pageLinks = isHome
     ? navbarPageLinks
@@ -35,15 +37,27 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
     };
   }, [mobileOpen]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+  const handleScroll = useCallback(() => {
+    const currentY = window.scrollY;
+    setScrolled(currentY > 20);
 
-    window.addEventListener("scroll", handleScroll);
+    // Don't hide when mobile menu is open or near the top
+    if (!mobileOpen && currentY > 80) {
+      const delta = currentY - lastScrollY.current;
+      if (delta > 5) setHidden(true);    // scrolling down
+      if (delta < -5) setHidden(false);  // scrolling up
+    } else {
+      setHidden(false);
+    }
+
+    lastScrollY.current = currentY;
+  }, [mobileOpen]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   const handleDemoClick = () => {
     if (onDemoClick) {
@@ -57,8 +71,10 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 ts-nav transition-all duration-300 ${
+        hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"
+      } ${
         scrolled
-          ? "bg-white/90 border-b border-black/5 shadow-sm"
+          ? "bg-[#f9f7f6]/90 backdrop-blur-md border-b border-[#181717]/5 shadow-sm"
           : "bg-transparent"
       }`}
       data-testid="main-navigation"
@@ -84,7 +100,9 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
               return (
                 <Link
                   className={`text-sm font-medium transition-colors ${
-                    isCurrent ? "text-black" : "text-black/70 hover:text-black"
+                    isCurrent
+                      ? "text-[#181717]"
+                      : "text-[#181717]/70 hover:text-[#181717]"
                   }`}
                   data-testid={`nav-page-${link.label
                     .toLowerCase()
@@ -101,7 +119,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
           {/* CTA buttons */}
           <div className="hidden lg:flex items-center gap-4">
             <a
-              className="text-sm font-medium text-black/70 hover:text-black transition-colors"
+              className="text-sm font-medium text-[#181717]/70 hover:text-[#181717] transition-colors"
               data-testid="nav-login-btn"
               href="https://agent.travscale.com"
               rel="noopener noreferrer"
@@ -110,7 +128,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
               Log in
             </a>
             <button
-              className="ts-btn-primary px-6 py-2.5 text-sm"
+              className="ts-btn-pill px-7 py-3 text-[13px]"
               data-testid="nav-demo-btn"
               onClick={handleDemoClick}
               type="button"
@@ -122,7 +140,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
 
           {/* Mobile menu toggle */}
           <button
-            className="lg:hidden p-2.5 border border-black/10 bg-white/85 backdrop-blur"
+            className="lg:hidden p-2.5 rounded-lg border border-[#181717]/10 bg-white/85 backdrop-blur"
             data-testid="mobile-menu-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
             type="button"
@@ -143,11 +161,11 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             onClick={() => setMobileOpen(false)}
           />
           <div
-            className="lg:hidden fixed left-0 right-0 top-15 sm:top-16 z-60 bg-[#FCFCFA] border-y border-black/10"
+            className="lg:hidden fixed left-0 right-0 top-15 sm:top-16 z-60 bg-[#f9f7f6] border-y border-[#181717]/10 rounded-b-2xl"
             data-testid="mobile-menu"
           >
             <div className="px-4 sm:px-6 py-4">
-              <p className="text-[11px] uppercase tracking-[0.16em] text-black/40 font-semibold mb-3">
+              <p className="text-[11px] uppercase tracking-[0.16em] text-[#181717]/40 font-semibold mb-3">
                 Pages
               </p>
 
@@ -157,10 +175,10 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
 
                   return (
                     <Link
-                      className={`text-left px-4 py-3.5 text-sm font-semibold transition-colors border ${
+                      className={`text-left px-4 py-3.5 text-sm font-semibold transition-colors rounded-lg border ${
                         isCurrent
-                          ? "bg-black text-white border-black"
-                          : "bg-white text-black/80 border-black/10 hover:border-[#003399]/30"
+                          ? "bg-[#232222] text-white border-[#232222]"
+                          : "bg-white text-[#181717]/80 border-[#181717]/10 hover:border-[#d04841]/30"
                       }`}
                       data-testid={`mobile-nav-${link.label
                         .toLowerCase()
@@ -176,7 +194,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
               </div>
 
               <button
-                className="ts-btn-primary px-6 py-3.5 text-sm w-full mt-4"
+                className="ts-btn-pill w-full py-3.5 text-sm mt-4"
                 data-testid="mobile-demo-btn"
                 onClick={() => {
                   setMobileOpen(false);

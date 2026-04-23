@@ -13,38 +13,29 @@ export default function Hero({ onDemoClick }: HeroProps) {
     <section
       className="relative pt-24 sm:pt-28 lg:pt-36 pb-14 sm:pb-16 lg:pb-28 overflow-hidden"
       data-testid="hero-section"
-      style={{ backgroundColor: "#FDFDFC" }}
+      style={{ backgroundColor: "#f9f7f6" }}
     >
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(0,0,0,1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,1) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
-        }}
-      />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 relative">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center">
           <div className="max-w-xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 border border-black/10 mb-6 sm:mb-8 bg-white/70 backdrop-blur-sm">
-              <span className="w-1.5 h-1.5 rounded-full ts-keep-round bg-[#003399]" />
-              <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-black/50">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#181717]/10 mb-6 sm:mb-8 bg-white/70 backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#d04841]" />
+              <span className="uppercase text-[11px] tracking-[0.2em] font-bold text-[#181717]/50">
                 Travel ERP Platform
               </span>
             </div>
 
             <h1
-              className="text-[2rem] sm:text-5xl lg:text-[3.5rem] tracking-tight font-medium leading-[1.08] mb-5 sm:mb-6"
+              className="text-[2rem] sm:text-5xl lg:text-[3.5rem] font-medium leading-[1.08] mb-5 sm:mb-6"
               data-testid="hero-tagline"
-              style={{ fontFamily: "var(--font-outfit)" }}
+              style={{ letterSpacing: "-1.44px" }}
             >
               Scale your travel business,{" "}
               <span className="ts-gradient-text">not your inbox.</span>
             </h1>
 
             <p
-              className="text-[15px] sm:text-base md:text-lg text-black/60 leading-relaxed mb-8 sm:mb-10 max-w-md"
+              className="text-[15px] sm:text-base md:text-lg text-[#666666] leading-relaxed mb-8 sm:mb-10 max-w-md"
               data-testid="hero-subtext"
             >
               Replace the WhatsApp and email chaos with a single, powerful
@@ -54,7 +45,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
 
             <div className="flex flex-col sm:flex-row gap-3.5 sm:gap-4">
               <button
-                className="ts-btn-primary group px-6 sm:px-8 py-3.5 sm:py-4 text-sm"
+                className="ts-btn-primary group px-6 sm:px-8 py-3.5 sm:py-4 text-sm rounded-xl"
                 data-testid="hero-demo-btn"
                 onClick={onDemoClick}
                 type="button"
@@ -63,7 +54,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
               </button>
               <a
-                className="ts-btn-secondary px-6 sm:px-8 py-3.5 sm:py-4 text-sm"
+                className="ts-btn-secondary px-6 sm:px-8 py-3.5 sm:py-4 text-sm rounded-xl"
                 data-testid="hero-trial-btn"
                 href="https://agent.travscale.com"
                 rel="noopener noreferrer"
@@ -74,20 +65,17 @@ export default function Hero({ onDemoClick }: HeroProps) {
               </a>
             </div>
 
-            <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-9 sm:mt-12 pt-6 sm:pt-8 border-t border-black/10">
+            <div className="grid grid-cols-3 gap-4 sm:gap-6 mt-9 sm:mt-12 pt-6 sm:pt-8 border-t border-[#181717]/10">
               {[
                 { value: "500+", label: "Travel Agents" },
                 { value: "18K+", label: "Bookings/mo" },
                 { value: "99.9%", label: "Uptime" },
               ].map((stat) => (
                 <div className="group" key={stat.label}>
-                  <div
-                    className="text-xl sm:text-2xl md:text-3xl font-semibold tracking-tight transition-colors group-hover:text-[#003399]"
-                    style={{ fontFamily: "var(--font-outfit)" }}
-                  >
+                  <div className="text-xl sm:text-2xl md:text-3xl font-medium tracking-tight transition-colors group-hover:text-[#d04841]">
                     {stat.value}
                   </div>
-                  <div className="text-[10px] sm:text-xs text-black/50 mt-1 uppercase tracking-wider font-medium">
+                  <div className="text-[10px] sm:text-xs text-[#666666] mt-1 uppercase tracking-wider font-medium">
                     {stat.label}
                   </div>
                 </div>
@@ -95,7 +83,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
             </div>
 
             <div className="relative mt-9 sm:mt-10 lg:hidden">
-              <div className="relative overflow-hidden ts-elevated">
+              <div className="relative overflow-hidden rounded-2xl ts-elevated">
                 <Image
                   alt="Travel professionals collaborating"
                   className="w-full h-56 sm:h-72 object-cover"
@@ -104,26 +92,26 @@ export default function Hero({ onDemoClick }: HeroProps) {
                   src={HERO_IMAGE}
                   width={960}
                 />
-                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#003399]" />
+                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#d04841]" />
               </div>
 
               <div className="absolute -bottom-4 left-3 right-3 ts-panel px-3 py-2.5 flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-[10px] uppercase tracking-[0.14em] text-black/45 font-semibold">
+                  <p className="text-[10px] uppercase tracking-[0.14em] text-[#181717]/45 font-semibold">
                     Platform Status
                   </p>
-                  <p className="text-sm font-medium text-black/80">
+                  <p className="text-sm font-medium text-[#181717]/80">
                     All systems operational
                   </p>
                 </div>
-                <span className="h-2.5 w-2.5 rounded-full ts-keep-round bg-green-500" />
+                <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
               </div>
             </div>
           </div>
 
           <div className="relative hidden lg:block">
             <div className="relative">
-              <div className="relative overflow-hidden ts-elevated">
+              <div className="relative overflow-hidden rounded-2xl ts-elevated">
                 <Image
                   alt="Travel professionals collaborating"
                   className="w-full h-120 object-cover"
@@ -132,22 +120,22 @@ export default function Hero({ onDemoClick }: HeroProps) {
                   src={HERO_IMAGE}
                   width={800}
                 />
-                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#003399]" />
+                <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#d04841]" />
               </div>
 
               <div className="absolute -bottom-6 -left-6 ts-panel p-5 max-w-55">
-                <div className="text-xs uppercase tracking-[0.15em] font-bold text-black/40 mb-2">
+                <div className="text-xs uppercase tracking-[0.15em] font-bold text-[#181717]/40 mb-2">
                   Platform Status
                 </div>
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full ts-keep-round bg-green-500" />
+                  <span className="w-2 h-2 rounded-full bg-green-500" />
                   <span className="text-sm font-medium">
                     All systems operational
                   </span>
                 </div>
               </div>
 
-              <div className="absolute -top-4 -right-4 w-24 h-24 border-2 border-[#003399]/20" />
+              <div className="absolute -top-4 -right-4 w-24 h-24 rounded-2xl border-2 border-[#d04841]/20" />
             </div>
           </div>
         </div>

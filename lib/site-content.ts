@@ -5,7 +5,7 @@ export const siteConfig = {
     "Travscale is a modern travel operations platform for agencies that need faster bookings, cleaner finance workflows, and stronger customer delivery.",
   url: "https://travscale.com",
   locale: "en_IN",
-  themeColor: "#003399",
+  themeColor: "#d04841",
   ogImage: "/opengraph-image.png",
   founded: "2026",
   socials: {

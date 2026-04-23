@@ -2,19 +2,38 @@
 @import "tw-animate-css";
 
 :root {
-  --ts-bg: #fdfdfc;
+  /* ── Tailscale-inspired design tokens (DESIGN.md) ── */
+  --ts-bg: #f9f7f6;
   --ts-surface: #ffffff;
-  --ts-surface-muted: #f7f8fb;
-  --ts-text: #0f172a;
-  --ts-muted: #475569;
-  --ts-border: #dce4f0;
-  --ts-primary: #003399;
-  --ts-primary-strong: #02266f;
-  --ts-accent: #0ea5e9;
-  --ts-shadow-soft: 0 16px 36px -26px rgba(15, 23, 42, 0.42);
-  --ts-shadow-strong: 0 28px 64px -38px rgba(2, 18, 52, 0.58);
-  --ts-focus-ring: rgba(0, 51, 153, 0.34);
+  --ts-surface-muted: #eeebea;
+  --ts-text: #181717;
+  --ts-muted: #666666;
+  --ts-border: rgba(46, 45, 45, 0.15);
+  --ts-primary: #d04841;
+  --ts-primary-strong: #b83c36;
+  --ts-secondary: #5a82de;
+  --ts-accent: #5a82de;
+  --ts-shadow-soft: 0 2px 8px -2px rgba(24, 23, 23, 0.08),
+    0 4px 16px -4px rgba(24, 23, 23, 0.06);
+  --ts-shadow-strong: 0 8px 24px -6px rgba(24, 23, 23, 0.12),
+    0 12px 40px -8px rgba(24, 23, 23, 0.08);
+  --ts-focus-ring: rgba(208, 72, 65, 0.4);
 
+  /* ── Palette tokens from DESIGN.md ── */
+  --palette-1: #ffffff;
+  --palette-2: #2e2d2d;
+  --palette-3: #f9f7f6;
+  --palette-4: #d04841;
+  --palette-5: #232222;
+  --palette-6: #efddfd;
+  --palette-7: #ffd3cf;
+  --palette-8: #cbf4c9;
+  --palette-9: #f8e5b9;
+  --palette-10: #cedefd;
+  --palette-11: #eeebea;
+  --palette-12: #5a82de;
+
+  /* ── shadcn/ui compatibility layer ── */
   --background: var(--ts-bg);
   --foreground: var(--ts-text);
   --card: var(--ts-surface);
@@ -23,11 +42,11 @@
   --popover-foreground: var(--ts-text);
   --primary: var(--ts-primary);
   --primary-foreground: #ffffff;
-  --secondary: #e8eef7;
+  --secondary: var(--palette-11);
   --secondary-foreground: var(--ts-text);
-  --muted: #edf2f8;
+  --muted: var(--palette-11);
   --muted-foreground: var(--ts-muted);
-  --accent: #e0eefb;
+  --accent: var(--palette-7);
   --accent-foreground: var(--ts-primary-strong);
   --destructive: #b91c1c;
   --border: var(--ts-border);
@@ -54,19 +73,14 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --font-sans: var(--font-manrope);
-  --font-mono: var(--font-outfit);
+  --font-sans: var(--font-inter);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-manrope), sans-serif;
+  font-family: var(--font-inter), "Inter", sans-serif;
   scroll-behavior: smooth;
-  background-image:
-    radial-gradient(circle at 100% 0%, rgba(0, 51, 153, 0.08), transparent 36%),
-    radial-gradient(circle at 0% 62%, rgba(2, 38, 111, 0.05), transparent 35%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(253, 253, 252, 0.9));
 }
 
 @layer base {
@@ -77,6 +91,8 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* ── Animations ── */
 
 @keyframes pulse-subtle {
   0%,
@@ -92,12 +108,10 @@ body {
   animation: pulse-subtle 3s ease-in-out infinite;
 }
 
+/* ── Typography Utilities ── */
+
 .ts-gradient-text {
-  background: linear-gradient(
-    120deg,
-    var(--ts-text) 0%,
-    var(--ts-primary) 100%
-  );
+  background: linear-gradient(120deg, var(--ts-text) 0%, var(--ts-primary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -108,14 +122,14 @@ body {
   color: var(--foreground);
 }
 
-:where([class*="rounded-"]):not(.ts-keep-round) {
-  border-radius: 0 !important;
-}
+/* ── Focus Ring ── */
 
 :where(button, a, input, textarea, select):focus-visible {
   outline: 2px solid var(--ts-focus-ring);
   outline-offset: 2px;
 }
+
+/* ── Eyebrow Label ── */
 
 .ts-eyebrow {
   display: block;
@@ -123,20 +137,26 @@ body {
   letter-spacing: 0.2em;
   font-size: 11px;
   font-weight: 700;
-  color: rgb(15 23 42 / 40%);
+  color: rgb(24 23 23 / 40%);
 }
 
+/* ── Panel & Elevation ── */
+
 .ts-panel {
-  border: 1px solid rgb(15 23 42 / 10%);
+  border: 1px solid rgb(24 23 23 / 10%);
   background: var(--ts-surface);
+  border-radius: 16px;
   box-shadow: var(--ts-shadow-soft);
 }
 
 .ts-elevated {
-  border: 1px solid rgb(15 23 42 / 10%);
+  border: 1px solid rgb(24 23 23 / 10%);
   background: var(--ts-surface);
+  border-radius: 16px;
   box-shadow: var(--ts-shadow-soft);
 }
+
+/* ── Button System (DESIGN.md §4) ── */
 
 .ts-btn-primary,
 .ts-btn-secondary {
@@ -144,7 +164,7 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  font-weight: 600;
+  font-weight: 500;
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
@@ -153,29 +173,103 @@ body {
     transform 0.25s ease;
 }
 
+/* Filled dark button */
 .ts-btn-primary {
-  border: 1px solid #000000;
-  background: #000000;
+  border: 0.8px solid #232222;
+  background: #232222;
   color: #ffffff;
+  border-radius: 8px;
   box-shadow: var(--ts-shadow-soft);
 }
 
 .ts-btn-primary:hover {
-  border-color: var(--ts-primary);
   background: var(--ts-primary);
+  border-color: var(--ts-primary);
 }
 
+/* Outline/secondary button */
 .ts-btn-secondary {
-  border: 1px solid rgb(15 23 42 / 16%);
+  border: 1px solid rgb(24 23 23 / 14%);
   background: var(--ts-surface);
   color: var(--ts-text);
+  border-radius: 8px;
 }
 
 .ts-btn-secondary:hover {
-  border-color: rgb(0 51 153 / 45%);
-  background: rgb(15 23 42 / 3%);
-  color: #000000;
+  border-color: rgba(208, 72, 65, 0.4);
+  background: rgb(24 23 23 / 3%);
+  color: var(--ts-text);
 }
+
+/* Pill button (dark) */
+.ts-btn-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #1f1e1e;
+  color: #ffffff;
+  border-radius: 9999px;
+  font-weight: 500;
+  border: 0.8px solid rgb(31, 30, 30);
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.ts-btn-pill:hover {
+  background: var(--ts-primary);
+  border-color: var(--ts-primary);
+}
+
+/* Pill button (light) */
+.ts-btn-pill-light {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  color: #2e2d2d;
+  border-radius: 9999px;
+  padding: 0 18px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 0.8px solid rgb(238, 235, 234);
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.ts-btn-pill-light:hover {
+  border-color: rgba(208, 72, 65, 0.3);
+}
+
+/* CTA accent button */
+.ts-btn-accent {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #d04841;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 24px 24px;
+  font-size: 16px;
+  font-weight: 400;
+  border: none;
+  cursor: pointer;
+  transition:
+    background-color 0.25s ease,
+    transform 0.15s ease;
+}
+
+.ts-btn-accent:hover {
+  background: #b83c36;
+}
+
+/* ── Section Reveal Animation ── */
 
 .ts-section {
   opacity: 0;
@@ -191,10 +285,13 @@ body {
   transform: translateY(0);
 }
 
+/* ── Surface Card ── */
+
 .ts-surface-card {
   position: relative;
   background: var(--ts-surface);
-  border: 1px solid rgb(15 23 42 / 10%);
+  border: 1px solid rgb(24 23 23 / 10%);
+  border-radius: 16px;
   box-shadow: var(--ts-shadow-soft);
   transition:
     transform 0.3s ease,
@@ -204,9 +301,11 @@ body {
 
 .ts-surface-card:hover {
   transform: translateY(-4px);
-  border-color: rgb(0 51 153 / 30%);
+  border-color: rgba(208, 72, 65, 0.25);
   box-shadow: var(--ts-shadow-strong);
 }
+
+/* ── Scroll Strip ── */
 
 .ts-scroll-strip {
   -webkit-overflow-scrolling: touch;
@@ -215,26 +314,6 @@ body {
 
 .ts-scroll-strip::-webkit-scrollbar {
   display: none;
-}
-
-.ts-mesh-soft {
-  position: relative;
-}
-
-.ts-mesh-soft::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    linear-gradient(180deg, rgba(0, 51, 153, 0.04) 0%, transparent 40%),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.015) 1px, transparent 1px),
-    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px);
-  background-size:
-    auto,
-    42px 42px,
-    42px 42px;
-  opacity: 0.45;
 }
 
 /* ── Testimonials Marquee ── */
@@ -277,12 +356,12 @@ body {
 
 .ts-marquee-fade-left {
   left: 0;
-  background: linear-gradient(to right, #fdfdfc, transparent);
+  background: linear-gradient(to right, #f9f7f6, transparent);
 }
 
 .ts-marquee-fade-right {
   right: 0;
-  background: linear-gradient(to left, #fdfdfc, transparent);
+  background: linear-gradient(to left, #f9f7f6, transparent);
 }
 
 @media (min-width: 768px) {
@@ -291,6 +370,8 @@ body {
     width: 120px;
   }
 }
+
+/* ── Reduced Motion ── */
 
 @media (prefers-reduced-motion: reduce) {
   * {

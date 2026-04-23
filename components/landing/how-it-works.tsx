@@ -64,38 +64,38 @@ export default function HowItWorks() {
         <div className="mb-10 sm:mb-14 md:mb-16 max-w-2xl">
           <span className="ts-eyebrow mb-4">How It Works</span>
           <h2
-            className="text-[1.85rem] sm:text-3xl md:text-4xl tracking-tight font-medium leading-tight mb-4"
+            className="text-[1.85rem] sm:text-3xl md:text-4xl font-medium leading-tight mb-4"
             data-testid="how-it-works-heading"
-            style={{ fontFamily: "var(--font-outfit)" }}
+            style={{ letterSpacing: "-1.44px" }}
           >
             Up and running in{" "}
-            <span className="text-[#003399]">three steps</span>
+            <span className="text-[#d04841]">three steps</span>
           </h2>
-          <p className="text-[15px] sm:text-base text-black/60 leading-relaxed">
+          <p className="text-[15px] sm:text-base text-[#666666] leading-relaxed">
             No complex onboarding. No lengthy implementation cycles. Get your
             agency on Travscale and see results from day one.
           </p>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-4 sm:gap-5 md:gap-6">
-          <article className="sm:col-span-2 lg:col-span-7 border border-black/10 bg-white p-6 sm:p-7 relative overflow-hidden min-h-75">
-            <div className="absolute inset-0 opacity-60 bg-[linear-gradient(130deg,rgba(0,51,153,0.12)_0%,rgba(0,51,153,0.03)_40%,transparent_72%)]" />
-            <div className="absolute right-6 top-6 hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#003399]">
+          <article className="sm:col-span-2 lg:col-span-7 rounded-[32px] border border-[#181717]/10 bg-white p-6 sm:p-7 relative overflow-hidden min-h-75">
+            <div className="absolute inset-0 opacity-60 bg-[linear-gradient(130deg,rgba(208,72,65,0.10)_0%,rgba(208,72,65,0.03)_40%,transparent_72%)]" />
+            <div className="absolute right-6 top-6 hidden sm:flex items-center gap-2 text-[10px] uppercase tracking-[0.18em] text-[#d04841]">
               <span>Go Live Track</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
             </div>
 
             <div className="relative">
-              <p className="text-[11px] uppercase tracking-[0.22em] text-black/55 mb-6">
+              <p className="text-[11px] uppercase tracking-[0.22em] text-[#181717]/55 mb-6">
                 Launch Cockpit
               </p>
               <h3
                 className="text-2xl sm:text-[1.95rem] leading-tight font-medium mb-4 max-w-xl"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                style={{ letterSpacing: "-1.44px" }}
               >
                 Your onboarding is mapped in one clear operating view.
               </h3>
-              <p className="text-sm sm:text-base text-black/65 leading-relaxed mb-8 max-w-2xl">
+              <p className="text-sm sm:text-base text-[#666666] leading-relaxed mb-8 max-w-2xl">
                 Travscale brings setup, migration, and day-to-day execution into
                 one structured flow. No waiting on long implementation cycles.
               </p>
@@ -103,16 +103,13 @@ export default function HowItWorks() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 {setupFacts.map((fact) => (
                   <div
-                    className="border border-black/10 bg-white/80 p-3"
+                    className="rounded-xl border border-[#181717]/10 bg-white/80 p-3"
                     key={fact.label}
                   >
-                    <p className="text-[10px] uppercase tracking-[0.15em] text-black/45 mb-2">
+                    <p className="text-[10px] uppercase tracking-[0.15em] text-[#181717]/45 mb-2">
                       {fact.label}
                     </p>
-                    <p
-                      className="text-lg"
-                      style={{ fontFamily: "var(--font-outfit)" }}
-                    >
+                    <p className="text-lg">
                       {fact.value}
                     </p>
                   </div>
@@ -122,32 +119,29 @@ export default function HowItWorks() {
           </article>
 
           <article
-            className="sm:col-span-2 lg:col-span-5 bg-[#081020] text-white border border-[#192947] p-6 sm:p-7 group relative overflow-hidden min-h-90"
+            className="sm:col-span-2 lg:col-span-5 bg-[#2e2d2d] text-white rounded-[32px] border border-[#2e2d2d] p-6 sm:p-7 group relative overflow-hidden min-h-90"
             data-testid={`step-${stepOne.num}`}
           >
-            <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#0f2b63]/70 blur-2xl" />
-            <div className="absolute -bottom-20 -left-12 w-48 h-48 rounded-full bg-[#003399]/50 blur-2xl" />
+            <div className="absolute -top-16 -right-16 w-44 h-44 rounded-full bg-[#d04841]/20 blur-2xl" />
+            <div className="absolute -bottom-20 -left-12 w-48 h-48 rounded-full bg-[#d04841]/15 blur-2xl" />
 
             <div className="relative h-full flex flex-col">
               <div className="flex items-center justify-between mb-7">
                 <span className="text-[11px] uppercase tracking-[0.18em] text-white/70">
                   Step {stepOne.num}
                 </span>
-                <span
-                  className="text-4xl sm:text-5xl leading-none text-white/15"
-                  style={{ fontFamily: "var(--font-outfit)" }}
-                >
+                <span className="text-4xl sm:text-5xl leading-none text-white/15">
                   {stepOne.num}
                 </span>
               </div>
 
-              <div className="w-11 h-11 bg-white/10 border border-white/20 flex items-center justify-center mb-5 transition-colors group-hover:bg-white/20">
+              <div className="w-11 h-11 bg-white/10 border border-white/20 rounded-xl flex items-center justify-center mb-5 transition-colors group-hover:bg-white/20">
                 <stepOne.icon className="w-5 h-5 text-white" />
               </div>
 
               <h3
                 className="text-2xl sm:text-[1.85rem] font-medium leading-tight mb-4"
-                style={{ fontFamily: "var(--font-outfit)" }}
+                style={{ letterSpacing: "-1.44px" }}
               >
                 {stepOne.title}
               </h3>
@@ -163,43 +157,37 @@ export default function HowItWorks() {
           </article>
 
           <article
-            className="sm:col-span-1 lg:col-span-4 bg-white border border-black/10 p-5 sm:p-6 group min-h-60"
+            className="sm:col-span-1 lg:col-span-4 bg-white rounded-2xl border border-[#181717]/10 p-5 sm:p-6 group min-h-60"
             data-testid={`step-${stepTwo.num}`}
           >
             <div className="flex items-center justify-between mb-4">
-              <span
-                className="text-sm tracking-[0.18em] text-black/45"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
+              <span className="text-sm tracking-[0.18em] text-[#181717]/45">
                 {stepTwo.num}
               </span>
-              <stepTwo.icon className="w-5 h-5 text-[#003399]" />
+              <stepTwo.icon className="w-5 h-5 text-[#d04841]" />
             </div>
-            <h3
-              className="text-xl sm:text-2xl font-medium mb-3 transition-colors group-hover:text-[#003399]"
-              style={{ fontFamily: "var(--font-outfit)" }}
-            >
+            <h3 className="text-xl sm:text-2xl font-medium mb-3 transition-colors group-hover:text-[#d04841]">
               {stepTwo.title}
             </h3>
-            <p className="text-sm sm:text-base text-black/60 leading-relaxed">
+            <p className="text-sm sm:text-base text-[#666666] leading-relaxed">
               {stepTwo.description}
             </p>
           </article>
 
-          <article className="sm:col-span-1 lg:col-span-3 bg-white border border-black/10 p-5 sm:p-6 min-h-60 relative overflow-hidden group">
-            <div className="absolute inset-x-0 top-0 h-1 bg-linear-to-r from-[#003399] via-[#0ea5e9] to-transparent" />
-            <div className="absolute -right-10 -bottom-10 w-28 h-28 rounded-full bg-[#003399]/5 blur-xl" />
+          <article className="sm:col-span-1 lg:col-span-3 bg-white rounded-2xl border border-[#181717]/10 p-5 sm:p-6 min-h-60 relative overflow-hidden group">
+            <div className="absolute inset-x-0 top-0 h-1 rounded-t-2xl bg-linear-to-r from-[#d04841] via-[#5a82de] to-transparent" />
+            <div className="absolute -right-10 -bottom-10 w-28 h-28 rounded-full bg-[#d04841]/5 blur-xl" />
 
-            <p className="text-[11px] uppercase tracking-[0.16em] text-black/45 mb-4">
+            <p className="text-[11px] uppercase tracking-[0.16em] text-[#181717]/45 mb-4">
               Immediate Wins
             </p>
             <ul className="space-y-3">
               {immediateWins.map((item) => (
                 <li
-                  className="flex items-start gap-2.5 text-sm text-black/65 pb-3 border-b border-black/10 last:pb-0 last:border-b-0"
+                  className="flex items-start gap-2.5 text-sm text-[#181717]/65 pb-3 border-b border-[#181717]/10 last:pb-0 last:border-b-0"
                   key={item}
                 >
-                  <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-[#003399]" />
+                  <CheckCircle2 className="w-4 h-4 mt-0.5 shrink-0 text-[#d04841]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -207,25 +195,19 @@ export default function HowItWorks() {
           </article>
 
           <article
-            className="sm:col-span-2 lg:col-span-5 bg-white border border-black/10 p-5 sm:p-6 group min-h-60"
+            className="sm:col-span-2 lg:col-span-5 bg-white rounded-2xl border border-[#181717]/10 p-5 sm:p-6 group min-h-60"
             data-testid={`step-${stepThree.num}`}
           >
             <div className="flex items-center justify-between mb-4">
-              <span
-                className="text-sm tracking-[0.18em] text-black/45"
-                style={{ fontFamily: "var(--font-outfit)" }}
-              >
+              <span className="text-sm tracking-[0.18em] text-[#181717]/45">
                 {stepThree.num}
               </span>
-              <stepThree.icon className="w-5 h-5 text-[#003399]" />
+              <stepThree.icon className="w-5 h-5 text-[#d04841]" />
             </div>
-            <h3
-              className="text-xl sm:text-2xl font-medium mb-3 transition-colors group-hover:text-[#003399]"
-              style={{ fontFamily: "var(--font-outfit)" }}
-            >
+            <h3 className="text-xl sm:text-2xl font-medium mb-3 transition-colors group-hover:text-[#d04841]">
               {stepThree.title}
             </h3>
-            <p className="text-sm sm:text-base text-black/60 leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base text-[#666666] leading-relaxed max-w-xl">
               {stepThree.description}
             </p>
           </article>
