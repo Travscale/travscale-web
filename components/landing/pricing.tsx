@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, Sparkles } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type BillingCycle = "monthly" | "yearly";
 type Plan = {
@@ -46,121 +47,170 @@ type PricingProps = { onDemoClick: () => void };
 const inr = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 0 });
 
 export default function Pricing({ onDemoClick }: PricingProps) {
-  const [billingCycle, setBillingCycle] = useState<BillingCycle>("monthly");
+  const [billingCycle, setBillingCycle] = useState<BillingCycle>("yearly");
+  
   const billingMeta = useMemo(() => ({
-    monthly: { period: "/agent/mo", note: "Billed monthly" },
-    yearly: { period: "/agent/yr", note: "Billed yearly (save 2 months)" },
+    monthly: { period: "/mo", note: "Billed monthly per agent" },
+    yearly: { period: "/mo", note: "Billed yearly (save 16%)" },
   }), []);
 
   return (
     <section
-      className="py-20 sm:py-24 md:py-32"
+      className="py-24 sm:py-32 relative overflow-hidden"
       data-testid="pricing-section"
       id="pricing"
       style={{ backgroundColor: "#f9f7f6" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
-        <div className="text-center mb-12 sm:mb-16 md:mb-20 max-w-2xl mx-auto">
-          <span className="ts-eyebrow mb-4">Pricing</span>
-          <h2
-            className="text-[1.85rem] sm:text-3xl md:text-[2.75rem] font-medium leading-[1.12] mb-5"
-            data-testid="pricing-heading"
-            style={{ letterSpacing: "-1.44px" }}
-          >
-            Simple pricing, <span className="text-[#d04841]">no surprises</span>
+        <div className="text-center mb-16 md:mb-24 max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-6">
+            <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
+              Clear Pricing
+            </span>
+          </div>
+          <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.25rem] font-medium leading-[1.08] text-[#181717] tracking-tight mb-6">
+            Simple pricing, <br className="hidden md:block" />
+            <span className="text-[#666666]">no hidden surprises.</span>
           </h2>
-          <p className="text-[15px] sm:text-base text-[#666666] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
             Choose the plan that fits your agency. All prices are in INR and optimized for Indian travel teams.
           </p>
 
-          {/* Billing toggle */}
-          <div className="mt-8 inline-flex items-center p-1 rounded-full border border-[#181717]/10 bg-white">
-            <button
-              className={`px-5 py-2.5 text-sm font-medium transition-all duration-300 rounded-full ${billingCycle === "monthly" ? "bg-[#2e2d2d] text-white shadow-sm" : "text-[#181717]/50 hover:text-[#181717]"}`}
-              onClick={() => setBillingCycle("monthly")}
-              type="button"
-            >
-              Monthly
-            </button>
-            <button
-              className={`px-5 py-2.5 text-sm font-medium transition-all duration-300 rounded-full ${billingCycle === "yearly" ? "bg-[#2e2d2d] text-white shadow-sm" : "text-[#181717]/50 hover:text-[#181717]"}`}
-              onClick={() => setBillingCycle("yearly")}
-              type="button"
-            >
-              Yearly
-            </button>
-          </div>
-          <p className="mt-3 text-[11px] text-[#181717]/35 uppercase tracking-[0.14em]">Taxes extra as applicable</p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 sm:gap-6">
-          {plans.map((plan) => (
-            <div
-              className={`relative flex flex-col p-7 sm:p-8 md:p-10 rounded-2xl transition-all duration-400 ${
-                plan.highlight
-                  ? "bg-[#2e2d2d] text-white border border-[#2e2d2d] shadow-[0_16px_64px_-16px_rgba(24,23,23,0.25)]"
-                  : "bg-white border border-[#181717]/8 hover:border-[#d04841]/15 hover:shadow-[0_8px_40px_-12px_rgba(208,72,65,0.08)]"
-              }`}
-              data-testid={`pricing-card-${plan.name.toLowerCase()}`}
-              key={plan.name}
-            >
-              {plan.badge && (
-                <div className="absolute -top-3 left-7 sm:left-8">
-                  <span className="bg-[#d04841] text-white text-[10px] uppercase tracking-[0.15em] font-bold px-4 py-1.5 rounded-full">
-                    {plan.badge}
-                  </span>
-                </div>
-              )}
-
-              <div className="mb-8 sm:mb-10">
-                <h3 className={`text-xl font-medium mb-2 ${plan.highlight ? "text-white" : "text-[#181717]"}`}>
-                  {plan.name}
-                </h3>
-                <p className={`text-sm mb-7 ${plan.highlight ? "text-white/50" : "text-[#666666]"}`}>
-                  {plan.description}
-                </p>
-                <div className="flex items-baseline gap-1">
-                  <span className={`text-4xl sm:text-5xl font-medium tracking-tight ${plan.highlight ? "text-white" : "text-[#181717]"}`}>
-                    {plan.price ? inr.format(plan.price[billingCycle]) : "Custom"}
-                  </span>
-                  {plan.price && (
-                    <span className={`text-sm ${plan.highlight ? "text-white/40" : "text-[#181717]/35"}`}>
-                      {billingMeta[billingCycle].period}
-                    </span>
-                  )}
-                </div>
-                <p className={`text-[11px] mt-2 uppercase tracking-[0.12em] ${plan.highlight ? "text-white/35" : "text-[#181717]/30"}`}>
-                  {plan.price ? billingMeta[billingCycle].note : "Volume-based pricing"}
-                </p>
-              </div>
-
-              <ul className="flex-1 space-y-3.5 mb-10">
-                {plan.features.map((feature) => (
-                  <li className="flex items-start gap-3" key={feature}>
-                    <Check className="w-4 h-4 mt-0.5 shrink-0 text-[#d04841]" />
-                    <span className={`text-sm ${plan.highlight ? "text-white/75" : "text-[#181717]/65"}`}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-
+          {/* Premium Billing Toggle */}
+          <div className="mt-10 flex flex-col items-center">
+            <div className="inline-flex items-center p-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm relative">
               <button
-                className={`group w-full py-4 text-[15px] font-medium flex items-center justify-center gap-2.5 transition-all duration-300 rounded-xl border ${
-                  plan.highlight
-                    ? "bg-white text-[#181717] border-white hover:bg-[#d04841] hover:text-white hover:border-[#d04841]"
-                    : "bg-[#2e2d2d] text-white border-[#2e2d2d] hover:bg-[#d04841] hover:border-[#d04841]"
-                }`}
-                data-testid={`pricing-cta-${plan.name.toLowerCase()}`}
-                onClick={onDemoClick}
+                className={cn(
+                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full",
+                  billingCycle === "monthly" ? "text-white" : "text-[#181717]/60 hover:text-[#181717]"
+                )}
+                onClick={() => setBillingCycle("monthly")}
                 type="button"
               >
-                {plan.cta}
-                <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+                Monthly
               </button>
+              <button
+                className={cn(
+                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-2",
+                  billingCycle === "yearly" ? "text-white" : "text-[#181717]/60 hover:text-[#181717]"
+                )}
+                onClick={() => setBillingCycle("yearly")}
+                type="button"
+              >
+                Yearly
+              </button>
+              
+              {/* Sliding Pill */}
+              <div 
+                className={cn(
+                  "absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#181717] rounded-full transition-transform duration-500 ease-out shadow-md",
+                  billingCycle === "monthly" ? "translate-x-0" : "translate-x-full"
+                )} 
+              />
             </div>
-          ))}
+            
+            {/* Animated Save Badge */}
+            <div className={cn(
+              "mt-4 flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 border border-emerald-100 px-3 py-1 rounded-full transition-all duration-500",
+              billingCycle === "yearly" ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+            )}>
+              <Sparkles className="w-3.5 h-3.5" />
+              Save 2 months free
+            </div>
+          </div>
         </div>
+
+        {/* Pricing Cards */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-6xl mx-auto items-center">
+          {plans.map((plan) => {
+            const isPro = plan.highlight;
+            const price = plan.price ? plan.price[billingCycle] : null;
+            // For yearly, display the monthly equivalent
+            const displayPrice = billingCycle === "yearly" && price ? price / 12 : price;
+
+            return (
+              <div
+                className={cn(
+                  "relative flex flex-col p-8 sm:p-10 rounded-[2.5rem] transition-all duration-500",
+                  isPro
+                    ? "bg-[#181717] text-white border border-[#2e2d2d] shadow-[0_30px_80px_-24px_rgba(24,23,23,0.4)] lg:scale-105 z-10"
+                    : "bg-white border border-[#181717]/10 hover:border-[#181717]/20 hover:shadow-[0_20px_60px_-16px_rgba(24,23,23,0.05)] z-0"
+                )}
+                data-testid={`pricing-card-${plan.name.toLowerCase()}`}
+                key={plan.name}
+              >
+                {plan.badge && (
+                  <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-max">
+                    <span className="bg-gradient-to-r from-[#d04841] to-rose-500 text-white text-[10px] uppercase tracking-[0.2em] font-bold px-5 py-2 rounded-full shadow-lg shadow-[#d04841]/25">
+                      {plan.badge}
+                    </span>
+                  </div>
+                )}
+
+                <div className="mb-8">
+                  <h3 className={cn("text-2xl font-semibold mb-3 tracking-tight", isPro ? "text-white" : "text-[#181717]")}>
+                    {plan.name}
+                  </h3>
+                  <p className={cn("text-sm leading-relaxed", isPro ? "text-white/60" : "text-[#666666]")}>
+                    {plan.description}
+                  </p>
+                </div>
+
+                <div className="mb-8 pb-8 border-b border-[#181717]/10">
+                  <div className="flex items-start gap-1">
+                    {displayPrice ? (
+                      <>
+                        <span className={cn("text-5xl font-bold tracking-tighter", isPro ? "text-white" : "text-[#181717]")}>
+                          {inr.format(displayPrice)}
+                        </span>
+                        <div className="flex flex-col justify-end h-[2.5rem] pb-1">
+                           <span className={cn("text-sm font-medium", isPro ? "text-white/40" : "text-[#181717]/40")}>
+                             {billingMeta[billingCycle].period}
+                           </span>
+                        </div>
+                      </>
+                    ) : (
+                      <span className={cn("text-5xl font-bold tracking-tighter", isPro ? "text-white" : "text-[#181717]")}>
+                        Custom
+                      </span>
+                    )}
+                  </div>
+                  <p className={cn("text-[11px] mt-3 uppercase tracking-widest font-semibold", isPro ? "text-white/30" : "text-[#181717]/30")}>
+                    {displayPrice ? billingMeta[billingCycle].note : "Volume-based pricing"}
+                  </p>
+                </div>
+
+                <ul className="flex-1 space-y-4 mb-10">
+                  {plan.features.map((feature) => (
+                    <li className="flex items-start gap-3" key={feature}>
+                      <div className={cn("w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5", isPro ? "bg-white/10" : "bg-[#d04841]/10")}>
+                        <Check className={cn("w-3 h-3", isPro ? "text-white" : "text-[#d04841]")} />
+                      </div>
+                      <span className={cn("text-[15px]", isPro ? "text-white/80" : "text-[#181717]/80")}>
+                        {feature}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                <button
+                  className={cn(
+                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-2xl",
+                    isPro
+                      ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
+                      : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"
+                  )}
+                  onClick={onDemoClick}
+                  type="button"
+                >
+                  {plan.cta}
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                </button>
+              </div>
+            );
+          })}
+        </div>
+        
       </div>
     </section>
   );
