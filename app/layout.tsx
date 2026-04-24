@@ -94,7 +94,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${inter.variable} antialiased`}>
         <SiteNavigation />
-        {children}
+        <main id="page-content">{children}</main>
       </body>
     </html>
   );

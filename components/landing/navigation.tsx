@@ -4,8 +4,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { navbarPageLinks } from "@/lib/site-content";
+import { AnimatePresence, motion } from "motion/react";
 
 const LOGO_URL = "/logo-w-name.svg";
 const AGENT_APP_URL = "https://agent.travscale.com";
@@ -21,19 +22,49 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const lastScrollY = useRef(0);
+  const navRef = useRef<HTMLElement>(null);
 
   const pageLinks = isHome
     ? navbarPageLinks
     : [{ label: "Home", href: "/" }, ...navbarPageLinks];
 
+  // Lock scroll + blur page content when mobile menu is open
   useEffect(() => {
-    const previous = document.body.style.overflow;
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("nav-open");
+    } else {
+      document.body.style.overflow = "";
+      document.body.classList.remove("nav-open");
     }
-
     return () => {
-      document.body.style.overflow = previous;
+      document.body.style.overflow = "";
+      document.body.classList.remove("nav-open");
+    };
+  }, [mobileOpen]);
+
+  // Close mobile menu on Escape key
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && mobileOpen) setMobileOpen(false);
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [mobileOpen]);
+
+  // Handle click outside to close mobile menu
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (navRef.current && !navRef.current.contains(event.target as Node)) {
+        setMobileOpen(false);
+      }
+    };
+
+    if (mobileOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [mobileOpen]);
 
@@ -41,11 +72,11 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
     const currentY = window.scrollY;
     setScrolled(currentY > 20);
 
-    // Don't hide when mobile menu is open or near the top
+    // Only hide if we scrolled down a bit, never hide on mobile menu open
     if (!mobileOpen && currentY > 80) {
       const delta = currentY - lastScrollY.current;
-      if (delta > 5) setHidden(true);    // scrolling down
-      if (delta < -5) setHidden(false);  // scrolling up
+      if (delta > 5) setHidden(true); // scrolling down
+      if (delta < -5) setHidden(false); // scrolling up
     } else {
       setHidden(false);
     }
@@ -64,51 +95,72 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
       onDemoClick();
       return;
     }
-
     window.open(AGENT_APP_URL, "_blank", "noopener,noreferrer");
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 ts-nav transition-all duration-300 ${
-        hidden && !mobileOpen ? "-translate-y-full" : "translate-y-0"
-      } ${
-        scrolled
-          ? "bg-[#f9f7f6]/90 backdrop-blur-md border-b border-[#181717]/5 shadow-sm"
-          : "bg-transparent"
+    <header
+      ref={navRef}
+      className={`fixed top-4 md:top-6 inset-x-0 mx-auto z-[100] px-4 transition-transform duration-500 ease-out flex justify-center w-full pointer-events-none ${
+        hidden && !mobileOpen ? "-translate-y-[150%]" : "translate-y-0"
       }`}
       data-testid="main-navigation"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="flex items-center justify-between h-15 sm:h-16 lg:h-20">
-          <Link className="shrink-0" data-testid="nav-logo" href="/">
-            <Image
-              alt="Travscale"
-              className="h-5 sm:h-5 lg:h-6 w-auto"
-              height={30}
-              priority
-              src={LOGO_URL}
-              width={118}
-            />
-          </Link>
+      {/* Dark scrim overlay — real blur is applied via CSS on #page-content */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="fixed inset-0 bg-black/25 pointer-events-auto md:hidden z-10"
+            onClick={() => setMobileOpen(false)}
+            aria-hidden="true"
+          />
+        )}
+      </AnimatePresence>
 
-          {/* Desktop nav — page links only */}
-          <div className="hidden lg:flex items-center gap-6">
+      <div className="relative w-full max-w-5xl pointer-events-auto z-20">
+        {/* Pill Navigation */}
+        <nav
+          className={`relative flex items-center justify-between p-1.5 md:p-2 transition-all duration-300 border shadow-[0_8px_32px_-8px_rgba(0,0,0,0.08)] rounded-[24px] md:rounded-[32px] z-20 ${
+            scrolled || mobileOpen
+              ? "bg-white/80 backdrop-blur-xl border-[#181717]/10"
+              : "bg-white/60 backdrop-blur-md border-[#181717]/5"
+          }`}
+        >
+          {/* Logo */}
+          <div className="flex items-center pl-3 sm:pl-4 pr-6 py-1.5">
+            <Link
+              href="/"
+              className="shrink-0 outline-none focus-visible:ring-2 ring-ts-primary/50 rounded-sm"
+              aria-label="Travscale Home"
+            >
+              <Image
+                src={LOGO_URL}
+                width={108}
+                height={24}
+                alt="Travscale Logo"
+                className="h-4 sm:h-5 w-auto"
+                priority
+              />
+            </Link>
+          </div>
+
+          {/* Desktop Links */}
+          <div className="hidden md:flex items-center gap-1 absolute left-1/2 -translate-x-1/2">
             {pageLinks.map((link) => {
-              const isCurrent = pathname === link.href;
-
+              const isActive = pathname === link.href;
               return (
                 <Link
-                  className={`text-sm font-medium transition-colors ${
-                    isCurrent
-                      ? "text-[#181717]"
-                      : "text-[#181717]/70 hover:text-[#181717]"
-                  }`}
-                  data-testid={`nav-page-${link.label
-                    .toLowerCase()
-                    .replace(/\s+/g, "-")}`}
-                  href={link.href}
                   key={link.href}
+                  href={link.href}
+                  className={`px-4 py-2 text-[14px] font-medium rounded-full transition-all duration-300 outline-none focus-visible:ring-2 ring-ts-primary/50 ${
+                    isActive
+                      ? "bg-[#181717]/5 text-[#181717]"
+                      : "text-[#181717]/60 hover:text-[#181717] hover:bg-[#181717]/[0.04]"
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -116,98 +168,117 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             })}
           </div>
 
-          {/* CTA buttons */}
-          <div className="hidden lg:flex items-center gap-4">
+          {/* Desktop CTA */}
+          <div className="hidden md:flex items-center gap-2 pr-1">
             <a
-              className="text-sm font-medium text-[#181717]/70 hover:text-[#181717] transition-colors"
-              data-testid="nav-login-btn"
-              href="https://agent.travscale.com"
-              rel="noopener noreferrer"
+              href={AGENT_APP_URL}
               target="_blank"
+              rel="noopener noreferrer"
+              className="px-4 py-2 text-[14px] font-medium text-[#181717]/60 hover:text-[#181717] transition-colors rounded-full hover:bg-[#181717]/[0.04] outline-none focus-visible:ring-2 ring-ts-primary/50"
             >
               Log in
             </a>
             <button
-              className="ts-btn-pill px-7 py-3 text-[13px]"
-              data-testid="nav-demo-btn"
               onClick={handleDemoClick}
-              type="button"
+              className="ts-btn-pill px-5 py-2.5 text-[13px] h-10 group"
             >
-              Book a Demo
-              <ArrowRight className="w-3.5 h-3.5" />
+              <span>Book a Demo</span>
+              <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
             </button>
           </div>
 
-          {/* Mobile menu toggle */}
+          {/* Mobile Toggle Button */}
           <button
-            className="lg:hidden p-2.5 rounded-lg border border-[#181717]/10 bg-white/85 backdrop-blur"
-            data-testid="mobile-menu-toggle"
             onClick={() => setMobileOpen(!mobileOpen)}
-            type="button"
+            aria-expanded={mobileOpen}
+            aria-label="Toggle menu"
+            className="md:hidden relative p-2 mr-1 rounded-full text-[#181717]/80 hover:bg-[#181717]/5 transition-colors outline-none focus-visible:ring-2 ring-ts-primary/50"
           >
-            {mobileOpen ? (
-              <X className="w-5 h-5" />
-            ) : (
-              <Menu className="w-5 h-5" />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {mobileOpen && (
-        <>
-          <div
-            className="fixed inset-0 top-15 sm:top-16 bg-black/35 backdrop-blur-[1px] lg:hidden"
-            onClick={() => setMobileOpen(false)}
-          />
-          <div
-            className="lg:hidden fixed left-0 right-0 top-15 sm:top-16 z-60 bg-[#f9f7f6] border-y border-[#181717]/10 rounded-b-2xl"
-            data-testid="mobile-menu"
-          >
-            <div className="px-4 sm:px-6 py-4">
-              <p className="text-[11px] uppercase tracking-[0.16em] text-[#181717]/40 font-semibold mb-3">
-                Pages
-              </p>
-
-              <div className="grid grid-cols-2 gap-2.5">
-                {pageLinks.map((link) => {
-                  const isCurrent = pathname === link.href;
-
-                  return (
-                    <Link
-                      className={`text-left px-4 py-3.5 text-sm font-semibold transition-colors rounded-lg border ${
-                        isCurrent
-                          ? "bg-[#232222] text-white border-[#232222]"
-                          : "bg-white text-[#181717]/80 border-[#181717]/10 hover:border-[#d04841]/30"
-                      }`}
-                      data-testid={`mobile-nav-${link.label
-                        .toLowerCase()
-                        .replace(/\s+/g, "-")}`}
-                      href={link.href}
-                      key={link.href}
-                      onClick={() => setMobileOpen(false)}
-                    >
-                      {link.label}
-                    </Link>
-                  );
-                })}
-              </div>
-
-              <button
-                className="ts-btn-pill w-full py-3.5 text-sm mt-4"
-                data-testid="mobile-demo-btn"
-                onClick={() => {
-                  setMobileOpen(false);
-                  handleDemoClick();
-                }}
-                type="button"
-              >
-                Book a Demo
-              </button>
+            <div className="relative w-5 h-5 flex items-center justify-center">
+              <span
+                className={`absolute h-[1.5px] w-4 bg-current transform transition-all duration-300 ${
+                  mobileOpen ? "rotate-45" : "-translate-y-1.5"
+                }`}
+              />
+              <span
+                className={`absolute h-[1.5px] w-4 bg-current transform transition-all duration-300 ${
+                  mobileOpen ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute h-[1.5px] w-4 bg-current transform transition-all duration-300 ${
+                  mobileOpen ? "-rotate-45" : "translate-y-1.5"
+                }`}
+              />
             </div>
-          </div>
-        </>
-      )}
-    </nav>
+          </button>
+        </nav>
+
+        {/* Mobile Menu Dropdown */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -16, scale: 0.96 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -16, scale: 0.96 }}
+              transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+              className="absolute top-[calc(100%+8px)] left-0 right-0 md:hidden bg-white/95 backdrop-blur-3xl border border-[#181717]/10 rounded-[24px] shadow-[0_16px_40px_-12px_rgba(0,0,0,0.15)] overflow-hidden z-10 origin-top"
+            >
+              <div className="flex flex-col p-3">
+                <div className="px-3 pb-2 pt-1">
+                  <p className="text-[10px] uppercase tracking-[0.2em] text-[#181717]/40 font-bold mb-1">
+                    Navigation
+                  </p>
+                </div>
+
+                <div className="flex flex-col gap-1">
+                  {pageLinks.map((link) => {
+                    const isActive = pathname === link.href;
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={`px-4 py-3 text-[15px] font-medium rounded-2xl transition-all duration-200 flex items-center justify-between ${
+                          isActive
+                            ? "bg-[#181717]/5 text-[#181717]"
+                            : "text-[#181717]/70 hover:bg-[#181717]/[0.03] hover:text-[#181717]"
+                        }`}
+                      >
+                        {link.label}
+                        {isActive && (
+                          <div className="w-1.5 h-1.5 rounded-full bg-[#181717]" />
+                        )}
+                      </Link>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-2 pt-2 border-t border-[#181717]/5 flex flex-col gap-2">
+                  <a
+                    href={AGENT_APP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMobileOpen(false)}
+                    className="px-4 py-3.5 text-[15px] font-medium text-[#181717]/70 hover:bg-[#181717]/[0.03] hover:text-[#181717] rounded-2xl transition-colors flex justify-center w-full"
+                  >
+                    Log in to Account
+                  </a>
+                  <button
+                    onClick={() => {
+                      setMobileOpen(false);
+                      handleDemoClick();
+                    }}
+                    className="ts-btn-primary w-full py-3.5 text-[15px] rounded-2xl justify-center h-auto font-medium"
+                  >
+                    Book a Demo
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    </header>
   );
 }

@@ -92,6 +92,19 @@ body {
   }
 }
 
+/* ── Mobile Nav Blur ── */
+
+#page-content {
+  transition: filter 0.3s ease, transform 0.3s ease;
+  will-change: filter;
+}
+
+body.nav-open #page-content {
+  filter: blur(8px) saturate(0.7);
+  pointer-events: none;
+  user-select: none;
+}
+
 /* ── Animations ── */
 
 @keyframes pulse-subtle {
