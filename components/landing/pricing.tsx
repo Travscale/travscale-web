@@ -61,7 +61,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
       id="pricing"
       style={{ backgroundColor: "#f9f7f6" }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
         <div className="text-center mb-16 md:mb-24 max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-6">
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
@@ -131,9 +131,9 @@ export default function Pricing({ onDemoClick }: PricingProps) {
             return (
               <div
                 className={cn(
-                  "relative flex flex-col p-8 sm:p-10 rounded-[2.5rem] transition-all duration-500",
+                  "relative flex flex-col p-8 sm:p-10 rounded-[2rem] transition-all duration-500",
                   isPro
-                    ? "bg-[#181717] text-white border border-[#2e2d2d] shadow-[0_30px_80px_-24px_rgba(24,23,23,0.4)] lg:scale-105 z-10"
+                    ? "bg-[#181717] text-white border border-white/10 shadow-[0_30px_80px_-24px_rgba(24,23,23,0.4)] lg:scale-105 z-10"
                     : "bg-white border border-[#181717]/10 hover:border-[#181717]/20 hover:shadow-[0_20px_60px_-16px_rgba(24,23,23,0.05)] z-0"
                 )}
                 data-testid={`pricing-card-${plan.name.toLowerCase()}`}
@@ -156,7 +156,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                   </p>
                 </div>
 
-                <div className="mb-8 pb-8 border-b border-[#181717]/10">
+                <div className={cn("mb-8 pb-8 border-b", isPro ? "border-white/10" : "border-[#181717]/10")}>
                   <div className="flex items-start gap-1">
                     {displayPrice ? (
                       <>
@@ -195,7 +195,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
 
                 <button
                   className={cn(
-                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-2xl",
+                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl",
                     isPro
                       ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
                       : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"

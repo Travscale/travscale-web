@@ -239,7 +239,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                         key={link.href}
                         href={link.href}
                         onClick={() => setMobileOpen(false)}
-                        className={`px-4 py-3 text-[15px] font-medium rounded-2xl transition-all duration-200 flex items-center justify-between ${
+                        className={`px-4 py-3 text-[15px] font-medium rounded-xl transition-all duration-200 flex items-center justify-between ${
                           isActive
                             ? "bg-[#181717]/5 text-[#181717]"
                             : "text-[#181717]/70 hover:bg-[#181717]/[0.03] hover:text-[#181717]"
@@ -260,7 +260,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setMobileOpen(false)}
-                    className="px-4 py-3.5 text-[15px] font-medium text-[#181717]/70 hover:bg-[#181717]/[0.03] hover:text-[#181717] rounded-2xl transition-colors flex justify-center w-full"
+                    className="px-4 py-3.5 text-[15px] font-medium text-[#181717]/70 hover:bg-[#181717]/[0.03] hover:text-[#181717] rounded-xl transition-colors flex justify-center w-full"
                   >
                     Log in to Account
                   </a>
@@ -269,7 +269,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
                       setMobileOpen(false);
                       handleDemoClick();
                     }}
-                    className="ts-btn-primary w-full py-3.5 text-[15px] rounded-2xl justify-center h-auto font-medium"
+                    className="ts-btn-primary w-full py-3.5 text-[15px] rounded-xl justify-center h-auto font-medium"
                   >
                     Book a Demo
                   </button>

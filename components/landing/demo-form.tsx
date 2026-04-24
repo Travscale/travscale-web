@@ -126,7 +126,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
   return (
     <div aria-modal="true" className="fixed inset-0 z-100 flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto" data-testid="demo-modal-overlay" onClick={onClose} role="dialog">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
-      <div className="relative ts-panel w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 rounded-2xl max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto" data-testid="demo-modal" onClick={(e) => e.stopPropagation()}>{content}</div>
+      <div className="relative ts-panel w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 rounded-[2rem] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto" data-testid="demo-modal" onClick={(e) => e.stopPropagation()}>{content}</div>
     </div>
   );
 }

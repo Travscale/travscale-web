@@ -19,6 +19,18 @@
     0 12px 40px -8px rgba(24, 23, 23, 0.08);
   --ts-focus-ring: rgba(208, 72, 65, 0.4);
 
+  /* ── Unified Radius Tokens ── */
+  --ts-radius-sm: 8px;      /* small UI (badges, tags) */
+  --ts-radius-md: 12px;     /* buttons, inputs, small cards */
+  --ts-radius-lg: 16px;     /* panels, modal, medium cards */
+  --ts-radius-xl: 2rem;     /* large section cards (32px) */
+  --ts-radius-pill: 9999px; /* pills, toggles */
+
+  /* ── Unified Button Sizing ── */
+  --ts-btn-h-sm: 40px;      /* compact (navbar) */
+  --ts-btn-h-md: 48px;      /* default */
+  --ts-btn-h-lg: 56px;      /* hero / section CTA */
+
   /* ── Palette tokens from DESIGN.md ── */
   --palette-1: #ffffff;
   --palette-2: #2e2d2d;
@@ -204,7 +216,7 @@ body.nav-open #page-content {
   border: 0.8px solid #232222;
   background: #232222;
   color: #ffffff;
-  border-radius: 8px;
+  border-radius: var(--ts-radius-md);
   box-shadow: var(--ts-shadow-soft);
 }
 
@@ -218,7 +230,7 @@ body.nav-open #page-content {
   border: 1px solid rgb(24 23 23 / 14%);
   background: var(--ts-surface);
   color: var(--ts-text);
-  border-radius: 8px;
+  border-radius: var(--ts-radius-md);
 }
 
 .ts-btn-secondary:hover {

@@ -22,7 +22,7 @@ export default function HowItWorks() {
             Up and running in <br className="hidden md:block" />
             <span className="text-[#666666]">three simple steps.</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#666666] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
             No complex onboarding. No lengthy implementation cycles. Get your agency on Travscale and see results from day one.
           </p>
         </div>
@@ -59,7 +59,7 @@ export default function HowItWorks() {
             </div>
             
             <div className="flex-1 w-full max-w-[500px] lg:max-w-none relative group perspective-1000">
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#d04841]/5 to-transparent rounded-[2.5rem] transform -rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:-rotate-1" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#d04841]/5 to-transparent rounded-[2rem] transform -rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:-rotate-1" />
               <div className="bg-white border border-[#181717]/10 rounded-[2rem] p-6 sm:p-8 shadow-[0_20px_60px_-16px_rgba(24,23,23,0.1)] transition-all duration-700 hover:shadow-[0_20px_60px_-16px_rgba(208,72,65,0.15)] relative z-10 overflow-hidden">
                 <div className="mb-6 flex items-center justify-between">
                   <div>
@@ -141,7 +141,7 @@ export default function HowItWorks() {
             </div>
             
             <div className="flex-1 w-full max-w-[500px] lg:max-w-none relative group">
-              <div className="absolute inset-0 bg-[#f9f7f6] rounded-[2.5rem] transform rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-1" />
+              <div className="absolute inset-0 bg-[#f9f7f6] rounded-[2rem] transform rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-1" />
               <div className="bg-white border border-[#181717]/10 rounded-[2rem] p-6 sm:p-8 shadow-[0_20px_60px_-16px_rgba(24,23,23,0.08)] relative z-10 overflow-hidden flex gap-6">
                 
                 {/* Master CRM Card */}
@@ -229,7 +229,7 @@ export default function HowItWorks() {
             </div>
             
             <div className="flex-1 w-full max-w-[500px] lg:max-w-none relative group">
-              <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-[2.5rem] transform -rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-0" />
+              <div className="absolute inset-0 bg-gradient-to-bl from-blue-500/5 to-transparent rounded-[2rem] transform -rotate-3 scale-105 -z-10 transition-transform duration-700 group-hover:rotate-0" />
               <div className="bg-white border border-[#181717]/10 rounded-[2rem] p-6 sm:p-8 shadow-[0_20px_60px_-16px_rgba(24,23,23,0.08)] relative z-10 overflow-hidden">
                 <div className="mb-8 flex justify-between items-end">
                   <div>

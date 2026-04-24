@@ -78,7 +78,7 @@ export default function UseCases() {
             Designed for real <br className="hidden md:block" />
             <span className="text-[#666666]">travel workflows.</span>
           </h2>
-          <p className="text-base sm:text-lg text-[#666666] leading-relaxed">
+          <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
             Whether you process high-volume visas or manage complex corporate travel policies, pick your operating model and run it flawlessly.
           </p>
         </div>
@@ -135,7 +135,7 @@ export default function UseCases() {
 
             {/* Dynamic Content Text */}
             <div className={cn(
-              "bg-white rounded-3xl p-8 border border-[#181717]/10 shadow-sm transition-all duration-400 ease-in-out",
+              "bg-white rounded-[2rem] p-8 border border-[#181717]/10 shadow-sm transition-all duration-400 ease-in-out",
               isTransitioning ? "opacity-0 translate-y-4" : "opacity-100 translate-y-0"
             )}>
               <h3 className="text-xl font-semibold text-[#181717] mb-3">{current.title} Workflows</h3>

@@ -72,7 +72,7 @@ export default function Testimonials() {
 
         {/* Hero Testimonial */}
         <div className="max-w-5xl mx-auto mb-16">
-          <div className="bg-[#181717] rounded-[2.5rem] p-8 md:p-12 lg:p-16 relative flex flex-col lg:flex-row items-center gap-12 group overflow-hidden">
+          <div className="bg-[#181717] rounded-[2rem] p-8 md:p-12 lg:p-16 relative flex flex-col lg:flex-row items-center gap-12 group overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#d04841]/20 blur-[100px] rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
             

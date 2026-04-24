@@ -102,7 +102,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
           
           <a
             href="https://agent.travscale.com"
-            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/15 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/30 hover:bg-[#f9f7f6] active:scale-[0.98]"
+            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/10 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/20 hover:bg-[#f9f7f6] active:scale-[0.98]"
             target="_blank"
             rel="noopener noreferrer"
           >
