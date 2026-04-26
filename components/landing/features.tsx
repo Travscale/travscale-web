@@ -178,26 +178,120 @@ export default function Features() {
               <div className="w-10 h-10 rounded-full bg-[#eeebea] flex items-center justify-center mb-4 group-hover:bg-[#d04841]/10 transition-colors">
                 <Building className="w-4 h-4 text-[#181717] group-hover:text-[#d04841] transition-colors" />
               </div>
-              <h3 className="text-2xl font-semibold text-[#181717] mb-3 tracking-tight">Supplier Operations</h3>
+              <h3 className="text-2xl font-semibold text-[#181717] mb-3 tracking-tight">
+                Supplier Operations
+              </h3>
               <p className="text-[#666666] text-[15px] leading-relaxed max-w-sm">
-                Centralize DMC terms, negotiated rates, and communication without losing details in scattered WhatsApp chats.
+                Centralize DMC terms, negotiated rates, and communication
+                without losing details in scattered WhatsApp chats.
               </p>
             </div>
+
             <div className="flex-1 h-64 md:h-auto bg-[#f0eeed] relative overflow-hidden flex items-center justify-center p-8">
-              <div className="w-full max-w-[280px] bg-white rounded-xl shadow-sm border border-[#181717]/10 p-4 transform rotate-2 group-hover:rotate-0 transition-transform duration-500 ease-out z-10">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-xs shrink-0">RJ</div>
-                  <div>
-                    <div className="text-sm font-semibold text-[#181717] truncate">Royal Journeys DMC</div>
-                    <div className="text-[10px] text-emerald-600 font-medium bg-emerald-50 inline-block px-1.5 py-0.5 rounded mt-0.5">Verified Partner</div>
+              {/* Decorative background grid */}
+              <div
+                className="absolute inset-0 opacity-[0.03]"
+                style={{
+                  backgroundImage:
+                    "radial-gradient(#181717 1px, transparent 1px)",
+                  backgroundSize: "20px 20px",
+                }}
+              />
+
+              {/* Supplier Card Stack */}
+              <div className="relative w-full max-w-[320px] h-[200px] flex items-center justify-center">
+                {/* Card 3 - Back */}
+                <div className="absolute w-[260px] bg-white rounded-xl border border-[#181717]/10 shadow-sm p-4 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] translate-x-6 translate-y-3 rotate-6 group-hover:translate-x-14 group-hover:translate-y-2 group-hover:rotate-12 opacity-60">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center text-amber-600 font-bold text-[10px] shrink-0">
+                      SD
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-[#181717] truncate">
+                        Sunset DMC
+                      </div>
+                      <div className="text-[10px] text-[#666666]">
+                        Thailand • B2B Hotel
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[#666666]">Net Rate</span>
+                    <span className="font-semibold text-[#181717]">
+                      ฿4,200/night
+                    </span>
                   </div>
                 </div>
-                <div className="bg-[#f9f7f6] rounded-lg p-3 text-xs text-[#666666]">
-                  &ldquo;Confirmed the 3-night stay at Atlantis. Rate includes half-board.&rdquo;
+
+                {/* Card 2 - Middle */}
+                <div className="absolute w-[260px] bg-white rounded-xl border border-[#181717]/10 shadow-md p-4 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] -translate-x-2 translate-y-1 rotate-[-3deg] group-hover:-translate-x-8 group-hover:translate-y-0 group-hover:rotate-[-8deg] opacity-80">
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-9 h-9 rounded-full bg-purple-50 flex items-center justify-center text-purple-600 font-bold text-[10px] shrink-0">
+                      GT
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-sm font-semibold text-[#181717] truncate">
+                        Global Trails
+                      </div>
+                      <div className="text-[10px] text-[#666666]">
+                        Europe • Ground Transport
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="text-[#666666]">Commission</span>
+                    <span className="font-semibold text-[#181717]">
+                      15% markup
+                    </span>
+                  </div>
+                </div>
+
+                {/* Card 1 - Front */}
+                <div className="absolute w-[260px] bg-white rounded-xl border border-[#181717]/10 shadow-lg p-4 transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] translate-y-[-2px] rotate-0 group-hover:translate-y-[-8px] group-hover:scale-[1.02] z-10">
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center gap-3">
+                      <div className="w-9 h-9 rounded-full bg-blue-50 flex items-center justify-center text-blue-600 font-bold text-[10px] shrink-0">
+                        RJ
+                      </div>
+                      <div className="min-w-0">
+                        <div className="text-sm font-semibold text-[#181717] truncate">
+                          Royal Journeys DMC
+                        </div>
+                        <div className="flex items-center gap-1.5 mt-0.5">
+                          <span className="text-[10px] text-emerald-600 font-medium bg-emerald-50 px-1.5 py-0.5 rounded">
+                            Verified
+                          </span>
+                          <span className="text-[10px] text-[#666666]">Dubai</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="w-7 h-7 rounded-full bg-[#f9f7f6] flex items-center justify-center shrink-0">
+                      <Building className="w-3.5 h-3.5 text-[#181717]/30" />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between text-xs py-1.5 border-b border-[#181717]/5">
+                      <span className="text-[#666666]">Atlantis Half-Board</span>
+                      <span className="font-medium text-[#181717]">
+                        AED 1,200/night
+                      </span>
+                    </div>
+                    <div className="flex items-center justify-between text-xs py-1.5">
+                      <span className="text-[#666666]">Desert Safari</span>
+                      <span className="font-medium text-[#181717]">AED 350/pax</span>
+                    </div>
+                  </div>
+
+                  {/* Active indicator */}
+                  <div className="mt-3 pt-3 border-t border-dashed border-[#181717]/10 flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_6px_rgba(16,185,129,0.4)]" />
+                    <span className="text-[10px] text-[#666666] font-medium">
+                      Last updated 2h ago
+                    </span>
+                  </div>
                 </div>
               </div>
-              {/* Background decorative card */}
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-[280px] bg-white/50 rounded-xl border border-[#181717]/5 p-4 -rotate-6 scale-95 z-0" />
             </div>
           </div>
 
