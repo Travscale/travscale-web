@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import RevealSection from "@/components/molecules/layout/reveal-section";
 import DemoRequestForm from "@/components/organisms/landing/demo-request-form";
 import FaqSection from "@/components/organisms/landing/faq-section";
 import FeaturesSection from "@/components/organisms/landing/features-section";
@@ -20,55 +19,17 @@ export default function MarketingHomeTemplate() {
   const openDemo = () => setDemoOpen(true);
   const closeDemo = () => setDemoOpen(false);
 
-  useEffect(() => {
-    const sections = document.querySelectorAll(".ts-section");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
-    );
-
-    sections.forEach((section) => observer.observe(section));
-    return () => sections.forEach((section) => observer.unobserve(section));
-  }, []);
-
   return (
-    <div className="min-h-screen ts-shell">
+    <div className="min-h-screen">
       <main>
         <HeroSection onDemoClick={openDemo} />
-
-        <RevealSection delayMs={50}>
-          <TrustedBySection />
-        </RevealSection>
-
-        <RevealSection delayMs={100}>
-          <FeaturesSection />
-        </RevealSection>
-
-        <RevealSection delayMs={140}>
-          <HowItWorksSection />
-        </RevealSection>
-
-        <RevealSection delayMs={180}>
-          <UseCasesSection />
-        </RevealSection>
-
-        <RevealSection delayMs={220}>
-          <PricingSection onDemoClick={openDemo} />
-        </RevealSection>
-
-        <RevealSection delayMs={260}>
-          <TestimonialsSection />
-        </RevealSection>
-
-        <RevealSection delayMs={300}>
-          <FaqSection />
-        </RevealSection>
+        <TrustedBySection />
+        <FeaturesSection />
+        <HowItWorksSection />
+        <UseCasesSection />
+        <PricingSection onDemoClick={openDemo} />
+        <TestimonialsSection />
+        <FaqSection />
       </main>
 
       <FooterSection onDemoClick={openDemo} />
