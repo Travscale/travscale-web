@@ -23,7 +23,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 text-center relative z-10">
           
           <div className="mb-10 inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-white shadow-sm border border-[#181717]/5">
-            <Image alt="Travscale Logo" src={LOGO_WORDMARK} width={32} height={32} className="w-8 h-8 object-contain" />
+            <Image alt="Travscale Logo" src="/logo.svg" width={32} height={32} className="w-8 h-8 object-contain" />
           </div>
 
           <h2 className="text-[2.5rem] sm:text-[3.5rem] md:text-[5rem] font-medium text-[#181717] tracking-tight mb-8 leading-[1.05]">
