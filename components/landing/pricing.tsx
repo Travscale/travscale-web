@@ -81,7 +81,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
             <div className="inline-flex items-center p-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm relative">
               <button
                 className={cn(
-                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full",
+                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full cursor-pointer",
                   billingCycle === "monthly" ? "text-white" : "text-[#181717]/60 hover:text-[#181717]"
                 )}
                 onClick={() => setBillingCycle("monthly")}
@@ -91,7 +91,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               </button>
               <button
                 className={cn(
-                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-2",
+                  "relative z-10 px-8 py-3 text-sm font-semibold transition-colors duration-300 rounded-full flex items-center gap-2 cursor-pointer",
                   billingCycle === "yearly" ? "text-white" : "text-[#181717]/60 hover:text-[#181717]"
                 )}
                 onClick={() => setBillingCycle("yearly")}
@@ -195,7 +195,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
 
                 <button
                   className={cn(
-                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl",
+                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
                     isPro
                       ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
                       : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"

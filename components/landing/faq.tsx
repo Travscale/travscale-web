@@ -55,7 +55,7 @@ export default function Faq() {
               <p className="text-sm text-[#666666] mb-6">
                 Our engineering and onboarding teams are ready to help you evaluate Travscale.
               </p>
-              <button className="group w-full py-3.5 text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl bg-[#181717] text-white hover:bg-[#2e2d2d] hover:shadow-md">
+              <button className="group w-full py-3.5 text-sm font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl bg-[#181717] text-white hover:bg-[#2e2d2d] hover:shadow-md cursor-pointer">
                 Chat with our team
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </button>
@@ -79,7 +79,7 @@ export default function Faq() {
                   <h3>
                     <button
                       aria-expanded={isOpen}
-                      className="w-full p-6 sm:p-8 text-left flex items-start justify-between gap-6"
+                      className="w-full p-6 sm:p-8 text-left flex items-start justify-between gap-6 cursor-pointer"
                       onClick={() => setOpenIndex(isOpen ? -1 : index)}
                       type="button"
                     >

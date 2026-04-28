@@ -202,7 +202,7 @@ function UseCaseCard({
           {/* CTA */}
           <button
             className={cn(
-              "inline-flex items-center gap-2 text-sm font-semibold group self-start transition-colors",
+              "inline-flex items-center gap-2 text-sm font-semibold group self-start transition-colors cursor-pointer",
               isDark
                 ? "text-white/80 hover:text-white"
                 : "text-[#181717] hover:text-[#d04841]",

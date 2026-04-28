@@ -229,7 +229,7 @@ function MobileMenu({ links, currentPath, onClose, onDemo }: MobileMenuProps) {
               onClose();
               onDemo();
             }}
-            className="ts-btn-primary flex h-auto w-full items-center justify-center rounded-xl py-3.5 text-[15px] font-medium"
+            className="ts-btn-primary flex h-auto w-full items-center justify-center rounded-xl py-3.5 text-[15px] font-medium cursor-pointer"
           >
             Book a Demo
           </button>
@@ -377,7 +377,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             </a>
             <button
               onClick={handleDemoClick}
-              className="ts-btn-pill group flex h-10 items-center px-5 py-2.5 text-[13px]"
+              className="ts-btn-pill group flex h-10 items-center px-5 py-2.5 text-[13px] cursor-pointer"
             >
               <span>Book a Demo</span>
               <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
@@ -390,7 +390,7 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             aria-label="Toggle menu"
-            className="relative mr-1 rounded-full p-2 text-[#181717]/80 outline-none ring-ts-primary/50 transition-colors hover:bg-[#181717]/5 focus-visible:ring-2 md:hidden"
+            className="relative mr-1 rounded-full p-2 text-[#181717]/80 outline-none ring-ts-primary/50 transition-colors hover:bg-[#181717]/5 focus-visible:ring-2 md:hidden cursor-pointer"
           >
             <div className="relative flex h-5 w-5 items-center justify-center">
               <span

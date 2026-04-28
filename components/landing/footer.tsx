@@ -36,7 +36,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
           </p>
           
           <button
-            className="group inline-flex items-center justify-center gap-3 px-8 py-4 sm:px-10 sm:py-5 rounded-xl bg-[#181717] text-white text-base font-medium transition-all duration-300 hover:bg-[#2e2d2d] hover:shadow-xl hover:-translate-y-1"
+            className="group inline-flex items-center justify-center gap-3 px-8 py-4 sm:px-10 sm:py-5 rounded-xl bg-[#181717] text-white text-base font-medium transition-all duration-300 hover:bg-[#2e2d2d] hover:shadow-xl hover:-translate-y-1 cursor-pointer"
             data-testid="footer-cta-btn"
             onClick={onDemoClick}
             type="button"
@@ -69,7 +69,7 @@ export default function Footer({ onDemoClick }: FooterProps) {
                     <li key={link.label}>
                       {isHashLink(link.href) ? (
                         <button 
-                          className="text-[14px] font-medium text-white/50 hover:text-white transition-colors duration-200" 
+                          className="text-[14px] font-medium text-white/50 hover:text-white transition-colors duration-200 cursor-pointer" 
                           data-testid={`footer-link-${link.label.toLowerCase().replace(/\s+/g, "-")}`} 
                           onClick={() => handleClick(link.href)} 
                           type="button"

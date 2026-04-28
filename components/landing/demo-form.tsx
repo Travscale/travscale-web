@@ -57,7 +57,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
 
   const content = (
     <>
-      <button className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-8 h-8 rounded-lg flex items-center justify-center text-[#181717]/40 hover:bg-[#181717]/5 hover:text-[#181717] transition-colors" data-testid="demo-modal-close" onClick={onClose} type="button">
+      <button className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 w-8 h-8 rounded-lg flex items-center justify-center text-[#181717]/40 hover:bg-[#181717]/5 hover:text-[#181717] transition-colors cursor-pointer" data-testid="demo-modal-close" onClick={onClose} type="button">
         <X className="w-5 h-5" />
       </button>
 
@@ -68,7 +68,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
           </div>
           <h3 className="text-2xl font-medium mb-3">We&apos;ll be in touch</h3>
           <p className="text-sm text-[#666666] mb-6">Thank you for your interest. Our team will reach out within 24 hours.</p>
-          <button className="ts-btn-primary rounded-xl px-8 py-3 text-sm" data-testid="demo-modal-done" onClick={onClose} type="button">Done</button>
+          <button className="ts-btn-primary rounded-xl px-8 py-3 text-sm cursor-pointer" data-testid="demo-modal-done" onClick={onClose} type="button">Done</button>
         </div>
       ) : (
         <>
@@ -104,7 +104,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
               <textarea className="w-full px-4 py-3 rounded-lg border border-[#181717]/10 bg-[#eeebea] text-sm focus:outline-none focus:border-[#d04841] transition-colors resize-none placeholder:text-[#181717]/30" data-testid="demo-input-message" onChange={(e) => setForm({ ...form, message: e.target.value })} placeholder="Tell us what you want to improve first" rows={3} value={form.message} />
             </label>
             {error && <p className="text-sm text-red-600" data-testid="demo-error">{error}</p>}
-            <button className="ts-btn-primary rounded-xl w-full py-3.5 sm:py-4 text-sm disabled:opacity-50" data-testid="demo-submit-btn" disabled={loading} type="submit">
+            <button className="ts-btn-primary rounded-xl w-full py-3.5 sm:py-4 text-sm disabled:opacity-50 cursor-pointer" data-testid="demo-submit-btn" disabled={loading} type="submit">
               {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : (<>Request Demo<ArrowRight className="w-3.5 h-3.5" /></>)}
             </button>
           </form>

@@ -89,7 +89,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
           style={{ transitionDelay: "300ms" }}
         >
           <button
-            className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#232222] px-8 text-[15px] font-medium text-white transition-all hover:bg-[#181717] hover:shadow-[0_8px_24px_-6px_rgba(35,34,34,0.3)] active:scale-[0.98] overflow-hidden"
+            className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#232222] px-8 text-[15px] font-medium text-white transition-all hover:bg-[#181717] hover:shadow-[0_8px_24px_-6px_rgba(35,34,34,0.3)] active:scale-[0.98] overflow-hidden cursor-pointer"
             onClick={onDemoClick}
             type="button"
           >
@@ -102,7 +102,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
           
           <a
             href="https://agent.travscale.com"
-            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/10 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/20 hover:bg-[#f9f7f6] active:scale-[0.98]"
+            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/10 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/20 hover:bg-[#f9f7f6] active:scale-[0.98] cursor-pointer"
             target="_blank"
             rel="noopener noreferrer"
           >
