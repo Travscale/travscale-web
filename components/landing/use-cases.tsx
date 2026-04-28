@@ -10,7 +10,7 @@ import {
   ShieldCheck,
   Building2,
   Clock,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "motion/react";
@@ -20,11 +20,12 @@ const useCases = [
     id: "tour-operators",
     icon: Map,
     title: "DMCs & Tour Operators",
-    description: "Orchestrate complex multi-day itineraries and large groups effortlessly. Manage supplier payments, rooming lists, and live passenger updates in one central workspace.",
+    description:
+      "Orchestrate complex multi-day itineraries and large groups effortlessly. Manage supplier payments, rooming lists, and live passenger updates in one central workspace.",
     features: [
       "Dynamic visual itinerary builder",
       "Supplier ledger & payment tracking",
-      "Live passenger mobile app sync"
+      "Live passenger mobile app sync",
     ],
     theme: "light",
   },
@@ -32,11 +33,12 @@ const useCases = [
     id: "tmc",
     icon: BriefcaseBusiness,
     title: "Corporate TMCs",
-    description: "Enforce strict corporate policies without slowing down your agents. Automate SLA tracking, out-of-policy approvals, and generate real-time spend reports for clients.",
+    description:
+      "Enforce strict corporate policies without slowing down your agents. Automate SLA tracking, out-of-policy approvals, and generate real-time spend reports for clients.",
     features: [
       "Custom policy engines & routing",
       "Automated SLA monitoring",
-      "Real-time corporate spend analytics"
+      "Real-time corporate spend analytics",
     ],
     theme: "dark",
   },
@@ -44,14 +46,15 @@ const useCases = [
     id: "visa",
     icon: FileBadge2,
     title: "Visa Specialists",
-    description: "Never miss a consulate deadline. Transform messy document collections into streamlined pipelines with automated reminders and strict expiry tracking.",
+    description:
+      "Never miss a consulate deadline. Transform messy document collections into streamlined pipelines with automated reminders and strict expiry tracking.",
     features: [
       "Consulate deadline tracking",
       "Automated missing document alerts",
-      "Passport expiry monitors"
+      "Passport expiry monitors",
     ],
     theme: "beige",
-  }
+  },
 ];
 
 // Card height reference:
@@ -72,25 +75,25 @@ function UseCaseCard({
   progress,
   total,
 }: {
-  uc: typeof useCases[0];
+  uc: (typeof useCases)[0];
   i: number;
   progress: any;
   total: number;
 }) {
-  const isDark  = uc.theme === "dark";
+  const isDark = uc.theme === "dark";
   const isBeige = uc.theme === "beige";
-  const isLast  = i === total - 1;
+  const isLast = i === total - 1;
 
   // Dimming starts when the next card begins to arrive.
   const startProgress = Math.max(0, (i + 0.5) / total);
-  const targetScale   = 1 - (total - 1 - i) * 0.05;
+  const targetScale = 1 - (total - 1 - i) * 0.05;
 
   const scale = useTransform(progress, [startProgress, 1], [1, targetScale]);
   // Last card never dims — nothing stacks on top of it.
   const dimOpacity = useTransform(
     progress,
     [startProgress, 1],
-    [0, isLast ? 0 : 0.18]
+    [0, isLast ? 0 : 0.18],
   );
 
   // Vertically center the stack.
@@ -104,9 +107,9 @@ function UseCaseCard({
       className="sticky w-full"
       style={{
         top: stackTop,
-        // Last card only needs a small margin — it has no dim/scale animation,
-        // so no need for a long trailing scroll zone.
-        marginBottom: isLast ? "5vh" : "40vh",
+        // Give the last card a trailing scroll zone as well, so it has 
+        // time to "stack" properly and stay sticky before the section ends.
+        marginBottom: "40vh",
         zIndex: i * 10,
       }}
     >
@@ -118,8 +121,8 @@ function UseCaseCard({
           isDark
             ? "bg-[#111111] border-[#222] text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)]"
             : isBeige
-            ? "bg-[#f5f2eb] border-[#181717]/5 text-[#181717]"
-            : "bg-white border-[#181717]/5 text-[#181717]"
+              ? "bg-[#f5f2eb] border-[#181717]/5 text-[#181717]"
+              : "bg-white border-[#181717]/5 text-[#181717]",
         )}
       >
         {/* Dim overlay — card recedes without exposing the page background */}
@@ -130,31 +133,40 @@ function UseCaseCard({
 
         {/* ── Content Side ───────────────────────────────────────────── */}
         <div className="flex-1 p-7 sm:p-10 lg:p-14 flex flex-col justify-center relative z-10">
-
           {/* Icon */}
-          <div className={cn(
-            "w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-7 border shadow-sm shrink-0",
-            isDark ? "bg-[#1a1a1a] border-white/10" : "bg-white border-[#181717]/10"
-          )}>
-            <uc.icon className={cn(
-              "w-5 h-5 sm:w-7 sm:h-7",
-              isDark ? "text-white" : "text-[#d04841]"
-            )} />
+          <div
+            className={cn(
+              "w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-7 border shadow-sm shrink-0",
+              isDark
+                ? "bg-[#1a1a1a] border-white/10"
+                : "bg-white border-[#181717]/10",
+            )}
+          >
+            <uc.icon
+              className={cn(
+                "w-5 h-5 sm:w-7 sm:h-7",
+                isDark ? "text-white" : "text-[#d04841]",
+              )}
+            />
           </div>
 
           {/* Title */}
-          <h3 className={cn(
-            "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3",
-            isDark ? "text-white" : "text-[#181717]"
-          )}>
+          <h3
+            className={cn(
+              "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3",
+              isDark ? "text-white" : "text-[#181717]",
+            )}
+          >
             {uc.title}
           </h3>
 
           {/* Description */}
-          <p className={cn(
-            "text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md",
-            isDark ? "text-white/55" : "text-[#666666]"
-          )}>
+          <p
+            className={cn(
+              "text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md",
+              isDark ? "text-white/55" : "text-[#666666]",
+            )}
+          >
             {uc.description}
           </p>
 
@@ -169,14 +181,18 @@ function UseCaseCard({
                 transition={{ delay: 0.08 + idx * 0.09, duration: 0.4 }}
                 className="flex items-center gap-3"
               >
-                <CheckCircle2 className={cn(
-                  "w-4 h-4 sm:w-5 sm:h-5 shrink-0",
-                  isDark ? "text-emerald-400" : "text-[#d04841]"
-                )} />
-                <span className={cn(
-                  "text-sm sm:text-base font-medium",
-                  isDark ? "text-white/75" : "text-[#181717]/80"
-                )}>
+                <CheckCircle2
+                  className={cn(
+                    "w-4 h-4 sm:w-5 sm:h-5 shrink-0",
+                    isDark ? "text-emerald-400" : "text-[#d04841]",
+                  )}
+                />
+                <span
+                  className={cn(
+                    "text-sm sm:text-base font-medium",
+                    isDark ? "text-white/75" : "text-[#181717]/80",
+                  )}
+                >
                   {feature}
                 </span>
               </motion.li>
@@ -184,10 +200,14 @@ function UseCaseCard({
           </ul>
 
           {/* CTA */}
-          <button className={cn(
-            "inline-flex items-center gap-2 text-sm font-semibold group self-start transition-colors",
-            isDark ? "text-white/80 hover:text-white" : "text-[#181717] hover:text-[#d04841]"
-          )}>
+          <button
+            className={cn(
+              "inline-flex items-center gap-2 text-sm font-semibold group self-start transition-colors",
+              isDark
+                ? "text-white/80 hover:text-white"
+                : "text-[#181717] hover:text-[#d04841]",
+            )}
+          >
             Learn more
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
@@ -200,12 +220,15 @@ function UseCaseCard({
         {/* height past the viewport and breaking both centering and the  */}
         {/* stacking scroll effect. Content-only cards are ~340px tall    */}
         {/* and center cleanly with the formula above.                    */}
-        <div className={cn(
-          "hidden lg:flex w-[44%] shrink-0 items-center justify-center p-12",
-          "border-l relative overflow-hidden min-h-[500px]",
-          isDark ? "border-white/5 bg-[#161616]" : "border-[#181717]/5 bg-black/[0.02]"
-        )}>
-
+        <div
+          className={cn(
+            "hidden lg:flex w-[44%] shrink-0 items-center justify-center p-12",
+            "border-l relative overflow-hidden min-h-[500px]",
+            isDark
+              ? "border-white/5 bg-[#161616]"
+              : "border-[#181717]/5 bg-black/[0.02]",
+          )}
+        >
           {/* Visual 1: DMC / Itinerary timeline */}
           {i === 0 && (
             <div className="w-full max-w-[280px] relative">
@@ -365,7 +388,7 @@ export default function UseCases() {
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#f3f0ee] to-transparent pointer-events-none" />
 
       {/* Header */}
-      <div className="max-w-7xl mx-auto px-5 sm:px-6 lg:px-8 mb-14 sm:mb-24 text-center relative z-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 mb-14 sm:mb-24 text-center relative z-10">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-6">
           <Building2 className="w-3.5 h-3.5 text-[#d04841]" />
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
@@ -373,17 +396,18 @@ export default function UseCases() {
           </span>
         </div>
         <h2 className="text-4xl sm:text-[3.5rem] font-medium leading-[1.08] text-[#181717] tracking-tight mb-4 sm:mb-6">
-          One platform.{" "}
-          <br className="hidden sm:block" />
+          One platform. <br className="hidden sm:block" />
           <span className="text-[#666666]">Any operating model.</span>
         </h2>
         <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
-          Travscale adapts to your specific workflow — whether you're building complex itineraries, enforcing corporate policies, or tracking consulate deadlines.
+          Travscale adapts to your specific workflow — whether you're building
+          complex itineraries, enforcing corporate policies, or tracking
+          consulate deadlines.
         </p>
       </div>
 
       {/* Stacked cards */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pb-[8vh]">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pb-[8vh]">
         {useCases.map((uc, i) => (
           <UseCaseCard
             key={uc.id}
