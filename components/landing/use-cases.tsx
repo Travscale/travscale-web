@@ -6,14 +6,21 @@ import {
   BriefcaseBusiness,
   FileBadge2,
   CheckCircle2,
-  PlaneTakeoff,
+  Bus,
+  Hotel,
+  Utensils,
   ShieldCheck,
-  Building2,
+  AlertTriangle,
   Clock,
   ArrowRight,
+  Building2,
+  X,
+  Check,
+  FileText,
+  Calendar,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 
 const useCases = [
   {
@@ -21,11 +28,11 @@ const useCases = [
     icon: Map,
     title: "DMCs & Tour Operators",
     description:
-      "Orchestrate complex multi-day itineraries and large groups effortlessly. Manage supplier payments, rooming lists, and live passenger updates in one central workspace.",
+      "Rooming lists that change at 2am. Coach drivers who need manifests yesterday. Passengers who somehow booked the wrong departure airport. This is the stuff your current software pretends doesn't happen.",
     features: [
-      "Dynamic visual itinerary builder",
-      "Supplier ledger & payment tracking",
-      "Live passenger mobile app sync",
+      "Drag-and-drop itineraries that survive last-minute changes",
+      "Supplier payments you can actually track without a spreadsheet",
+      "Push updates to passengers before they call your emergency line",
     ],
     theme: "light",
   },
@@ -34,89 +41,63 @@ const useCases = [
     icon: BriefcaseBusiness,
     title: "Corporate TMCs",
     description:
-      "Enforce strict corporate policies without slowing down your agents. Automate SLA tracking, out-of-policy approvals, and generate real-time spend reports for clients.",
+      "Your agents didn't write the corporate travel policy, but they're the ones getting yelled at when a C-suite booking gets flagged. Give them tools that make saying 'no' feel less like a personal attack.",
     features: [
-      "Custom policy engines & routing",
-      "Automated SLA monitoring",
-      "Real-time corporate spend analytics",
+      "Auto-route out-of-policy trips to the right approver",
+      "SLA timers that turn 'we're looking into it' into actual accountability",
+      "Client spend reports built in seconds, not Sunday evenings",
     ],
     theme: "dark",
   },
   {
     id: "visa",
     icon: FileBadge2,
-    title: "Visa Specialists",
+    title: "Visa & Immigration",
     description:
-      "Never miss a consulate deadline. Transform messy document collections into streamlined pipelines with automated reminders and strict expiry tracking.",
+      "Nobody calls their visa agent to say everything is fine. They call at 4pm on a Friday because they just noticed their passport expires in eleven days. You need a system that panics before they do.",
     features: [
-      "Consulate deadline tracking",
-      "Automated missing document alerts",
-      "Passport expiry monitors",
+      "Consulate deadlines that scream at you, not your client",
+      "Missing-document alerts before the appointment is wasted",
+      "Passport expiry tracking that checks the actual pages",
     ],
     theme: "beige",
   },
 ];
 
-// Card height reference:
-//   Desktop (with visual panel): ~520px  → center offset = 260px
-//   Mobile  (content only):      ~340px  → center offset = 170px
-//
-// Formula: top = max(5vh, calc(50vh - <halfHeight>px + i * <stackOffset>px))
-// This pins the card's vertical midpoint near the viewport center while
-// each subsequent card sits slightly lower to reveal the stack behind it.
-//
-// On mobile we hide the visual panel entirely so the card is compact
-// enough to actually fit in the viewport — that was the root cause of
-// both the "not centered" and "not suitable for mobile" complaints.
+type UseCaseCardProps = {
+  uc: (typeof useCases)[0];
+  i: number;
+  progress: MotionValue<number>;
+  range: [number, number];
+  targetScale: number;
+};
 
 function UseCaseCard({
   uc,
   i,
   progress,
-  total,
-}: {
-  uc: (typeof useCases)[0];
-  i: number;
-  progress: any;
-  total: number;
-}) {
+  range,
+  targetScale,
+}: UseCaseCardProps) {
   const isDark = uc.theme === "dark";
   const isBeige = uc.theme === "beige";
-  const isLast = i === total - 1;
 
-  // Dimming starts when the next card begins to arrive.
-  const startProgress = Math.max(0, (i + 0.5) / total);
-  const targetScale = 1 - (total - 1 - i) * 0.05;
-
-  const scale = useTransform(progress, [startProgress, 1], [1, targetScale]);
-  // Last card never dims — nothing stacks on top of it.
-  const dimOpacity = useTransform(
-    progress,
-    [startProgress, 1],
-    [0, isLast ? 0 : 0.18],
-  );
-
-  // Vertically center the stack.
-  // 50vh - 260px puts the midpoint of a ~520px desktop card at screen center.
-  // Each card offsets 24px lower so you can see cards behind it.
-  // `max(5vh, ...)` floors it so it never goes off the top on short screens.
-  const stackTop = `max(5vh, calc(50vh - 260px + ${i * 24}px))`;
+  const scale = useTransform(progress, range, [1, targetScale]);
+  const dimOpacity = useTransform(progress, range, [0, 0.15]);
 
   return (
     <div
-      className="sticky w-full"
-      style={{
-        top: stackTop,
-        // Give the last card a trailing scroll zone as well, so it has 
-        // time to "stack" properly and stay sticky before the section ends.
-        marginBottom: "40vh",
-        zIndex: i * 10,
-      }}
+      className="sticky top-0 flex h-screen items-center justify-center py-6 sm:py-8"
+      style={{ zIndex: i * 10 }}
     >
       <motion.div
-        style={{ scale, transformOrigin: "top center" }}
+        style={{
+          scale,
+          transformOrigin: "top center",
+          top: `calc(-5vh + ${i * 25}px)`,
+        }}
         className={cn(
-          "w-full relative rounded-[2rem] sm:rounded-[2.5rem] border flex flex-col lg:flex-row",
+          "relative w-full max-w-5xl rounded-[2rem] sm:rounded-[2.5rem] border flex flex-col lg:flex-row overflow-hidden",
           "shadow-[0_30px_80px_-20px_rgba(0,0,0,0.12)]",
           isDark
             ? "bg-[#111111] border-[#222] text-white shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)]"
@@ -125,7 +106,7 @@ function UseCaseCard({
               : "bg-white border-[#181717]/5 text-[#181717]",
         )}
       >
-        {/* Dim overlay — card recedes without exposing the page background */}
+        {/* Dim overlay */}
         <motion.div
           className="absolute inset-0 rounded-[2rem] sm:rounded-[2.5rem] bg-black pointer-events-none z-50"
           style={{ opacity: dimOpacity }}
@@ -133,7 +114,6 @@ function UseCaseCard({
 
         {/* ── Content Side ───────────────────────────────────────────── */}
         <div className="flex-1 p-7 sm:p-10 lg:p-14 flex flex-col justify-center relative z-10">
-          {/* Icon */}
           <div
             className={cn(
               "w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center mb-5 sm:mb-7 border shadow-sm shrink-0",
@@ -150,7 +130,6 @@ function UseCaseCard({
             />
           </div>
 
-          {/* Title */}
           <h3
             className={cn(
               "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-3",
@@ -160,7 +139,6 @@ function UseCaseCard({
             {uc.title}
           </h3>
 
-          {/* Description */}
           <p
             className={cn(
               "text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 max-w-md",
@@ -170,7 +148,6 @@ function UseCaseCard({
             {uc.description}
           </p>
 
-          {/* Features */}
           <ul className="space-y-2.5 sm:space-y-3.5 mb-7 sm:mb-9">
             {uc.features.map((feature, idx) => (
               <motion.li
@@ -199,7 +176,6 @@ function UseCaseCard({
             ))}
           </ul>
 
-          {/* CTA */}
           <button
             className={cn(
               "inline-flex items-center gap-2 text-sm font-semibold group self-start transition-colors cursor-pointer",
@@ -208,18 +184,12 @@ function UseCaseCard({
                 : "text-[#181717] hover:text-[#d04841]",
             )}
           >
-            Learn more
+            See how it works
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
 
-        {/* ── Visual Side — hidden on mobile ─────────────────────────── */}
-        {/*                                                               */}
-        {/* Hiding this on mobile is the key fix. On small screens the   */}
-        {/* visual panel adds 200-250px of height, pushing the total card */}
-        {/* height past the viewport and breaking both centering and the  */}
-        {/* stacking scroll effect. Content-only cards are ~340px tall    */}
-        {/* and center cleanly with the formula above.                    */}
+        {/* ── Visual Side ─────────────────────────────────────────── */}
         <div
           className={cn(
             "hidden lg:flex w-[44%] shrink-0 items-center justify-center p-12",
@@ -229,24 +199,50 @@ function UseCaseCard({
               : "border-[#181717]/5 bg-black/[0.02]",
           )}
         >
-          {/* Visual 1: DMC / Itinerary timeline */}
+          {/* Visual 1: Tour Operator — messy trip coming together */}
           {i === 0 && (
             <div className="w-full max-w-[280px] relative">
-              <div className="absolute top-0 bottom-0 left-[23px] w-0.5 bg-gradient-to-b from-blue-500/50 via-blue-500/20 to-transparent" />
+              <div className="absolute top-0 bottom-0 left-[23px] w-0.5 bg-gradient-to-b from-blue-500/40 via-amber-500/20 to-transparent" />
 
               <motion.div
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="relative z-10 flex gap-4 mb-6"
+                className="relative z-10 flex gap-4 mb-5"
               >
                 <div className="w-12 h-12 rounded-full bg-blue-50 border border-blue-100 flex items-center justify-center shrink-0 shadow-sm">
-                  <PlaneTakeoff className="w-5 h-5 text-blue-600" />
+                  <Bus className="w-5 h-5 text-blue-600" />
                 </div>
-                <div className="flex-1 bg-white p-4 rounded-2xl border border-[#181717]/5 shadow-sm hover:-translate-y-1 transition-transform">
-                  <div className="h-2 w-20 bg-blue-100 rounded-full mb-2" />
-                  <div className="h-2 w-32 bg-[#181717]/5 rounded-full" />
+                <div className="flex-1 bg-white p-4 rounded-2xl border border-[#181717]/5 shadow-sm">
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="h-2 w-16 bg-blue-100 rounded-full" />
+                    <span className="text-[10px] font-semibold text-blue-600 bg-blue-50 px-1.5 py-0.5 rounded-full">
+                      47 seats
+                    </span>
+                  </div>
+                  <div className="h-2 w-28 bg-[#181717]/5 rounded-full" />
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3, duration: 0.5 }}
+                className="relative z-10 flex gap-4 mb-5"
+              >
+                <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 shadow-sm">
+                  <Hotel className="w-5 h-5 text-amber-600" />
+                </div>
+                <div className="flex-1 bg-white p-4 rounded-2xl border border-[#181717]/5 shadow-sm">
+                  <div className="flex items-center justify-between mb-2">
+                    <div className="h-2 w-20 bg-amber-100 rounded-full" />
+                    <span className="text-[10px] font-semibold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded-full">
+                      12 rooms
+                    </span>
+                  </div>
+                  <div className="h-2 w-24 bg-[#181717]/5 rounded-full" />
                 </div>
               </motion.div>
 
@@ -254,53 +250,68 @@ function UseCaseCard({
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 0.7, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.35, duration: 0.5 }}
-                className="relative z-10 flex gap-4 mb-6"
+                transition={{ delay: 0.4, duration: 0.5 }}
+                className="relative z-10 flex gap-4"
               >
-                <div className="w-12 h-12 rounded-full bg-amber-50 border border-amber-100 flex items-center justify-center shrink-0 shadow-sm">
-                  <Map className="w-5 h-5 text-amber-600" />
+                <div className="w-12 h-12 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center shrink-0 shadow-sm">
+                  <Utensils className="w-5 h-5 text-rose-500" />
                 </div>
                 <div className="flex-1 bg-white p-4 rounded-2xl border border-[#181717]/5 shadow-sm">
-                  <div className="h-2 w-24 bg-amber-100 rounded-full mb-2" />
-                  <div className="h-2 w-20 bg-[#181717]/5 rounded-full" />
+                  <div className="h-2 w-24 bg-rose-100 rounded-full mb-2" />
+                  <div className="h-2 w-16 bg-[#181717]/5 rounded-full" />
                 </div>
               </motion.div>
             </div>
           )}
 
-          {/* Visual 2: Corporate / Policy engine */}
+          {/* Visual 2: Corporate — policy approval flow */}
           {i === 1 && (
             <div className="w-full max-w-[300px] relative">
               <motion.div
-                initial={{ opacity: 0, y: 20, rotate: -10 }}
+                initial={{ opacity: 0, y: 20, rotate: -6 }}
                 whileInView={{ opacity: 1, y: 0, rotate: -2 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.6, type: "spring" }}
-                className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-5 mb-4 shadow-xl relative z-10"
+                className="bg-[#1e1e1e] border border-white/10 rounded-2xl p-5 mb-3 shadow-xl relative z-10"
               >
                 <div className="flex items-center gap-3 mb-4">
-                  <ShieldCheck className="w-6 h-6 text-emerald-400" />
+                  <div className="w-8 h-8 rounded-full bg-emerald-500/15 flex items-center justify-center">
+                    <Check className="w-4 h-4 text-emerald-400" />
+                  </div>
                   <div>
                     <div className="h-2 w-24 bg-emerald-400/20 rounded-full mb-1.5" />
-                    <div className="h-1.5 w-16 bg-white/10 rounded-full" />
+                    <div className="h-1.5 w-12 bg-white/10 rounded-full" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <div className="h-8 w-full bg-white/5 rounded-lg border border-white/5" />
-                  <div className="h-8 w-full bg-white/5 rounded-lg border border-white/5" />
+                  <div className="h-7 w-full bg-white/5 rounded-lg border border-white/5 flex items-center px-3">
+                    <div className="h-1.5 w-20 bg-white/20 rounded-full" />
+                  </div>
+                  <div className="h-7 w-full bg-white/5 rounded-lg border border-white/5 flex items-center px-3">
+                    <div className="h-1.5 w-28 bg-white/20 rounded-full" />
+                  </div>
                 </div>
               </motion.div>
 
               <motion.div
-                initial={{ opacity: 0, x: 20, rotate: 10 }}
-                whileInView={{ opacity: 0.9, x: 16, y: -20, rotate: 2 }}
+                initial={{ opacity: 0, x: 20, rotate: 8 }}
+                whileInView={{ opacity: 0.9, x: 14, y: -16, rotate: 3 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.35, duration: 0.6, type: "spring" }}
-                className="bg-[#2a1a1e] border border-rose-500/20 rounded-2xl p-5 shadow-xl w-[90%] ml-auto"
+                className="bg-[#2a1a1e] border border-rose-500/20 rounded-2xl p-5 shadow-xl w-[92%] ml-auto"
               >
                 <div className="flex justify-between items-start mb-3">
-                  <div className="h-2 w-20 bg-rose-400/40 rounded-full" />
-                  <div className="h-5 w-12 bg-rose-500/20 rounded-full border border-rose-500/30" />
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-rose-500/15 flex items-center justify-center">
+                      <X className="w-3 h-3 text-rose-400" />
+                    </div>
+                    <div className="h-2 w-16 bg-rose-400/30 rounded-full" />
+                  </div>
+                  <div className="h-5 px-2 flex items-center bg-rose-500/15 rounded-full border border-rose-500/25">
+                    <span className="text-[9px] font-semibold text-rose-300 uppercase tracking-wider">
+                      Pending
+                    </span>
+                  </div>
                 </div>
                 <div className="h-2 w-full bg-white/10 rounded-full mb-2" />
                 <div className="h-2 w-2/3 bg-white/10 rounded-full" />
@@ -308,18 +319,26 @@ function UseCaseCard({
             </div>
           )}
 
-          {/* Visual 3: Visa / Pipeline */}
+          {/* Visual 3: Visa — countdown + document pipeline */}
           {i === 2 && (
             <div className="w-full max-w-[280px] relative space-y-4">
               <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
+                initial={{ opacity: 0, y: -10 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1, duration: 0.4 }}
-                className="flex items-center justify-between mb-2"
+                className="flex items-center justify-between"
               >
-                <div className="h-2 w-16 bg-[#181717]/10 rounded-full" />
-                <div className="h-4 w-6 bg-white border border-[#181717]/10 rounded-full" />
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-3.5 h-3.5 text-rose-400" />
+                  <div className="h-2 w-14 bg-[#181717]/10 rounded-full" />
+                </div>
+                <div className="flex items-center gap-1.5 px-2 py-1 bg-rose-50 border border-rose-100 rounded-full">
+                  <Clock className="w-3 h-3 text-rose-500" />
+                  <span className="text-[10px] font-bold text-rose-600">
+                    11 days
+                  </span>
+                </div>
               </motion.div>
 
               <motion.div
@@ -330,14 +349,20 @@ function UseCaseCard({
                 className="bg-white border border-[#181717]/10 rounded-2xl p-4 shadow-sm relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-rose-400" />
-                <div className="flex justify-between mb-3 pl-3">
-                  <div className="h-2 w-20 bg-rose-100 rounded-full" />
-                  <Clock className="w-3.5 h-3.5 text-rose-400" />
-                </div>
-                <div className="pl-3">
-                  <div className="h-1.5 w-full bg-[#181717]/5 rounded-full overflow-hidden">
-                    <div className="h-full w-1/3 bg-emerald-400 rounded-full" />
+                <div className="flex justify-between items-start mb-3 pl-3">
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-3.5 h-3.5 text-rose-400" />
+                    <div className="h-2 w-20 bg-rose-100 rounded-full" />
                   </div>
+                  <AlertTriangle className="w-3.5 h-3.5 text-rose-400" />
+                </div>
+                <div className="pl-3 space-y-1.5">
+                  <div className="h-1.5 w-full bg-[#181717]/5 rounded-full overflow-hidden">
+                    <div className="h-full w-1/3 bg-rose-400 rounded-full" />
+                  </div>
+                  <span className="text-[10px] text-rose-500 font-medium">
+                    2 documents missing
+                  </span>
                 </div>
               </motion.div>
 
@@ -349,9 +374,12 @@ function UseCaseCard({
                 className="bg-white border border-[#181717]/10 rounded-2xl p-4 shadow-sm relative overflow-hidden"
               >
                 <div className="absolute top-0 left-0 w-1 h-full bg-emerald-400" />
-                <div className="flex justify-between mb-3 pl-3">
-                  <div className="h-2 w-24 bg-emerald-100 rounded-full" />
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                <div className="flex justify-between items-start mb-3 pl-3">
+                  <div className="flex items-center gap-2">
+                    <FileText className="w-3.5 h-3.5 text-emerald-400" />
+                    <div className="h-2 w-24 bg-emerald-100 rounded-full" />
+                  </div>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
                 </div>
                 <div className="pl-3">
                   <div className="h-1.5 w-full bg-[#181717]/5 rounded-full overflow-hidden">
@@ -372,7 +400,7 @@ function UseCaseCard({
 }
 
 export default function UseCases() {
-  const containerRef = useRef(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end end"],
@@ -380,7 +408,6 @@ export default function UseCases() {
 
   return (
     <section
-      ref={containerRef}
       className="py-20 sm:py-32 relative bg-[#fcfbfb] overflow-visible"
       id="use-cases"
     >
@@ -392,31 +419,35 @@ export default function UseCases() {
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-6">
           <Building2 className="w-3.5 h-3.5 text-[#d04841]" />
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
-            Purpose Built
+            Built for reality
           </span>
         </div>
         <h2 className="text-4xl sm:text-[3.5rem] font-medium leading-[1.08] text-[#181717] tracking-tight mb-4 sm:mb-6">
-          One platform. <br className="hidden sm:block" />
-          <span className="text-[#666666]">Any operating model.</span>
+          Travel doesn't run <br className="hidden sm:block" />
+          <span className="text-[#666666]">on spreadsheets.</span>
         </h2>
         <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
-          Travscale adapts to your specific workflow — whether you're building
-          complex itineraries, enforcing corporate policies, or tracking
-          consulate deadlines.
+          Three different worlds. One shared truth: the software you're using
+          was built by people who've never had to rebook 47 passengers at
+          midnight.
         </p>
       </div>
 
       {/* Stacked cards */}
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-12 relative z-10 pb-[8vh]">
-        {useCases.map((uc, i) => (
-          <UseCaseCard
-            key={uc.id}
-            uc={uc}
-            i={i}
-            progress={scrollYProgress}
-            total={useCases.length}
-          />
-        ))}
+      <div ref={containerRef} className="relative z-10">
+        {useCases.map((uc, i) => {
+          const targetScale = 1 - (useCases.length - 1 - i) * 0.05;
+          return (
+            <UseCaseCard
+              key={uc.id}
+              uc={uc}
+              i={i}
+              progress={scrollYProgress}
+              range={[i * 0.25, 1]}
+              targetScale={targetScale}
+            />
+          );
+        })}
       </div>
     </section>
   );
