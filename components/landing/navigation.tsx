@@ -224,15 +224,15 @@ function MobileMenu({ links, currentPath, onClose, onDemo }: MobileMenuProps) {
           >
             Log in to Account
           </a>
-          <button
-            onClick={() => {
-              onClose();
-              onDemo();
-            }}
+          <a
+            href="https://cal.com/abubakarshaikh/travscale-product-demo"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={onClose}
             className="ts-btn-primary flex h-auto w-full items-center justify-center rounded-xl py-3.5 text-[15px] font-medium cursor-pointer"
           >
             Book a Demo
-          </button>
+          </a>
         </div>
       </div>
     </motion.div>
@@ -375,13 +375,15 @@ export default function Navigation({ onDemoClick }: NavigationProps) {
             >
               Log in
             </a>
-            <button
-              onClick={handleDemoClick}
+            <a
+              href="https://cal.com/abubakarshaikh/travscale-product-demo"
+              target="_blank"
+              rel="noopener noreferrer"
               className="ts-btn-pill group flex h-10 items-center px-5 py-2.5 text-[13px] cursor-pointer"
             >
               <span>Book a Demo</span>
               <ArrowRight className="ml-1 h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
-            </button>
+            </a>
           </div>
 
           {/* Mobile hamburger button */}

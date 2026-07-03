@@ -193,19 +193,36 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                   ))}
                 </ul>
 
-                <button
-                  className={cn(
-                    "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
-                    isPro
-                      ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
-                      : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"
-                  )}
-                  onClick={onDemoClick}
-                  type="button"
-                >
-                  {plan.cta}
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                {plan.cta === "Book a Demo" ? (
+                  <a
+                    href="https://cal.com/abubakarshaikh/travscale-product-demo"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
+                      isPro
+                        ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
+                        : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"
+                    )}
+                  >
+                    {plan.cta}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </a>
+                ) : (
+                  <button
+                    className={cn(
+                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
+                      isPro
+                        ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
+                        : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"
+                    )}
+                    onClick={onDemoClick}
+                    type="button"
+                  >
+                    {plan.cta}
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  </button>
+                )}
               </div>
             );
           })}

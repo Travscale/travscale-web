@@ -88,17 +88,18 @@ export default function Hero({ onDemoClick }: HeroProps) {
           )}
           style={{ transitionDelay: "300ms" }}
         >
-          <button
+          <a
+            href="https://cal.com/abubakarshaikh/travscale-product-demo"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#232222] px-8 text-[15px] font-medium text-white transition-all hover:bg-[#181717] hover:shadow-[0_8px_24px_-6px_rgba(35,34,34,0.3)] active:scale-[0.98] overflow-hidden cursor-pointer"
-            onClick={onDemoClick}
-            type="button"
           >
             <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-150%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(150%)]">
               <div className="relative h-full w-8 bg-white/20" />
             </div>
             Book a Demo
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </button>
+          </a>
           
           <a
             href="https://agent.travscale.com"
