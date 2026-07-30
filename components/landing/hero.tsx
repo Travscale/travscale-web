@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight, Play, CheckCircle2, LayoutGrid, Users, Plane, CreditCard, ShieldCheck } from "lucide-react";
+import { ArrowRight, Play, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+import HeroPortalCarousel from "@/components/molecules/landing/hero-portal-carousel";
 
 type HeroProps = {
   onDemoClick: () => void;
@@ -138,126 +140,15 @@ export default function Hero({ onDemoClick }: HeroProps) {
           <span className="hidden sm:block">Trusted by 500+ agencies</span>
         </div>
 
-        {/* High-Fidelity Mock UI / Dashboard Preview */}
+        {/* High-Fidelity Portal Carousel Showcase */}
         <div 
           className={cn(
-            "mt-16 sm:mt-24 relative mx-auto max-w-[1000px] transition-all duration-1000 ease-out",
+            "mt-16 sm:mt-24 transition-all duration-1000 ease-out",
             mounted ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
           )}
           style={{ transitionDelay: '600ms' }}
         >
-          {/* Decorative Glow behind the mock UI */}
-          <div className="absolute inset-0 -top-8 -bottom-8 bg-gradient-to-b from-[#d04841]/5 via-transparent to-transparent blur-3xl rounded-[100px] -z-10" />
-          
-          <div className="relative rounded-2xl border border-[#181717]/10 bg-white shadow-[0_20px_60px_-16px_rgba(24,23,23,0.1)] overflow-hidden flex flex-col h-[400px] sm:h-[500px]">
-            {/* Window Header */}
-            <div className="h-12 border-b border-[#181717]/5 bg-[#f9f7f6]/80 backdrop-blur-sm flex items-center px-4 justify-between">
-              <div className="flex gap-2">
-                <div className="w-3 h-3 rounded-full bg-[#181717]/15" />
-                <div className="w-3 h-3 rounded-full bg-[#181717]/15" />
-                <div className="w-3 h-3 rounded-full bg-[#181717]/15" />
-              </div>
-              <div className="flex bg-white border border-[#181717]/10 rounded-md px-3 py-1 shadow-sm">
-                <span className="text-[10px] font-medium text-[#181717]/50">app.travscale.com</span>
-              </div>
-              <div className="w-10" /> {/* Spacer for centering */}
-            </div>
-
-            {/* Dashboard Content */}
-            <div className="flex flex-1 overflow-hidden bg-[#fafafa]">
-              {/* Sidebar */}
-              <div className="w-16 sm:w-56 border-r border-[#181717]/5 bg-white p-4 flex flex-col gap-2">
-                <div className="h-8 rounded-lg bg-[#181717]/5 mb-6 hidden sm:block" />
-                <div className="h-8 rounded-full bg-white border border-[#181717]/10 flex items-center justify-center sm:hidden mb-6">
-                   <div className="w-4 h-4 bg-[#181717]/20 rounded" />
-                </div>
-                
-                {[
-                  { icon: LayoutGrid, label: "Dashboard", active: true },
-                  { icon: Users, label: "Passengers" },
-                  { icon: Plane, label: "Bookings" },
-                  { icon: CreditCard, label: "Invoices" },
-                ].map((item, i) => (
-                  <div key={i} className={cn(
-                    "flex items-center gap-3 p-2 rounded-md transition-colors",
-                    item.active ? "bg-[#d04841]/10 text-[#d04841]" : "text-[#181717]/40"
-                  )}>
-                    <item.icon className="w-5 h-5 shrink-0" />
-                    <span className="text-sm font-medium hidden sm:block">{item.label}</span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Main Area */}
-              <div className="flex-1 p-6 sm:p-8 overflow-hidden flex flex-col gap-6 text-left">
-                {/* Header row */}
-                <div className="flex justify-between items-end">
-                  <div>
-                    <h2 className="text-xl font-semibold text-[#181717] mb-1">Overview</h2>
-                    <p className="text-xs text-[#666666]">Your business at a glance</p>
-                  </div>
-                  <div className="h-8 w-24 bg-white border border-[#181717]/10 rounded-md shadow-sm hidden sm:block" />
-                </div>
-
-                {/* Stats grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                  {[
-                    { label: "Active Visas", value: "142", trend: "+12%" },
-                    { label: "Monthly Bookings", value: "2,845", trend: "+5%" },
-                    { label: "Revenue", value: "₹4.2M", trend: "+18%" },
-                  ].map((stat, i) => (
-                    <div key={i} className="bg-white border border-[#181717]/5 rounded-xl p-4 shadow-sm flex flex-col gap-2">
-                      <div className="text-xs font-medium text-[#666666]">{stat.label}</div>
-                      <div className="flex items-baseline justify-between">
-                        <div className="text-2xl font-bold text-[#181717] tracking-tight">{stat.value}</div>
-                        <div className="text-xs font-medium text-emerald-600 bg-emerald-50 px-1.5 py-0.5 rounded">{stat.trend}</div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Main chart/list area */}
-                <div className="flex-1 bg-white border border-[#181717]/5 rounded-xl shadow-sm p-5 flex flex-col gap-4">
-                  <div className="flex items-center justify-between border-b border-[#181717]/5 pb-4">
-                    <div className="h-4 w-32 bg-[#181717]/10 rounded" />
-                    <div className="h-4 w-16 bg-[#181717]/5 rounded hidden sm:block" />
-                  </div>
-                  {[1, 2, 3].map(i => (
-                    <div key={i} className="flex items-center justify-between pb-3 border-b border-[#181717]/[0.02] last:border-0 last:pb-0">
-                      <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-[#181717]/5 flex items-center justify-center">
-                          <div className="w-3 h-3 bg-[#181717]/20 rounded-full" />
-                        </div>
-                        <div className="flex flex-col gap-1.5">
-                          <div className="h-3 w-24 sm:w-40 bg-[#181717]/15 rounded" />
-                          <div className="h-2 w-16 sm:w-24 bg-[#181717]/5 rounded" />
-                        </div>
-                      </div>
-                      <div className="h-6 w-16 sm:w-20 bg-emerald-50 border border-emerald-100 rounded-full" />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-            
-            {/* Floating elements to break the box (adds depth) */}
-            <div 
-              className={cn(
-                "absolute -right-4 top-32 bg-white border border-[#181717]/10 rounded-xl p-3 shadow-[0_12px_40px_-12px_rgba(24,23,23,0.15)] hidden lg:flex items-center gap-3 transition-all duration-1000 ease-out",
-                mounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"
-              )}
-              style={{ transitionDelay: '1000ms' }}
-            >
-              <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              </div>
-              <div className="text-left">
-                <div className="text-xs font-semibold text-[#181717]">Booking Confirmed</div>
-                <div className="text-[10px] text-[#666666] font-medium">Emirates EK-502</div>
-              </div>
-            </div>
-            
-          </div>
+          <HeroPortalCarousel />
         </div>
       </div>
     </section>
