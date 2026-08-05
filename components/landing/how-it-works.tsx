@@ -2,6 +2,7 @@
 
 import { CheckCircle2, ShieldCheck, CreditCard, Power, Plane, Globe2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Reveal from "@/components/atoms/interaction/reveal";
 
 export default function HowItWorks() {
   return (
@@ -12,7 +13,7 @@ export default function HowItWorks() {
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="text-center mb-20 sm:mb-28 max-w-2xl mx-auto">
+        <Reveal className="text-center mb-20 sm:mb-28 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f9f7f6] border border-[#181717]/10 shadow-sm mb-6">
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
               The Process
@@ -25,10 +26,11 @@ export default function HowItWorks() {
           <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-2xl mx-auto">
             No complex onboarding. No lengthy implementation cycles. Get your agency on Travscale and see results from day one.
           </p>
-        </div>
+        </Reveal>
 
         <div className="space-y-24 sm:space-y-32">
           {/* Step 1 */}
+          <Reveal delayMs={0}>
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div className="flex-1 lg:pr-10">
               <div className="relative">
@@ -109,8 +111,10 @@ export default function HowItWorks() {
               </div>
             </div>
           </div>
+          </Reveal>
 
           {/* Step 2 */}
+          <Reveal delayMs={80}>
           <div className="flex flex-col lg:flex-row-reverse items-center gap-12 lg:gap-20">
             <div className="flex-1 lg:pl-10">
               <div className="relative">
@@ -197,8 +201,10 @@ export default function HowItWorks() {
               </div>
             </div>
           </div>
+          </Reveal>
 
           {/* Step 3 */}
+          <Reveal delayMs={160}>
           <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
             <div className="flex-1 lg:pr-10">
               <div className="relative">
@@ -256,7 +262,7 @@ export default function HowItWorks() {
                 {/* Automation Log */}
                 <div className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
                     <div className="text-sm font-medium text-[#181717]">Invoice #4022 paid. Receipt sent.</div>
                     <div className="text-xs text-[#666666] ml-auto">Just now</div>
                   </div>
@@ -266,10 +272,10 @@ export default function HowItWorks() {
                     <div className="text-xs text-[#666666] ml-auto">2m ago</div>
                   </div>
                 </div>
-                
-              </div>
+                </div>
             </div>
           </div>
+          </Reveal>
 
         </div>
       </div>

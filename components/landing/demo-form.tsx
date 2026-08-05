@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { ArrowRight, Check, Loader2, X } from "lucide-react";
 import { Drawer } from "vaul";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL ?? process.env.REACT_APP_BACKEND_URL;
 const API = BACKEND_URL ? `${BACKEND_URL}/api` : "";
@@ -19,6 +20,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
   const [error, setError] = useState("");
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const reduceMotion = useReducedMotion();
 
   useEffect(() => {
     setMounted(true);
@@ -53,7 +55,7 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
     } catch { setError("Something went wrong. Please try again."); } finally { setLoading(false); }
   };
 
-  if (!mounted || !isOpen) return null;
+  if (!mounted) return null;
 
   const content = (
     <>
@@ -129,10 +131,46 @@ export default function DemoForm({ isOpen, onClose }: DemoFormProps) {
   }
 
   return createPortal(
-    <div aria-modal="true" className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto" data-testid="demo-modal-overlay" onClick={onClose} role="dialog">
-      <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
-      <div className="relative z-10 ts-panel w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 rounded-[2rem] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto" data-testid="demo-modal" onClick={(e) => e.stopPropagation()}>{content}</div>
-    </div>,
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          aria-modal="true"
+          className="fixed inset-0 z-[100] flex items-start sm:items-center justify-center p-2 sm:p-4 overflow-y-auto"
+          data-testid="demo-modal-overlay"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+          onClick={onClose}
+          role="dialog"
+        >
+          <motion.div className="fixed inset-0 bg-black/60 backdrop-blur-sm" />
+          <motion.div
+            className="relative z-10 ts-panel w-full max-w-lg mt-4 sm:mt-0 p-5 sm:p-8 md:p-10 rounded-[2rem] max-h-[calc(100dvh-1rem)] sm:max-h-[calc(100dvh-2rem)] overflow-y-auto"
+            data-testid="demo-modal"
+            initial={
+              reduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, transform: "scale(0.96) translateY(8px)" }
+            }
+            animate={
+              reduceMotion
+                ? { opacity: 1 }
+                : { opacity: 1, transform: "scale(1) translateY(0px)" }
+            }
+            exit={
+              reduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, transform: "scale(0.97) translateY(4px)" }
+            }
+            transition={{ duration: 0.22, ease: [0.23, 1, 0.32, 1] }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {content}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.body
   );
 }

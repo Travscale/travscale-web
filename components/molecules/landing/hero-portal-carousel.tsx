@@ -245,10 +245,10 @@ export default function HeroPortalCarousel() {
                 <div className="absolute inset-0 z-20 flex items-center justify-center p-2 sm:p-3.5 pointer-events-none">
                   <div
                     className={cn(
-                      "relative overflow-hidden bg-white/35 backdrop-blur-2xl border border-white/60 p-2.5 sm:p-3.5 rounded-2xl shadow-[0_12px_32px_-8px_rgba(24,23,23,0.16)] max-w-[220px] xs:max-w-[250px] sm:max-w-xs md:max-w-sm w-full text-left transition-all duration-400 ease-[cubic-bezier(0.23,1,0.32,1)] transform select-none",
+                      "relative overflow-hidden bg-white/35 backdrop-blur-2xl border border-white/60 p-2.5 sm:p-3.5 rounded-2xl shadow-[0_12px_32px_-8px_rgba(24,23,23,0.16)] max-w-[220px] xs:max-w-[250px] sm:max-w-xs md:max-w-sm w-full text-left transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.23,1,0.32,1)] transform select-none",
                       isNotifVisible
-                        ? "opacity-100 translate-y-0 scale-95 sm:scale-100 blur-0"
-                        : "opacity-0 translate-y-2 scale-90 blur-xs"
+                        ? "opacity-100 translate-y-0 scale-95 sm:scale-100"
+                        : "opacity-0 translate-y-2 scale-90"
                     )}
                   >
                     {/* Noise texture overlay matching parent card radius (rounded-2xl) */}
@@ -302,8 +302,8 @@ export default function HeroPortalCarousel() {
         {/* Minimal Progress Line across bottom */}
         <div className="w-full h-1 bg-[#181717]/5 overflow-hidden" aria-hidden="true">
           <div
-            className="h-full bg-[#d04841] transition-all duration-75 ease-linear"
-            style={{ width: `${progress}%` }}
+            className="h-full w-full origin-left bg-[#d04841] transition-transform duration-75 ease-linear"
+            style={{ transform: `scaleX(${progress / 100})` }}
           />
         </div>
       </div>

@@ -9,6 +9,7 @@ import {
   Plane,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Reveal from "@/components/atoms/interaction/reveal";
 
 export default function Features() {
   return (
@@ -19,7 +20,7 @@ export default function Features() {
       style={{ backgroundColor: "#f9f7f6" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="mb-16 md:mb-20 max-w-2xl">
+        <Reveal className="mb-16 md:mb-20 max-w-2xl">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-6">
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
               Platform Features
@@ -32,13 +33,14 @@ export default function Features() {
           <p className="text-base sm:text-lg text-[#666666] leading-relaxed max-w-xl">
             Every workflow in Travscale is designed to replace inbox chaos with clear processes your whole agency can trust.
           </p>
-        </div>
+        </Reveal>
 
         {/* High-Fidelity Graphic Bento Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-12 gap-5 sm:gap-6">
           
           {/* Card 1: Passenger Management */}
-          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 md:col-span-1 lg:col-span-4 flex flex-col min-h-[400px]">
+          <Reveal className="h-full md:col-span-1 lg:col-span-4" delayMs={0}>
+          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 flex flex-col min-h-[400px] h-full">
             {/* Visual Area */}
             <div className="h-56 pt-8 px-8 flex justify-center items-end overflow-hidden bg-[#f0eeed]">
               <div className="w-full bg-white rounded-t-xl border-t border-x border-[#181717]/10 shadow-[0_-8px_30px_-15px_rgba(0,0,0,0.1)] p-5 translate-y-4 group-hover:translate-y-2 transition-transform duration-500 ease-out">
@@ -75,9 +77,11 @@ export default function Features() {
               <p className="text-[#666666] text-[15px] leading-relaxed">Track passports, visas, and trip history in a clean, searchable database.</p>
             </div>
           </div>
+          </Reveal>
 
           {/* Card 2: Smart Invoicing */}
-          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 md:col-span-1 lg:col-span-4 flex flex-col min-h-[400px]">
+          <Reveal className="h-full md:col-span-1 lg:col-span-4" delayMs={60}>
+          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 flex flex-col min-h-[400px] h-full">
             <div className="h-56 pt-8 px-8 flex justify-center items-end overflow-hidden relative bg-[#f0eeed]">
               {/* Background decorative elements */}
               <div className="absolute top-12 right-12 w-32 h-32 bg-[#d04841]/5 rounded-full blur-xl group-hover:bg-[#d04841]/10 transition-colors duration-500" />
@@ -126,9 +130,11 @@ export default function Features() {
               <p className="text-[#666666] text-[15px] leading-relaxed">Generate agency-ready invoices with taxes and automatic payment links.</p>
             </div>
           </div>
+          </Reveal>
 
           {/* Card 3: Visa Workflow */}
-          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 md:col-span-1 lg:col-span-4 flex flex-col min-h-[400px]">
+          <Reveal className="h-full md:col-span-1 lg:col-span-4" delayMs={120}>
+          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 flex flex-col min-h-[400px] h-full">
             <div className="h-56 pt-8 px-4 flex justify-center items-end gap-3 overflow-hidden relative bg-[#f0eeed]">
               <div className="w-28 bg-[#f1eeec] border border-[#181717]/5 rounded-t-xl p-2.5 translate-y-8 group-hover:translate-y-4 transition-transform duration-500 ease-out">
                 <div className="text-[10px] font-semibold text-[#181717]/60 mb-2 uppercase tracking-wider">Collected</div>
@@ -171,9 +177,11 @@ export default function Features() {
               <p className="text-[#666666] text-[15px] leading-relaxed">Handle requests, approvals, and consulate timelines visually.</p>
             </div>
           </div>
+          </Reveal>
 
           {/* Card 4: Supplier Operations (Larger horizontal card) */}
-          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 md:col-span-2 lg:col-span-8 flex flex-col md:flex-row min-h-[320px]">
+          <Reveal className="h-full md:col-span-2 lg:col-span-8" delayMs={180}>
+          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 flex flex-col md:flex-row min-h-[320px] h-full">
             <div className="flex-1 p-8 bg-white md:border-r border-[#181717]/5 flex flex-col justify-center">
               <div className="w-10 h-10 rounded-full bg-[#eeebea] flex items-center justify-center mb-4 group-hover:bg-[#d04841]/10 transition-colors">
                 <Building className="w-4 h-4 text-[#181717] group-hover:text-[#d04841] transition-colors" />
@@ -294,9 +302,11 @@ export default function Features() {
               </div>
             </div>
           </div>
+          </Reveal>
 
           {/* Card 5: Itinerary Builder */}
-          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 md:col-span-1 lg:col-span-4 flex flex-col min-h-[320px]">
+          <Reveal className="h-full md:col-span-1 lg:col-span-4" delayMs={240}>
+          <div className="group relative bg-white rounded-[2rem] overflow-hidden border border-[#181717]/5 shadow-sm hover:shadow-md hover:border-[#181717]/10 transition-all duration-300 flex flex-col min-h-[320px] h-full">
             <div className="h-64 pt-8 px-8 flex justify-center items-end overflow-hidden relative bg-[#f0eeed]">
               {/* Background gradient for depth */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/[0.03] to-transparent pointer-events-none" />
@@ -358,6 +368,7 @@ export default function Features() {
               <p className="text-[#666666] text-[15px] leading-relaxed">Create and share polished day-by-day plans with clients instantly.</p>
             </div>
           </div>
+          </Reveal>
 
         </div>
       </div>

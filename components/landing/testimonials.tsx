@@ -2,6 +2,7 @@
 
 import { Star, Quote } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Reveal from "@/components/atoms/interaction/reveal";
 
 const testimonials = [
   {
@@ -57,7 +58,7 @@ export default function Testimonials() {
       style={{ backgroundColor: "#ffffff" }}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12">
-        <div className="text-center mb-16 md:mb-20 max-w-2xl mx-auto">
+        <Reveal className="text-center mb-16 md:mb-20 max-w-2xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#f9f7f6] border border-[#181717]/10 shadow-sm mb-6">
             <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
             <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
@@ -65,13 +66,13 @@ export default function Testimonials() {
             </span>
           </div>
           <h2 className="text-[2rem] sm:text-[2.5rem] md:text-[3.25rem] font-medium leading-[1.08] text-[#181717] tracking-tight mb-6">
-            Trusted by the world's <br className="hidden md:block" />
+Trusted by the world's <br className="hidden md:block" />
             <span className="text-[#666666]">fastest-growing agencies.</span>
           </h2>
-        </div>
+        </Reveal>
 
         {/* Hero Testimonial */}
-        <div className="max-w-5xl mx-auto mb-16">
+        <Reveal className="max-w-5xl mx-auto mb-16">
           <div className="bg-[#181717] rounded-[2rem] p-8 md:p-12 lg:p-16 relative flex flex-col lg:flex-row items-center gap-12 group overflow-hidden">
             {/* Background Glow */}
             <div className="absolute top-0 right-0 -mr-32 -mt-32 w-96 h-96 bg-[#d04841]/20 blur-[100px] rounded-full pointer-events-none transition-opacity duration-700 opacity-50 group-hover:opacity-100" />
@@ -100,7 +101,7 @@ export default function Testimonials() {
                <div className="bg-white/10 backdrop-blur-md border border-white/10 rounded-3xl p-6 lg:p-8 shadow-2xl transform lg:rotate-3 transition-transform duration-500 group-hover:rotate-0">
                  <div className="flex justify-between items-center mb-8">
                     <div className="text-white/80 text-xs font-semibold uppercase tracking-wider">Platform Metrics</div>
-                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse-subtle" />
                  </div>
                  <div className="space-y-6">
                    <div>
@@ -112,21 +113,23 @@ export default function Testimonials() {
                      <div className="text-white/50 text-[10px] uppercase tracking-widest mb-1.5">Error Rate</div>
                      <div className="text-white text-3xl font-bold tracking-tight">0.12% <span className="text-emerald-400 text-sm ml-2 font-medium">↓ 99%</span></div>
                    </div>
-                 </div>
-               </div>
-            </div>
-          </div>
-        </div>
+</div>
+                </div>
+             </div>
+           </div>
+         </Reveal>
 
         {/* Masonry Grid via CSS Columns */}
         <div className="max-w-6xl mx-auto relative pb-12">
           
           <div className="columns-1 md:columns-2 lg:columns-3 gap-6">
             {testimonials.map((t, i) => (
-              <div 
+              <Reveal
                 key={i}
-                className="break-inside-avoid mb-6 bg-[#f9f7f6] rounded-[2rem] p-8 border border-[#181717]/5 hover:border-[#181717]/10 hover:shadow-sm transition-all duration-300 group flex flex-col"
+                className="break-inside-avoid mb-6"
+                delayMs={i * 40}
               >
+              <div className="bg-[#f9f7f6] rounded-[2rem] p-8 border border-[#181717]/5 hover:border-[#181717]/10 hover:shadow-sm transition-all duration-300 group flex flex-col h-full">
                 <div className="flex gap-1 mb-6">
                   {[1, 2, 3, 4, 5].map(star => (
                     <Star key={star} className="w-4 h-4 fill-[#d04841] text-[#d04841]" />
@@ -147,6 +150,7 @@ export default function Testimonials() {
                   </div>
                 </div>
               </div>
+              </Reveal>
             ))}
           </div>
 

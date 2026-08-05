@@ -103,7 +103,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
               {/* Sliding Pill */}
               <div 
                 className={cn(
-                  "absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#181717] rounded-full transition-transform duration-500 ease-out shadow-md",
+                  "absolute top-1.5 bottom-1.5 w-[calc(50%-6px)] bg-[#181717] rounded-full transition-transform duration-250 ease-[cubic-bezier(0.23,1,0.32,1)] shadow-md",
                   billingCycle === "monthly" ? "translate-x-0" : "translate-x-full"
                 )} 
               />
@@ -160,7 +160,10 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                   <div className="flex items-start gap-1">
                     {displayPrice ? (
                       <>
-                        <span className={cn("text-5xl font-bold tracking-tighter", isPro ? "text-white" : "text-[#181717]")}>
+                        <span
+                          key={billingCycle}
+                          className={cn("ts-price-swap text-5xl font-bold tracking-tighter", isPro ? "text-white" : "text-[#181717]")}
+                        >
                           {inr.format(displayPrice)}
                         </span>
                         <div className="flex flex-col justify-end h-[2.5rem] pb-1">
@@ -199,7 +202,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
+                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer active:scale-[0.97] active:duration-100",
                       isPro
                         ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
                         : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"
@@ -211,7 +214,7 @@ export default function Pricing({ onDemoClick }: PricingProps) {
                 ) : (
                   <button
                     className={cn(
-                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer",
+                      "group w-full py-4 text-[15px] font-semibold flex items-center justify-center gap-2 transition-all duration-300 rounded-xl cursor-pointer active:scale-[0.97] active:duration-100",
                       isPro
                         ? "bg-white text-[#181717] hover:bg-[#f9f7f6] hover:scale-[1.02]"
                         : "bg-[#f9f7f6] text-[#181717] hover:bg-[#181717] hover:text-white"

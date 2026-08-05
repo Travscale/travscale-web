@@ -13,23 +13,30 @@
   --ts-primary-strong: #b83c36;
   --ts-secondary: #5a82de;
   --ts-accent: #5a82de;
-  --ts-shadow-soft: 0 2px 8px -2px rgba(24, 23, 23, 0.08),
+  --ts-shadow-soft:
+    0 2px 8px -2px rgba(24, 23, 23, 0.08),
     0 4px 16px -4px rgba(24, 23, 23, 0.06);
-  --ts-shadow-strong: 0 8px 24px -6px rgba(24, 23, 23, 0.12),
+  --ts-shadow-strong:
+    0 8px 24px -6px rgba(24, 23, 23, 0.12),
     0 12px 40px -8px rgba(24, 23, 23, 0.08);
   --ts-focus-ring: rgba(208, 72, 65, 0.4);
 
   /* ── Unified Radius Tokens ── */
-  --ts-radius-sm: 8px;      /* small UI (badges, tags) */
-  --ts-radius-md: 12px;     /* buttons, inputs, small cards */
-  --ts-radius-lg: 16px;     /* panels, modal, medium cards */
-  --ts-radius-xl: 2rem;     /* large section cards (32px) */
+  --ts-radius-sm: 8px; /* small UI (badges, tags) */
+  --ts-radius-md: 12px; /* buttons, inputs, small cards */
+  --ts-radius-lg: 16px; /* panels, modal, medium cards */
+  --ts-radius-xl: 2rem; /* large section cards (32px) */
   --ts-radius-pill: 9999px; /* pills, toggles */
 
   /* ── Unified Button Sizing ── */
-  --ts-btn-h-sm: 40px;      /* compact (navbar) */
-  --ts-btn-h-md: 48px;      /* default */
-  --ts-btn-h-lg: 56px;      /* hero / section CTA */
+  --ts-btn-h-sm: 40px; /* compact (navbar) */
+  --ts-btn-h-md: 48px; /* default */
+  --ts-btn-h-lg: 56px; /* hero / section CTA */
+
+  /* ── Motion Easing Tokens ── */
+  --ts-ease-out: cubic-bezier(0.23, 1, 0.32, 1); /* strong ease-out for UI entrances */
+  --ts-ease-in-out: cubic-bezier(0.77, 0, 0.175, 1); /* on-screen movement/morphs */
+  --ts-ease-drawer: cubic-bezier(0.32, 0.72, 0, 1); /* iOS-like sheet curve */
 
   /* ── Palette tokens from DESIGN.md ── */
   --palette-1: #ffffff;
@@ -107,7 +114,9 @@ body {
 /* ── Mobile Nav Blur ── */
 
 #page-content {
-  transition: filter 0.3s ease, transform 0.3s ease;
+  transition:
+    filter 0.3s ease,
+    transform 0.3s ease;
   will-change: filter;
 }
 
@@ -134,8 +143,12 @@ body.nav-open #page-content {
 }
 
 @keyframes logo-scroll {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 .animate-logo-scroll {
@@ -149,7 +162,11 @@ body.nav-open #page-content {
 /* ── Typography Utilities ── */
 
 .ts-gradient-text {
-  background: linear-gradient(120deg, var(--ts-text) 0%, var(--ts-primary) 100%);
+  background: linear-gradient(
+    120deg,
+    var(--ts-text) 0%,
+    var(--ts-primary) 100%
+  );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -208,7 +225,12 @@ body.nav-open #page-content {
     color 0.25s ease,
     border-color 0.25s ease,
     box-shadow 0.25s ease,
-    transform 0.25s ease;
+    transform 0.14s var(--ts-ease-out);
+}
+
+.ts-btn-primary:active,
+.ts-btn-secondary:active {
+  transform: scale(0.97);
 }
 
 /* Filled dark button */
@@ -253,7 +275,13 @@ body.nav-open #page-content {
   cursor: pointer;
   transition:
     background-color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    transform 0.14s var(--ts-ease-out);
+}
+
+.ts-btn-pill:active,
+.ts-btn-pill-light:active {
+  transform: scale(0.97);
 }
 
 .ts-btn-pill:hover {
@@ -277,7 +305,8 @@ body.nav-open #page-content {
   cursor: pointer;
   transition:
     background-color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    transform 0.14s var(--ts-ease-out);
 }
 
 .ts-btn-pill-light:hover {
@@ -300,7 +329,11 @@ body.nav-open #page-content {
   cursor: pointer;
   transition:
     background-color 0.25s ease,
-    transform 0.15s ease;
+    transform 0.14s var(--ts-ease-out);
+}
+
+.ts-btn-accent:active {
+  transform: scale(0.97);
 }
 
 .ts-btn-accent:hover {
@@ -308,6 +341,37 @@ body.nav-open #page-content {
 }
 
 /* ── Section Reveal Animation ── */
+
+.ts-reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 600ms var(--ts-ease-out),
+    transform 600ms var(--ts-ease-out);
+  will-change: opacity, transform;
+}
+
+.ts-reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Price Swap (billing cycle change) ── */
+
+.ts-price-swap {
+  opacity: 1;
+  transform: translateY(0);
+  transition:
+    opacity 220ms var(--ts-ease-out),
+    transform 220ms var(--ts-ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/* ── Section Reveal Animation (legacy) ── */
 
 .ts-section {
   opacity: 0;
@@ -421,6 +485,12 @@ body.nav-open #page-content {
 
   .ts-section,
   .ts-section.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  .ts-reveal,
+  .ts-reveal-visible {
     opacity: 1;
     transform: none;
   }

@@ -43,38 +43,62 @@ export default function Hero({ onDemoClick }: HeroProps) {
         {/* Eyebrow */}
         <div 
           className={cn(
-            "inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-8 transition-all duration-700 ease-out",
+            "inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#181717]/10 shadow-sm mb-8 transition-[opacity,transform] duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]",
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           )}
         >
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#d04841] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d04841]"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#d04841] animate-pulse-subtle"></span>
           </span>
           <span className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[#181717]/60">
             Next-Gen Travel Operations
           </span>
         </div>
 
-        {/* Headline */}
+        {/* Headline - masked line-by-line reveal */}
         <h1 
           className={cn(
-            "text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-medium leading-[1.05] text-[#181717] tracking-tight mb-8 mx-auto max-w-5xl transition-all duration-700 ease-out",
-            mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+            "text-[2.5rem] sm:text-5xl md:text-6xl lg:text-[4.5rem] font-medium leading-[1.05] text-[#181717] tracking-tight mb-8 mx-auto max-w-5xl"
           )}
-          style={{ letterSpacing: "-0.03em", transitionDelay: "100ms" }}
+          style={{ letterSpacing: "-0.03em" }}
         >
-          Scale your travel business, <br className="hidden md:block" />
-          <span className="relative inline-block mt-2 md:mt-0">
-            <span className="relative z-10 text-[#d04841]">not your inbox.</span>
-            <span className="absolute bottom-1 left-0 w-full h-[0.15em] bg-[#d04841]/10 -z-10 rounded-full" />
+          <span className="block overflow-hidden">
+            <span
+              className={cn(
+                "block transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                mounted ? "translate-y-0" : "translate-y-full"
+              )}
+              style={{ transitionDelay: "100ms" }}
+            >
+              Scale your travel business,
+            </span>
+          </span>
+          <span className="block overflow-hidden">
+            <span
+              className={cn(
+                "block relative transition-transform duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                mounted ? "translate-y-0" : "translate-y-full"
+              )}
+              style={{ transitionDelay: "180ms" }}
+            >
+              <span className="relative inline-block">
+                <span className="relative z-10 text-[#d04841]">not your inbox.</span>
+                <span
+                  className={cn(
+                    "absolute bottom-1 left-0 w-full h-[0.15em] bg-[#d04841]/10 -z-10 rounded-full origin-left transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                    mounted ? "scale-x-100" : "scale-x-0"
+                  )}
+                  style={{ transitionDelay: "480ms" }}
+                />
+              </span>
+            </span>
           </span>
         </h1>
 
         {/* Subheading */}
         <p 
           className={cn(
-            "text-base sm:text-lg lg:text-xl text-[#666666] leading-relaxed max-w-2xl mx-auto mb-10 transition-all duration-700 ease-out",
+            "text-base sm:text-lg lg:text-xl text-[#666666] leading-relaxed max-w-2xl mx-auto mb-10 transition-[opacity,transform] duration-600 ease-[cubic-bezier(0.23,1,0.32,1)]",
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           )}
           style={{ transitionDelay: "200ms" }}
@@ -85,7 +109,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
         {/* CTAs */}
         <div 
           className={cn(
-            "flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 ease-out",
+            "flex flex-col sm:flex-row items-center justify-center gap-4 transition-[opacity,transform] duration-600 ease-[cubic-bezier(0.23,1,0.32,1)]",
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
           )}
           style={{ transitionDelay: "300ms" }}
@@ -94,7 +118,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
             href="https://cal.com/abubakarshaikh/travscale-product-demo"
             target="_blank"
             rel="noopener noreferrer"
-            className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#232222] px-8 text-[15px] font-medium text-white transition-all hover:bg-[#181717] hover:shadow-[0_8px_24px_-6px_rgba(35,34,34,0.3)] active:scale-[0.98] overflow-hidden cursor-pointer"
+            className="group relative flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-[#232222] px-8 text-[15px] font-medium text-white transition-all hover:bg-[#181717] hover:shadow-[0_8px_24px_-6px_rgba(35,34,34,0.3)] active:scale-[0.97] active:duration-100 overflow-hidden cursor-pointer"
           >
             <div className="absolute inset-0 flex h-full w-full justify-center [transform:skew(-12deg)_translateX(-150%)] group-hover:duration-1000 group-hover:[transform:skew(-12deg)_translateX(150%)]">
               <div className="relative h-full w-8 bg-white/20" />
@@ -105,7 +129,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
           
           <a
             href="https://agent.travscale.com"
-            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/10 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/20 hover:bg-[#f9f7f6] active:scale-[0.98] cursor-pointer"
+            className="group flex h-14 w-full sm:w-auto items-center justify-center gap-2 rounded-xl border border-[#181717]/10 bg-white px-8 text-[15px] font-medium text-[#181717] transition-all hover:border-[#181717]/20 hover:bg-[#f9f7f6] active:scale-[0.97] active:duration-100 cursor-pointer"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -117,7 +141,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
         {/* Trust Indicators */}
         <div 
           className={cn(
-            "mt-10 flex items-center justify-center gap-4 text-sm font-medium text-[#666666] transition-all duration-1000 ease-out",
+            "mt-10 flex items-center justify-center gap-4 text-sm font-medium text-[#666666] transition-[opacity,transform] duration-600 ease-[cubic-bezier(0.23,1,0.32,1)]",
             mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
           )}
           style={{ transitionDelay: "450ms" }}
@@ -133,7 +157,11 @@ export default function Hero({ onDemoClick }: HeroProps) {
                 key={i} 
                 src={`https://i.pravatar.cc/100?img=${10 + i}`} 
                 alt="User avatar" 
-                className="h-6 w-6 rounded-full border-2 border-[#f9f7f6]" 
+                className={cn(
+                  "h-6 w-6 rounded-full border-2 border-[#f9f7f6] transition-[opacity,transform] duration-300 ease-[cubic-bezier(0.23,1,0.32,1)]",
+                  mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-px"
+                )}
+                style={{ transitionDelay: `${450 + i * 30}ms` }}
               />
             ))}
           </div>
@@ -143,7 +171,7 @@ export default function Hero({ onDemoClick }: HeroProps) {
         {/* High-Fidelity Portal Carousel Showcase */}
         <div 
           className={cn(
-            "mt-16 sm:mt-24 transition-all duration-1000 ease-out",
+            "mt-16 sm:mt-24 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
             mounted ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
           )}
           style={{ transitionDelay: '600ms' }}
