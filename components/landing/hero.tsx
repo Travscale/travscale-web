@@ -4,8 +4,6 @@ import { useEffect, useState } from "react";
 import { ArrowRight, Play, ShieldCheck } from "lucide-react";
 import { cn } from "@/lib/utils";
 
-import HeroPortalCarousel from "@/components/molecules/landing/hero-portal-carousel";
-
 type HeroProps = {
   onDemoClick: () => void;
 };
@@ -166,17 +164,6 @@ export default function Hero({ onDemoClick }: HeroProps) {
             ))}
           </div>
           <span className="hidden sm:block">Trusted by 500+ agencies</span>
-        </div>
-
-        {/* High-Fidelity Portal Carousel Showcase */}
-        <div 
-          className={cn(
-            "mt-16 sm:mt-24 transition-[opacity,transform] duration-700 ease-[cubic-bezier(0.23,1,0.32,1)]",
-            mounted ? "translate-y-0 opacity-100" : "translate-y-16 opacity-0"
-          )}
-          style={{ transitionDelay: '600ms' }}
-        >
-          <HeroPortalCarousel />
         </div>
       </div>
     </section>
